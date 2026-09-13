@@ -4,7 +4,7 @@ Two static pages, no build step, no dependencies.
 
 | File | What it is |
 |---|---|
-| `index.html` | Ten-slide interactive pitch deck (arrow keys, swipe, clickable project cards, an animated before/after performance demo, and a 3D dependency-graph scene) |
+| `index.html` | "The Dhruv Jain Case File" — a ten-slide interactive pitch deck (typewriter opening, sealed-slides progress rail, animated before/after race demos, expanding project rows) |
 | `cv.html` | Full CV plus a "How to hire me" section with a live timezone-overlap calculator |
 | `deck.html` | Redirect stub to `/` — the deck used to live here; kept so shared links don't break |
 | `.nojekyll` | Tells GitHub Pages to serve the files as-is instead of running them through Jekyll |
@@ -14,7 +14,7 @@ The two pages link to each other and share a light theme with a dark toggle (the
 Everything is inline. Two external requests, both from public CDNs:
 
 - **Google Fonts** — Bricolage Grotesque, Figtree, JetBrains Mono. Real fallback stacks are declared, so the pages read correctly if it is blocked.
-- **three.js r128** from cdnjs — loaded *lazily*, only when the 3D panel scrolls into view (on `cv.html`) or when you reach slide 6 (on `index.html`). If WebGL is unavailable or the script fails, each panel swaps itself for a written fallback. Nothing else on the page depends on it.
+- **three.js r128** from cdnjs — used only by `cv.html`, loaded *lazily* when the 3D panel scrolls into view. If WebGL is unavailable or the script fails, the panel swaps itself for a written fallback. Nothing else on the page depends on it.
 
 ## The interactive bits
 
@@ -32,12 +32,14 @@ Everything is inline. Two external requests, both from public CDNs:
 - Scroll-triggered reveals, count-up stats, and a timeline rail that draws itself — all skipped when the visitor has `prefers-reduced-motion` set.
 - Copy-email and print/save-PDF buttons; the print stylesheet strips every interactive control so it prints as a clean CV.
 
-**`index.html`** (the deck)
+**`index.html`** (the deck — "The Dhruv Jain Case File")
 
-- Arrow keys, space, Home/End, swipe, dots and arrows for navigation
+- Arrow keys, space, Home/End, swipe, the progress rail and arrows for navigation; unvisited slides show as **sealed** and unseal as you reach them
+- **Opening**: a typewriter intro (click or press any key to skip; a *Replay opening* button re-runs it)
 - **Slide 2**: a *Run both* button that races the old pipeline against the new one, time-compressed 60:1
-- **Slide 6**: the same 3D blast-radius scene
-- **Slide 7**: expanding project cards
+- **Slide 6**: an animated context-size comparison (25,000 tokens vs ~900) for Groundwork
+- **Slide 7**: expanding project rows
+- A footer teaser always shows what the next slide is about
 
 ## Publishing to GitHub Pages
 
