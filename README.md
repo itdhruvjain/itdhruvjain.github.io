@@ -4,8 +4,9 @@ Two static pages, no build step, no dependencies.
 
 | File | What it is |
 |---|---|
-| `index.html` | Full CV plus a "How to hire me" section with a live timezone-overlap calculator |
-| `deck.html` | Ten-slide interactive pitch deck (arrow keys, swipe, clickable project cards, an animated before/after performance demo, and a 3D dependency-graph scene) |
+| `index.html` | Ten-slide interactive pitch deck (arrow keys, swipe, clickable project cards, an animated before/after performance demo, and a 3D dependency-graph scene) |
+| `cv.html` | Full CV plus a "How to hire me" section with a live timezone-overlap calculator |
+| `deck.html` | Redirect stub to `/` — the deck used to live here; kept so shared links don't break |
 | `.nojekyll` | Tells GitHub Pages to serve the files as-is instead of running them through Jekyll |
 
 The two pages link to each other and share a light theme with a dark toggle (the choice is remembered in `localStorage`).
@@ -13,11 +14,11 @@ The two pages link to each other and share a light theme with a dark toggle (the
 Everything is inline. Two external requests, both from public CDNs:
 
 - **Google Fonts** — Bricolage Grotesque, Figtree, JetBrains Mono. Real fallback stacks are declared, so the pages read correctly if it is blocked.
-- **three.js r128** from cdnjs — loaded *lazily*, only when the 3D panel scrolls into view (on `index.html`) or when you reach slide 6 (on `deck.html`). If WebGL is unavailable or the script fails, each panel swaps itself for a written fallback. Nothing else on the page depends on it.
+- **three.js r128** from cdnjs — loaded *lazily*, only when the 3D panel scrolls into view (on `cv.html`) or when you reach slide 6 (on `index.html`). If WebGL is unavailable or the script fails, each panel swaps itself for a written fallback. Nothing else on the page depends on it.
 
 ## The interactive bits
 
-**`index.html`** — every section does something
+**`cv.html`** — every section does something
 
 - **Role lens** (top of page): pick Backend / Frontend / Data / Leadership / AI and the whole CV re-weights around it. Matching bullets and projects stay lit, everything else dims — nothing is hidden, and the counter tells the reader exactly what was highlighted and what wasn't.
 - **Stat tiles**: click any of the four headline numbers to expand the story behind it.
@@ -31,7 +32,7 @@ Everything is inline. Two external requests, both from public CDNs:
 - Scroll-triggered reveals, count-up stats, and a timeline rail that draws itself — all skipped when the visitor has `prefers-reduced-motion` set.
 - Copy-email and print/save-PDF buttons; the print stylesheet strips every interactive control so it prints as a clean CV.
 
-**`deck.html`**
+**`index.html`** (the deck)
 
 - Arrow keys, space, Home/End, swipe, dots and arrows for navigation
 - **Slide 2**: a *Run both* button that races the old pipeline against the new one, time-compressed 60:1
@@ -43,7 +44,7 @@ Everything is inline. Two external requests, both from public CDNs:
 **Option A — as your main personal site** (lands at `https://<username>.github.io`)
 
 1. Create a **public** repo named exactly `<your-github-username>.github.io`.
-2. Copy `index.html`, `deck.html` and `.nojekyll` into the repo root.
+2. Copy `index.html`, `cv.html` and `.nojekyll` into the repo root.
 3. Commit and push to the `main` branch.
 4. Go to **Settings → Pages**. Under *Build and deployment*, set Source to **Deploy from a branch**, branch `main`, folder `/ (root)`. Save.
 5. Wait a minute or two, then open `https://<your-github-username>.github.io`.
@@ -73,7 +74,7 @@ Then enable Pages in **Settings → Pages** as in step 4.
 
 ## Before you publish — three things to change
 
-These are in `index.html`, in the `How to hire me` section:
+These are in `cv.html`, in the `How to hire me` section:
 
 1. **Working hours** currently read `10:00 – 19:00 IST`. Change them if that is not your real day — the timezone calculator keys off this value (search for `10, 0` and `19, 0` in the script at the bottom of the file, and the `10:00 – 19:00 IST` text in the markup).
 2. **Work authorisation** shows an "Ask me" chip. Replace it with your actual position once you decide how you want to state it.
