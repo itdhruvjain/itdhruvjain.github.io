@@ -440,7 +440,6 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);font-fa
       <a href="#playground">Playground</a>
       <a href="#skills">Skills</a>
       <a href="#hiring">Hiring me</a>
-    <a href="index.html">The pitch &rsaquo;</a>
     </div>
     <button class="iconbtn" id="palBtn" type="button" aria-label="Open command palette" title="Search (press /)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
@@ -1048,7 +1047,6 @@ $('#printBtn').addEventListener('click', function () { window.print(); });
   ITEMS.push({ label: 'Toggle dark / light theme', type: 'action', run: function () { $('#themeBtn').click(); } });
   ITEMS.push({ label: 'Copy email address', type: 'action', run: function () { $('#copyMail').click(); } });
   ITEMS.push({ label: 'Print or save as PDF', type: 'action', run: function () { window.print(); } });
-  ITEMS.push({ label: 'Open the pitch deck', type: 'action', run: function () { location.href = 'index.html'; } });
 
   var shown = [], sel = 0;
   function render(q) {
