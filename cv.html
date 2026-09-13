@@ -82,6 +82,11 @@ body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:
 
 /* ---------- masthead ---------- */
 header{padding-top:54px;padding-bottom:8px}
+.top-cta{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--ink-2);
+  margin:0 0 20px;display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}
+.top-cta a{color:var(--accent);text-decoration:none;border:1px solid var(--rule-2);
+  border-radius:999px;padding:7px 13px;transition:border-color .2s}
+.top-cta a:hover{border-color:var(--accent)}
 .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
   color:var(--ink-3);margin:0 0 26px;display:flex;flex-wrap:wrap;gap:6px 18px}
 .eyebrow b{color:var(--ink-2);font-weight:500}
@@ -430,6 +435,11 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);font-fa
 <div class="wrap">
 
   <header>
+    <p class="top-cta">
+      <a href="https://github.com/itdhruvjain" target="_blank" rel="noopener">GitHub — github.com/itdhruvjain ↗</a>
+      <span>If you want my quick overview, click this link:</span>
+      <a href="index.html">The five-minute pitch deck ›</a>
+    </p>
     <p class="eyebrow"><b>Dhruv Jain</b><span>Curriculum vitae</span><span>Ahmedabad, India · IST (UTC+5:30)</span><span>Open to remote</span></p>
     <h1>I fix the things<br>everyone else<br>works around.</h1>
     <p class="thesis">Four years of full-stack engineering, and the work I am proudest of is the work <em>nobody asked me to do.</em></p>
