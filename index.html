@@ -21,6 +21,7 @@
 <meta name="twitter:title" content="The Dhruv Jain Case File">
 <meta name="twitter:description" content="An interactive ten-slide case for hiring Dhruv Jain, built around a 60x performance rewrite nobody asked for.">
 <meta name="twitter:image" content="https://itdhruvjain.github.io/og.png">
+<script>(function(){try{var t=localStorage.getItem('dj-theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t;}catch(e){}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
@@ -192,6 +193,10 @@ h2{font-size:clamp(27px,4.3vw,54px);font-weight:800;line-height:1.05;letter-spac
 @keyframes beckon{0%,100%{box-shadow:0 0 0 0 rgba(20,101,90,0)}45%{box-shadow:0 0 0 7px rgba(20,101,90,.10)}}
 .hint{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
 
+/* ---------- theme toggle ---------- */
+.tbtn{width:30px;height:30px;border-radius:999px;border:1px solid var(--rule-2);background:var(--panel);color:var(--ink-2);cursor:pointer;display:grid;place-items:center;padding:0;line-height:1;font-size:14px}
+.tbtn:hover{border-color:var(--fast);color:var(--fast)}
+
 /* ---------- replay badge ---------- */
 .badge{display:flex;gap:8px;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
 .badge button{border:1px solid var(--rule-2);background:var(--panel-2);border-radius:999px;padding:5px 10px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
@@ -229,7 +234,7 @@ h2{font-size:clamp(27px,4.3vw,54px);font-weight:800;line-height:1.05;letter-spac
 <div class="deck">
   <div class="topbar">
     <div class="brand"><b>Dhruv Jain</b> · Full-stack engineer</div>
-    <div class="meter"><span id="counter">01 / 10</span><span>·</span><span><span class="sealcount" id="sealed">9</span> sealed</span><span class="badge"><button id="replay">Replay opening</button></span></div>
+    <div class="meter"><span id="counter">01 / 10</span><span>·</span><span><span class="sealcount" id="sealed">9</span> sealed</span><span class="badge"><button id="replay">Replay opening</button></span><button class="tbtn" id="themeBtn" type="button" aria-label="Toggle dark mode">◐</button></div>
   </div>
 
   <nav class="rail" id="rail" aria-label="Slides"></nav>
@@ -663,6 +668,19 @@ h2{font-size:clamp(27px,4.3vw,54px);font-weight:800;line-height:1.05;letter-spac
   document.getElementById('replay').addEventListener('click', function(e){ e.stopPropagation(); replayOpening(); });
   document.addEventListener('click', function(e){
     if(typing && !e.target.closest('button') && !e.target.closest('a')) finishTyping();
+  });
+
+  /* ---- theme toggle ---- */
+  var themeBtn = document.getElementById('themeBtn');
+  var sysDark = window.matchMedia('(prefers-color-scheme: dark)');
+  function effectiveTheme(){
+    var t = document.documentElement.dataset.theme;
+    return t === 'dark' || t === 'light' ? t : (sysDark.matches ? 'dark' : 'light');
+  }
+  themeBtn.addEventListener('click', function(){
+    var next = effectiveTheme() === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try{ localStorage.setItem('dj-theme', next); }catch(e){}
   });
 
   go(0);
