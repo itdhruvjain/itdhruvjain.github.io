@@ -82,13 +82,8 @@ body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:
 
 /* ---------- masthead ---------- */
 header{padding-top:54px;padding-bottom:8px}
-.top-cta{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--ink-2);
-  margin:0 0 20px;display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}
-.top-cta a{color:var(--accent);text-decoration:none;border:1px solid var(--rule-2);
-  border-radius:999px;padding:7px 13px;transition:border-color .2s}
-.top-cta a:hover{border-color:var(--accent)}
 .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--ink-3);margin:0 0 26px;display:flex;flex-wrap:wrap;gap:6px 18px}
+  color:var(--ink-3);margin:28px 0 26px;display:flex;flex-wrap:wrap;gap:6px 18px}
 .eyebrow b{color:var(--ink-2);font-weight:500}
 h1{font-family:var(--display);font-weight:800;font-size:clamp(46px,10.5vw,104px);line-height:.86;
   letter-spacing:-.045em;margin:0 0 22px;text-wrap:balance}
@@ -153,12 +148,12 @@ h1{font-family:var(--display);font-weight:800;font-size:clamp(46px,10.5vw,104px)
   font-family:inherit;cursor:pointer;transition:background .15s}
 .hstat:last-child{border-right:0}
 .hstat:hover{background:var(--surface-2)}
-.hstat .pad{padding:18px 16px 18px 0}
+.hstat .pad{display:flex;flex-direction:column;padding:18px 16px 18px 0}
 .hstat:not(:first-child) .pad{padding-left:16px}
-.hstat .n{font-family:var(--display);font-weight:700;font-size:clamp(24px,3.6vw,32px);line-height:1;
+.hstat .n{display:block;font-family:var(--display);font-weight:700;font-size:clamp(24px,3.6vw,32px);line-height:1;
   letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--ink)}
 .hstat .n.warm{color:var(--ink)}
-.hstat .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);
+.hstat .l{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);
   margin-top:9px;line-height:1.55;text-transform:uppercase}
 .hstat .more{font-size:13.5px;color:var(--ink-2);line-height:1.5;border-top:1px solid var(--rule);
   margin-top:12px;padding-top:10px;text-transform:none;font-family:var(--body);letter-spacing:0}
@@ -397,6 +392,33 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);font-fa
   font-size:11.5px;color:var(--ink-3);line-height:1.8}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
 
+/* ---------- phones ---------- */
+@media (max-width:640px){
+  .wrap{padding-inline:16px}
+  .topnav .in{padding:10px 16px}
+  h1{font-size:clamp(40px,12vw,64px)}
+  .thesis{font-size:clamp(19px,5.4vw,24px);max-width:none}
+  .hm-num{gap:8px 12px}
+  .hm-was,.hm-now{font-size:clamp(28px,8.6vw,40px)}
+  .hm-factor{flex:1 1 100%;align-self:flex-start;text-align:center}
+  .hstats{grid-template-columns:1fr 1fr}
+  .hstat .pad,.hstat:not(:first-child) .pad{padding:16px 14px}
+  .hstat:nth-child(even){border-right:0}
+  .hstat:nth-child(-n+2){border-bottom:1px solid var(--rule)}
+  .pmetrics{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;padding:0 16px 14px}
+  .pm{border-right:0;margin-right:0;padding-right:0}
+  .pm dd{white-space:normal}
+  .pbtn{padding:16px}
+  .pbody{padding:0 16px 16px}
+  .cmp{height:176px}
+  .cmp-pane{padding:0 12px;gap:10px}
+  .cmp-pane .lab{font-size:9.5px;letter-spacing:.06em;max-width:40%;line-height:1.4}
+  .cmp-pane .big{font-size:20px}
+  .cmp-before{align-items:flex-end;text-align:right}
+  .cmp-before .barline{width:100%}
+  .job-head .when{margin-left:0;flex:1 1 100%}
+}
+
 @media print{
   .topnav,.tz,.play,.lens,.scrub,.pal,.toast,.iconbtn{display:none!important}
   body{background:#fff;color:#000;font-size:11pt}
@@ -435,11 +457,6 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);font-fa
 <div class="wrap">
 
   <header>
-    <p class="top-cta">
-      <a href="https://github.com/itdhruvjain" target="_blank" rel="noopener">GitHub — github.com/itdhruvjain ↗</a>
-      <span>If you want my quick overview, click this link:</span>
-      <a href="index.html">The five-minute pitch deck ›</a>
-    </p>
     <p class="eyebrow"><b>Dhruv Jain</b><span>Curriculum vitae</span><span>Ahmedabad, India · IST (UTC+5:30)</span><span>Open to remote</span></p>
     <h1>I fix the things<br>everyone else<br>works around.</h1>
     <p class="thesis">Four years of full-stack engineering, and the work I am proudest of is the work <em>nobody asked me to do.</em></p>
