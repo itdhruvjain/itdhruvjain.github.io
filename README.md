@@ -4,7 +4,7 @@ Two static pages, no build step, no dependencies.
 
 | File | What it is |
 |---|---|
-| `index.html` | "The Dhruv Jain Case File" — a ten-slide interactive pitch deck (typewriter opening, sealed-slides progress rail, animated before/after race demos, expanding project rows) |
+| `index.html` | The front page — a single-scroll, evidence-first pitch: hero with the 60× result and role target, three evidence sections (PIQET, Health4Community, Groundwork), a five-product range table, a have/learning skills grid, working principles and a "How to hire me" Q&A. Plain HTML/CSS, one small script for the theme toggle |
 | `cv.html` | Full CV plus a "How to hire me" section with a live timezone-overlap calculator |
 | `deck.html` | Redirect stub to `/` — the deck used to live here; kept so shared links don't break |
 | `.nojekyll` | Tells GitHub Pages to serve the files as-is instead of running them through Jekyll |
@@ -13,7 +13,7 @@ The two pages link to each other and share a light theme with a dark toggle (the
 
 Everything is inline. Two external requests, both from public CDNs:
 
-- **Google Fonts** — Bricolage Grotesque, Figtree, JetBrains Mono. Real fallback stacks are declared, so the pages read correctly if it is blocked.
+- **Google Fonts** — `index.html` uses Archivo, Source Serif 4 and JetBrains Mono; `cv.html` uses Archivo, Figtree, Newsreader and JetBrains Mono. Real fallback stacks are declared, so the pages read correctly if it is blocked.
 - **three.js r128** from cdnjs — used only by `cv.html`, loaded *lazily* when the 3D panel scrolls into view. If WebGL is unavailable or the script fails, the panel swaps itself for a written fallback. Nothing else on the page depends on it.
 
 ## The interactive bits
@@ -32,14 +32,12 @@ Everything is inline. Two external requests, both from public CDNs:
 - Scroll-triggered reveals, count-up stats, and a timeline rail that draws itself — all skipped when the visitor has `prefers-reduced-motion` set.
 - Copy-email and print/save-PDF buttons; the print stylesheet strips every interactive control so it prints as a clean CV.
 
-**`index.html`** (the deck — "The Dhruv Jain Case File")
+**`index.html`** (the front page)
 
-- Arrow keys, space, Home/End, swipe, the progress rail and arrows for navigation; unvisited slides show as **sealed** and unseal as you reach them
-- **Opening**: a typewriter intro (click or press any key to skip; a *Replay opening* button re-runs it)
-- **Slide 2**: a *Run both* button that races the old pipeline against the new one, time-compressed 60:1
-- **Slide 6**: an animated context-size comparison (25,000 tokens vs ~900) for Groundwork
-- **Slide 7**: expanding project rows
-- A footer teaser always shows what the next slide is about
+- Deliberately static: one scroll, no slides, no reveals to wait for. The only interactive control is the dark-mode toggle (shared `dj-theme` key with `cv.html`).
+- The two before/after bar charts are drawn to scale in CSS and animate once on load; the animation is skipped under `prefers-reduced-motion`.
+- Sticky header with section jump links (hidden on phones) and a print stylesheet that drops the header and buttons.
+
 
 ## Publishing to GitHub Pages
 
@@ -74,13 +72,13 @@ Then enable Pages in **Settings → Pages** as in step 4.
    - `www` subdomain → a `CNAME` record pointing at `<username>.github.io`
 3. Back in **Settings → Pages**, enter the domain and tick **Enforce HTTPS** once the certificate is issued.
 
-## Before you publish — three things to change
+## Before you publish
 
-These are in `cv.html`, in the `How to hire me` section:
+**`cv.html`**, in the `How to hire me` section:
 
 1. **Working hours** currently read `10:00 – 19:00 IST`. Change them if that is not your real day — the timezone calculator keys off this value (search for `10, 0` and `19, 0` in the script at the bottom of the file, and the `10:00 – 19:00 IST` text in the markup).
-2. **Work authorisation** shows an "Ask me" chip. Replace it with your actual position once you decide how you want to state it.
-3. **Availability** shows an "Ask me" chip in place of a notice period. A real number is always more convincing.
+2. **Work authorisation** shows an "Ask me" chip. The front page now states the position plainly (Indian citizen, remote via EOR or contract, sponsorship needed for on-site) — bring the CV in line with it.
+3. **Availability** shows an "Ask me" chip in place of a notice period. The front page says "currently serving notice" — bring the CV in line with it.
 
 ## Editing
 

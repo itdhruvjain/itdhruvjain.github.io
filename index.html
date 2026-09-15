@@ -2,712 +2,467 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Dhruv Jain Case File</title>
-<meta name="description" content="An interactive ten-slide case for hiring Dhruv Jain, built around a 60x performance rewrite nobody asked for.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dhruv Jain — Full-Stack Engineer &amp; Team Lead</title>
+<meta name="description" content="Dhruv Jain, full-stack engineer and team lead (C#/.NET, TypeScript, SQL Server) in Ahmedabad, India. Four years, three of them leading two live products, and a 60× report rewrite nobody asked for.">
 <meta name="author" content="Dhruv Jain">
-<meta name="theme-color" content="#FAFBFA">
+<meta name="theme-color" content="#f4f5f6">
 <meta name="color-scheme" content="light dark">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%230B7A71%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2246%22%20font-family%3D%22Helvetica%2CArial%2Csans-serif%22%20font-size%3D%2238%22%20font-weight%3D%22bold%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%3ED%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%230f5c4a%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2246%22%20font-family%3D%22Helvetica%2CArial%2Csans-serif%22%20font-size%3D%2238%22%20font-weight%3D%22bold%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%3ED%3C%2Ftext%3E%3C%2Fsvg%3E">
 <meta property="og:type" content="website">
-<meta property="og:title" content="The Dhruv Jain Case File">
-<meta property="og:description" content="An interactive ten-slide case for hiring Dhruv Jain, built around a 60x performance rewrite nobody asked for.">
+<meta property="og:title" content="Dhruv Jain — Full-Stack Engineer &amp; Team Lead">
+<meta property="og:description" content="Four years, three of them leading two live products, and a 60× report rewrite nobody asked for. Senior or lead full-stack role, fully remote.">
 <meta property="og:site_name" content="Dhruv Jain">
 <meta property="og:url" content="https://itdhruvjain.github.io/">
 <meta property="og:image" content="https://itdhruvjain.github.io/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="The Dhruv Jain Case File">
-<meta name="twitter:description" content="An interactive ten-slide case for hiring Dhruv Jain, built around a 60x performance rewrite nobody asked for.">
+<meta name="twitter:title" content="Dhruv Jain — Full-Stack Engineer &amp; Team Lead">
+<meta name="twitter:description" content="Four years, three of them leading two live products, and a 60× report rewrite nobody asked for. Senior or lead full-stack role, fully remote.">
 <meta name="twitter:image" content="https://itdhruvjain.github.io/og.png">
 <script>(function(){try{var t=localStorage.getItem('dj-theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t;}catch(e){}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
 <style>
-html{color-scheme:light dark}
-img{max-width:100%}
-[hidden]{display:none!important}
-
-:root{
-  --ground:#FAFBFA; --panel:#FFFFFF; --panel-2:#F1F3F1;
-  --ink:#11151A; --ink-2:#4B535B; --ink-3:#868E95;
-  --rule:#E3E5E2; --rule-2:#CFD3CF;
-  --slow:#9A5017; --fast:#14655A;
-  --slow-dim:#F8EDE2; --fast-dim:#E4EFEC;
-  --slow-rule:#DCC0A4; --fast-rule:#AECFC8;
-  --seal:#CFD3CF;
-  --shadow:0 1px 2px rgba(17,21,26,.04),0 18px 40px -28px rgba(17,21,26,.35);
-  --display:Archivo,"Helvetica Neue",Arial,sans-serif;
-  --body:Figtree,"Helvetica Neue",Arial,sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --ease:cubic-bezier(.16,.84,.34,1);
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --ground:#0E1114; --panel:#151A1F; --panel-2:#1B2229;
-    --ink:#EEF1F3; --ink-2:#A8B2BA; --ink-3:#717C85;
-    --rule:#232B32; --rule-2:#313A42;
-    --slow:#E0925A; --fast:#4FBFAE;
-    --slow-dim:#2A1D12; --fast-dim:#0F2A27;
-    --slow-rule:#5A3A20; --fast-rule:#1F4A45;
-    --seal:#313A42;
-    --shadow:0 1px 2px rgba(0,0,0,.5),0 18px 40px -26px rgba(0,0,0,.8);
+  html{color-scheme:light dark;scroll-behavior:smooth;scroll-padding-top:72px;}
+  :root{
+    --paper:#f4f5f6;
+    --surface:#ffffff;
+    --sunken:#eceef0;
+    --ink:#14181c;
+    --muted:#5c666e;
+    --faint:#8b949b;
+    --line:#dde1e4;
+    --accent:#0f5c4a;
+    --accent-soft:#e3efea;
+    --warm:#a9501f;
+    --warm-soft:#f6ece3;
+    --fill-bg:#fdf3d4;
+    --fill-ink:#6b5310;
+    --fill-line:#d9b83d;
+    --shadow:0 1px 2px rgba(20,24,28,.05),0 8px 24px -16px rgba(20,24,28,.18);
+    --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+    --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   }
-}
-:root[data-theme="dark"]{
-  --ground:#0E1114; --panel:#151A1F; --panel-2:#1B2229;
-  --ink:#EEF1F3; --ink-2:#A8B2BA; --ink-3:#717C85;
-  --rule:#232B32; --rule-2:#313A42;
-  --slow:#E0925A; --fast:#4FBFAE;
-  --slow-dim:#2A1D12; --fast-dim:#0F2A27;
-  --slow-rule:#5A3A20; --fast-rule:#1F4A45;
-  --seal:#313A42;
-  --shadow:0 1px 2px rgba(0,0,0,.5),0 18px 40px -26px rgba(0,0,0,.8);
-}
-*{box-sizing:border-box}
-body{background:var(--ground);color:var(--ink);font-family:var(--body);margin:0;-webkit-font-smoothing:antialiased}
-h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
-p{margin:0}
-button{font:inherit;color:inherit;cursor:pointer}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0e1114;--surface:#171b1f;--sunken:#1f242a;--ink:#e8ebed;--muted:#9aa4ac;--faint:#6d777f;
+      --line:#2b3238;--accent:#5cc3a1;--accent-soft:#13322a;--warm:#e08b53;--warm-soft:#33220f;
+      --fill-bg:#3a3009;--fill-ink:#f0d98a;--fill-line:#7d6a1d;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -16px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0e1114;--surface:#171b1f;--sunken:#1f242a;--ink:#e8ebed;--muted:#9aa4ac;--faint:#6d777f;
+    --line:#2b3238;--accent:#5cc3a1;--accent-soft:#13322a;--warm:#e08b53;--warm-soft:#33220f;
+    --fill-bg:#3a3009;--fill-ink:#f0d98a;--fill-line:#7d6a1d;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -16px rgba(0,0,0,.8);
+  }
 
-/* ---------- shell ---------- */
-.deck{height:100dvh;display:flex;flex-direction:column;padding:0 clamp(16px,4vw,56px);padding-block:0}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0 14px;border-bottom:1px solid var(--rule);flex-wrap:wrap}
-.brand{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2)}
-.brand b{color:var(--ink);font-weight:700}
-.meter{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink-3)}
-.sealcount{color:var(--slow);font-weight:700}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;}
+  img{max-width:100%;}
+  h1,h2,h3,h4{font-family:var(--display);font-weight:700;letter-spacing:-.02em;text-wrap:balance;margin:0;line-height:1.1;}
+  p{margin:0;}
+  a{color:inherit;}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
 
-/* ---------- progress rail ---------- */
-.rail{display:flex;gap:6px;align-items:flex-end;padding:12px 0 4px;overflow-x:auto;scrollbar-width:none}
-.rail::-webkit-scrollbar{display:none}
-.tick{flex:1 1 0;min-width:54px;background:none;border:0;padding:0;text-align:left;display:flex;flex-direction:column;gap:6px}
-.tick .bar{height:3px;border-radius:2px;background:var(--rule-2);transition:background .45s var(--ease),transform .45s var(--ease);transform-origin:left}
-.tick[data-state="seen"] .bar{background:var(--ink-3)}
-.tick[data-state="now"] .bar{background:var(--fast);transform:scaleY(2.2)}
-.tick .lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .3s}
-.tick[data-state="now"] .lab{color:var(--ink)}
-.tick[data-state="sealed"] .lab{color:transparent;background:var(--seal);border-radius:2px;position:relative}
-.tick[data-state="sealed"] .lab::after{content:"SEALED";position:absolute;inset:0;display:grid;place-items:center;color:var(--ground);font-size:8px;letter-spacing:.14em}
-.tick:hover .bar{background:var(--ink-2)}
+  .wrap{max-width:1040px;margin:0 auto;padding-inline:20px;}
+  .measure{max-width:62ch;}
 
-/* ---------- stage ---------- */
-.stage{flex:1;min-height:0;position:relative;display:grid;overflow-y:auto;scrollbar-width:thin}
-.slide{grid-area:1/1;align-self:safe center;padding:clamp(24px,4vh,56px) 0;display:none;visibility:hidden;opacity:0;pointer-events:none}
-.slide.is-active{display:block;visibility:visible;opacity:1;pointer-events:auto}
-.wrap{max-width:1080px;margin:0 auto;width:100%;display:flex;flex-direction:column;gap:clamp(14px,2vh,22px)}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--fast)}
-.eyebrow.warm{color:var(--slow)}
-h1{font-size:clamp(44px,8.4vw,104px);font-weight:800;line-height:.94;letter-spacing:-.03em}
-h2{font-size:clamp(27px,4.3vw,54px);font-weight:800;line-height:1.05;letter-spacing:-.02em}
-.lede{font-size:clamp(15px,1.35vw,17.5px);line-height:1.6;color:var(--ink-2);max-width:68ch}
-.kicker{font-size:clamp(17px,2vw,22px);font-weight:600;font-family:var(--display);color:var(--ink)}
+  .bar{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid var(--line);}
+  @supports (background:color-mix(in srgb,red 50%,transparent)){
+    .bar{background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);}
+  }
+  .bar-in{display:flex;align-items:center;gap:14px;min-height:56px;flex-wrap:wrap;padding-block:8px;}
+  .brand{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;white-space:nowrap;}
+  .brand span{color:var(--faint);}
+  .jump{display:flex;gap:18px;margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;}
+  .jump a{color:var(--muted);text-decoration:none;}
+  .jump a:hover{color:var(--accent);}
+  .bar-cta{display:flex;gap:8px;margin-left:auto;align-items:center;}
+  @media(min-width:900px){.bar-cta{margin-left:0;}}
+  @media(max-width:899px){.jump{display:none;}.brand span{display:none;}}
+  .btn{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;border:1px solid var(--line);border-radius:3px;background:var(--surface);color:var(--ink);text-decoration:none;cursor:pointer;white-space:nowrap;display:inline-block;line-height:1.4;}
+  .btn:hover{border-color:var(--accent);color:var(--accent);}
+  .btn.solid{background:var(--accent);border-color:var(--accent);color:var(--surface);}
+  .btn.solid:hover{opacity:.88;color:var(--surface);}
+  .btn.icon{padding:5px 9px;font-size:14px;letter-spacing:0;line-height:1.2;}
 
-/* reveal choreography */
-.slide.in .r{animation:rise .66s var(--ease) both}
-.slide.in .r:nth-child(1){animation-delay:.10s}
-.slide.in .r:nth-child(2){animation-delay:.20s}
-.slide.in .r:nth-child(3){animation-delay:.30s}
-.slide.in .r:nth-child(4){animation-delay:.40s}
-.slide.in .r:nth-child(5){animation-delay:.48s}
-.slide.in .r:nth-child(6){animation-delay:.56s}
-.slide.in .r:nth-child(7){animation-delay:.64s}
-@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-.slide.in .wipe{animation:wipe .82s var(--ease) both;animation-delay:.18s}
-@keyframes wipe{from{opacity:0;clip-path:inset(0 100% 0 0);transform:translateY(10px)}to{opacity:1;clip-path:inset(0 0 0 0);transform:none}}
-.slide.in .stagger > *{animation:rise .6s var(--ease) both}
-.stagger > *{--sd:0s}
-.slide.in .stagger > :nth-child(1){animation-delay:.46s}
-.slide.in .stagger > :nth-child(2){animation-delay:.58s}
-.slide.in .stagger > :nth-child(3){animation-delay:.70s}
-.slide.in .stagger > :nth-child(4){animation-delay:.82s}
-.slide.in .stagger > :nth-child(5){animation-delay:.94s}
-.slide.in .stagger > :nth-child(6){animation-delay:1.06s}
-.slide.in .stagger > :nth-child(7){animation-delay:1.18s}
-.slide.in .stagger > :nth-child(8){animation-delay:1.30s}
 
-/* ---------- components ---------- */
-.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
-.card{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:18px 18px 20px;display:flex;flex-direction:column;gap:8px}
-.card .step{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--fast);text-transform:uppercase}
-.card h3{font-size:16px;font-weight:600;letter-spacing:-.01em}
-.card p{font-size:14.5px;line-height:1.55;color:var(--ink-2)}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:2px;background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden}
-.stat{background:var(--panel);padding:16px 16px 14px;display:flex;flex-direction:column;gap:4px}
-.stat .n{font-family:var(--display);font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1}
-.stat .l{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);line-height:1.4}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:7px 11px;border:1px solid var(--rule-2);border-radius:999px;color:var(--ink-2)}
-.tag{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:4px 8px;border-radius:4px;align-self:flex-start}
-.tag.have{background:var(--fast-dim);color:var(--fast);border:1px solid var(--fast-rule)}
-.tag.learn{background:var(--slow-dim);color:var(--slow);border:1px solid var(--slow-rule)}
+  section{padding-block:56px;border-top:1px solid var(--line);}
+  section:first-of-type{border-top:0;}
+  .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+  h2{font-size:clamp(26px,3.6vw,38px);margin-bottom:16px;}
+  h3{font-size:19px;letter-spacing:-.01em;}
+  .lede{font-size:19px;color:var(--muted);}
 
-/* race demo */
-.race{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow)}
-.race-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.race-head .tiny{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
-.btn{background:var(--ink);color:var(--ground);border:0;border-radius:999px;padding:8px 16px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;transition:transform .2s var(--ease),opacity .2s}
-.btn:hover{transform:translateY(-1px)}
-.btn.ghost{background:transparent;color:var(--ink-2);border:1px solid var(--rule-2)}
-.track{display:flex;flex-direction:column;gap:7px}
-.track-top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em}
-.track-name{color:var(--ink-2)}
-.track-time{font-weight:700;font-variant-numeric:tabular-nums}
-.lane{height:12px;border-radius:999px;background:var(--panel-2);overflow:hidden;border:1px solid var(--rule)}
-.fill{display:block;height:100%;width:0;border-radius:999px}
-.lane.slow .fill{background:linear-gradient(90deg,var(--slow-rule),var(--slow))}
-.lane.fast .fill{background:linear-gradient(90deg,var(--fast-rule),var(--fast))}
-.slow .track-time{color:var(--slow)}
-.fast .track-time{color:var(--fast)}
-.note{font-size:12.5px;color:var(--ink-3);line-height:1.5}
+  .hero{padding-block:48px 52px;}
+  .hero h1{font-size:clamp(44px,8vw,86px);letter-spacing:-.035em;line-height:.95;margin-bottom:10px;}
+  .hero-role{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:26px;}
+  .thesis{font-size:clamp(20px,2.6vw,25px);line-height:1.45;font-weight:600;font-family:var(--display);letter-spacing:-.015em;max-width:24ch;margin-bottom:14px;}
+  .proof{font-size:18px;color:var(--muted);max-width:56ch;}
+  .proof strong{color:var(--ink);font-weight:600;}
+  .kpis{display:flex;flex-wrap:wrap;gap:0;margin-block:30px;border:1px solid var(--line);border-radius:4px;background:var(--surface);overflow:hidden;}
+  .kpi{flex:1 1 150px;padding:14px 18px;border-right:1px solid var(--line);}
+  .kpi:last-child{border-right:0;}
+  @media(max-width:700px){
+    .kpi{flex-basis:45%;border-bottom:1px solid var(--line);}
+    .kpi:nth-child(2n){border-right:0;}
+    .kpi:nth-last-child(-n+2){border-bottom:0;}
+  }
+  .kpi b{display:block;font-family:var(--display);font-size:26px;letter-spacing:-.03em;font-variant-numeric:tabular-nums;}
+  .kpi span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);}
+  .seeking{border-left:3px solid var(--accent);padding:4px 0 4px 14px;font-size:17px;max-width:60ch;}
+  .hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px;}
 
-/* range list */
-.rows{border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:var(--panel)}
-.row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 16px;border-bottom:1px solid var(--rule);cursor:pointer;transition:background .25s}
-.row:last-child{border-bottom:0}
-.row:hover{background:var(--panel-2)}
-.row .rn{font-family:var(--display);font-weight:600;font-size:15.5px}
-.row .rs{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.04em}
-.row .caret{color:var(--ink-3);transition:transform .3s var(--ease)}
-.row[aria-expanded="true"] .caret{transform:rotate(90deg)}
-.rowbody{display:none;padding:0 16px 16px;font-size:14.5px;line-height:1.6;color:var(--ink-2);border-bottom:1px solid var(--rule);background:var(--panel-2)}
-.rowbody.open{display:block;animation:rise .4s var(--ease) both}
+  figure{margin:26px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:20px;box-shadow:var(--shadow);}
+  .fig-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:18px;}
+  .row{display:grid;gap:6px;margin-bottom:16px;}
+  .row-top{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:11.5px;color:var(--muted);}
+  .row-top b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums;}
+  .track{height:10px;background:var(--sunken);border-radius:2px;overflow:hidden;}
+  .bar-fill{height:100%;border-radius:2px;transform-origin:left center;animation:grow .9s cubic-bezier(.2,.7,.3,1) both;}
+  .bar-fill.slow{background:var(--warm);width:100%;}
+  .bar-fill.fast{background:var(--accent);width:1.7%;min-width:5px;}
+  .bar-fill.naive{background:var(--warm);width:100%;}
+  .bar-fill.scoped{background:var(--accent);width:4%;min-width:5px;}
+  @keyframes grow{from{transform:scaleX(.55);opacity:.6}to{transform:scaleX(1);opacity:1}}
+  figcaption{font-family:var(--mono);font-size:10.5px;line-height:1.7;color:var(--faint);border-top:1px solid var(--line);padding-top:12px;}
+  @media (prefers-reduced-motion: reduce){.bar-fill{animation:none;}*{transition:none!important;}html{scroll-behavior:auto;}}
 
-/* contact */
-.links{display:flex;flex-wrap:wrap;gap:10px}
-.links a{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-decoration:none;color:var(--ink);border:1px solid var(--rule-2);border-radius:999px;padding:9px 15px;transition:border-color .25s,transform .2s var(--ease)}
-.links a:hover{border-color:var(--fast);transform:translateY(-1px)}
+  /* mechanism flow */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;margin-top:6px;}
+  .step{flex:1 1 150px;background:var(--sunken);border:1px solid var(--line);border-radius:4px;padding:12px 14px;}
+  .step em{display:block;font-family:var(--mono);font-style:normal;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:5px;}
+  .step p{font-size:14.5px;line-height:1.5;color:var(--muted);}
+  .step.ok{border-color:var(--accent);background:var(--accent-soft);}
+  .step.ok p,.step.ok em{color:var(--accent);}
+  .step.esc{border-color:var(--warm);background:var(--warm-soft);}
+  .step.esc p,.step.esc em{color:var(--warm);}
 
-/* ---------- footer / teaser ---------- */
-.footbar{border-top:1px solid var(--rule);padding:14px 0 18px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.teaser{display:flex;align-items:baseline;gap:10px;min-width:0;flex:1}
-.teaser .tl{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
-.teaser .tt{font-family:var(--display);font-weight:600;font-size:clamp(13.5px,1.5vw,16px);color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.teaser.swap .tt{animation:teaseIn .5s var(--ease) both}
-@keyframes teaseIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
-.navs{display:flex;gap:8px;align-items:center}
-.nav{width:40px;height:40px;border-radius:999px;border:1px solid var(--rule-2);background:var(--panel);display:grid;place-items:center;font-size:17px;line-height:1;transition:border-color .25s,transform .2s var(--ease),background .25s}
-.nav:hover{border-color:var(--fast);transform:translateY(-1px)}
-.nav[disabled]{opacity:.35;cursor:default;transform:none}
-.nav.beckon{animation:beckon 1.9s ease-in-out infinite}
-@keyframes beckon{0%,100%{box-shadow:0 0 0 0 rgba(20,101,90,0)}45%{box-shadow:0 0 0 7px rgba(20,101,90,.10)}}
-.hint{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+  .grid{display:grid;gap:14px;margin-top:26px;}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:18px 20px;}
+  .card h3{margin-bottom:8px;}
+  .card p{font-size:16px;color:var(--muted);}
+  .card p strong{color:var(--ink);font-weight:600;}
+  .card p + p{margin-top:10px;}
+  .tag{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;padding:3px 7px;border-radius:2px;margin-bottom:10px;}
+  .tag.have{background:var(--accent-soft);color:var(--accent);}
+  .tag.learn{background:var(--warm-soft);color:var(--warm);}
 
-/* ---------- theme toggle ---------- */
-.tbtn{width:30px;height:30px;border-radius:999px;border:1px solid var(--rule-2);background:var(--panel);color:var(--ink-2);cursor:pointer;display:grid;place-items:center;padding:0;line-height:1;font-size:14px}
-.tbtn:hover{border-color:var(--fast);color:var(--fast)}
+  .tbl-wrap{overflow-x:auto;margin-top:26px;border:1px solid var(--line);border-radius:5px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;min-width:620px;}
+  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top;font-size:15.5px;}
+  tr:last-child td{border-bottom:0;}
+  th{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:500;}
+  td.name{font-family:var(--display);font-weight:600;font-size:16px;white-space:nowrap;}
+  td.stack{font-family:var(--mono);font-size:11.5px;color:var(--muted);line-height:1.6;}
+  td.what{color:var(--muted);}
 
-/* ---------- replay badge ---------- */
-.badge{display:flex;gap:8px;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
-.badge button{border:1px solid var(--rule-2);background:var(--panel-2);border-radius:999px;padding:5px 10px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
-.badge button:hover{border-color:var(--fast)}
+  .qa{display:grid;margin-top:26px;border-top:1px solid var(--line);}
+  .qa div.pair{display:grid;grid-template-columns:200px minmax(0,1fr);gap:20px;padding:16px 0;border-bottom:1px solid var(--line);}
+  .qa .q{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding-top:4px;}
+  .qa .a{font-size:16.5px;color:var(--muted);}
+  .qa .a strong{color:var(--ink);font-weight:600;}
+  @media(max-width:700px){.qa div.pair{grid-template-columns:1fr;gap:6px;}}
 
-/* ---------- opening typewriter ---------- */
-.w{display:inline-block}
-.ch{position:relative}
-.typing .ch{visibility:hidden}
-.ch.tip::after{content:"";position:absolute;left:100%;top:.08em;height:.82em;width:.055em;min-width:2px;background:var(--fast);border-radius:1px;animation:blink .8s steps(1,end) infinite}
-@keyframes blink{0%,48%{opacity:1}49%,100%{opacity:0}}
-.hold > *{animation:rise .55s var(--ease) both}
-.hold > :nth-child(1){animation-delay:2.55s}
-.hold > :nth-child(2){animation-delay:2.66s}
-.hold > :nth-child(3){animation-delay:2.77s}
-.hold > :nth-child(4){animation-delay:2.88s}
-.hold > :nth-child(5){animation-delay:2.99s}
-.hold.rerun > *{animation:none;opacity:0}
-.hold.go > *{animation:rise .55s var(--ease) both;opacity:1}
+  .principles{display:grid;gap:22px;margin-top:26px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+  .principle h3{margin-bottom:6px;}
+  .principle p{font-size:16px;color:var(--muted);}
 
-@media (max-width:640px){
-  .deck{padding:0 16px}
-  .topbar{gap:8px 12px;padding:14px 0 10px}
-  .meter{gap:10px}
-  .slide{padding:14px 0 18px}
-  .wrap{gap:12px}
-  h1{font-size:clamp(40px,12vw,64px)}
-  h2{font-size:clamp(25px,7vw,34px)}
-  .lede{font-size:15px}
-  .card{padding:15px 14px 16px}
-  .card p{font-size:14px}
-  .race{padding:14px}
-  .race-head{flex-direction:column;align-items:flex-start}
-  .footbar{padding:12px 0 14px}
-  .teaser .tl{display:none}
-  .rail{gap:4px}
-  .tick{min-width:34px}
-  .tick .lab{display:none}
-  .hint{display:none}
-  .badge span{display:none}
-}
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.001s!important;animation-delay:0s!important;transition-duration:.001s!important}
-}
+  footer{border-top:1px solid var(--line);padding-block:44px 60px;}
+  .foot-cta{display:flex;gap:10px;flex-wrap:wrap;margin-block:22px;}
+  .fine{font-family:var(--mono);font-size:11px;color:var(--faint);line-height:1.8;}
+
+  @media print{
+    .bar,.hero-cta,.foot-cta{display:none!important;}
+    body{font-size:12pt;background:#fff;color:#000;}
+    figure,.card,.tbl-wrap,.kpis{box-shadow:none;break-inside:avoid;}
+    section{padding-block:24px;}
+    .bar-fill{animation:none;}
+  }
 </style>
 </head>
 <body>
 
-<div class="deck">
-  <div class="topbar">
-    <div class="brand"><b>Dhruv Jain</b> · Full-stack engineer</div>
-    <div class="meter"><span id="counter">01 / 10</span><span>·</span><span><span class="sealcount" id="sealed">9</span> sealed</span><span class="badge"><button id="replay">Replay opening</button></span><button class="tbtn" id="themeBtn" type="button" aria-label="Toggle dark mode">◐</button></div>
-  </div>
-
-  <nav class="rail" id="rail" aria-label="Slides"></nav>
-
-  <main class="stage" id="stage">
-
-    <section class="slide" data-title="Opening" data-teaser="Exhibit A — a report that took ten minutes now takes ten seconds">
-      <div class="wrap">
-        <p class="eyebrow" id="t1">Ahmedabad, India · Open to remote</p>
-        <h1 id="t2">Dhruv Jain</h1>
-        <p class="lede" id="t3" style="font-size:clamp(17px,2vw,23px);color:var(--ink)">I take on the problems everyone else has learned to work around.</p>
-        <div class="chips hold" id="chips">
-          <span class="chip">4+ years full-stack</span>
-          <span class="chip">C# / .NET 10</span>
-          <span class="chip">TypeScript · Angular</span>
-          <span class="chip">SQL Server · Redis</span>
-          <span class="chip">Team lead, 2 products</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="slide" data-title="Exhibit A" data-teaser="Why it matters more than the number — nobody asked me to do it">
-      <div class="wrap">
-        <p class="eyebrow warm r">Exhibit A</p>
-        <h2 class="wipe">A report that took ten minutes now takes ten seconds.</h2>
-        <p class="lede r">A ten-year-old packaging life-cycle-assessment product. The calculations lived in large, deeply nested SQL stored procedures, and the pipeline had run unchanged for three years because the risk of getting the numbers wrong was real. <strong style="color:var(--ink)">Press run.</strong></p>
-        <div class="race r">
-          <div class="race-head">
-            <span class="tiny">Same report · same inputs · 60× time-compressed</span>
-            <span style="display:flex;gap:8px"><button class="btn" id="runRace">Run both</button><button class="btn ghost" id="resetRace">Reset</button></span>
-          </div>
-          <div class="track slow">
-            <div class="track-top"><span class="track-name">Before — nested stored procedures</span><span class="track-time" id="tSlow">0:00</span></div>
-            <div class="lane slow"><i class="fill" id="fSlow"></i></div>
-          </div>
-          <div class="track fast">
-            <div class="track-top"><span class="track-name">After — API layer + Redis</span><span class="track-time" id="tFast">0.0s</span></div>
-            <div class="lane fast"><i class="fill" id="fFast"></i></div>
-          </div>
-          <p class="note">An illustration of the measured result, not a live benchmark. Real figures: 5–10 minutes down to 5–10 seconds, roughly 60× faster.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="slide" data-title="The point" data-teaser="Exhibit B — legacy codebase to modern stack, shipped in two months">
-      <div class="wrap">
-        <p class="eyebrow r">Why it matters more than the number</p>
-        <h2 class="wipe">Nobody asked me to do it.</h2>
-        <div class="grid3 stagger">
-          <div class="card"><span class="step">01 · Saw it</span><p>Every lead before me had built around those stored procedures rather than into them. Reasonably — the numbers are what the customer acts on, so the downside of breaking them was real.</p></div>
-          <div class="card"><span class="step">02 · Took it</span><p>No ticket, no client request. I moved the calculation layer into the API behind a single source of truth and added Redis caching, then led a team of three on the product.</p></div>
-          <div class="card"><span class="step">03 · Shipped it</span><p>Reports went from minutes to seconds and stayed correct. It earned the company's Client Excellence Award in 2025 — but the point is that the opportunity had been sitting there for three years.</p></div>
-        </div>
-        <div class="stats r">
-          <div class="stat"><span class="n num" data-to="60" data-suffix="×">0×</span><span class="l">Faster report generation</span></div>
-          <div class="stat"><span class="n num" data-to="10" data-suffix=" yrs">0 yrs</span><span class="l">Age of the product I took it on in</span></div>
-          <div class="stat"><span class="n num" data-to="3">0</span><span class="l">Engineers I lead on it</span></div>
-          <div class="stat"><span class="n" style="color:var(--slow)">0</span><span class="l">People who asked me to</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="slide" data-title="Exhibit B" data-teaser="Exhibit C — a year spent working out what good AI practice looks like">
-      <div class="wrap">
-        <p class="eyebrow warm r">Exhibit B</p>
-        <h2 class="wipe">Legacy codebase to modern stack, shipped in two months.</h2>
-        <p class="lede r">Health4Community is a multi-tenant SaaS platform for healthcare and clinic organisations. It ran on a legacy ASP.NET MVC codebase. Leading a five-member team, I re-architected it onto .NET 10 with Clean Architecture and DDD, and Angular 20, and shipped the new version in two months.</p>
-        <div class="grid2 stagger">
-          <div class="card"><span class="step">What I own on it</span><p>The multi-tenant foundations: fine-grained permissions, tenant isolation, Azure AD B2C identity, per-tenant branding. And the whole workforce suite — attendance, timesheets with multi-level approvals, leave, rostering, configurable overtime and award loading.</p></div>
-          <div class="card"><span class="step">How I designed it</span><p>Around the operational edge cases rather than the happy path: shift overlaps, approval chains, award-rule variations. Later requirements fit the model instead of forcing a rewrite. That is the part of the job I actually enjoy — thinking ahead of the user.</p></div>
-        </div>
-        <p class="note r">This is also the honest answer to "can you pick up our stack?" — I have done exactly that, at speed, on a product with real customers on it.</p>
-      </div>
-    </section>
-
-    <section class="slide" data-title="Exhibit C" data-teaser="Groundwork — before an agent edits a file, it should know what it can break">
-      <div class="wrap">
-        <p class="eyebrow warm r">Exhibit C</p>
-        <h2 class="wipe">A year spent working out what good AI practice looks like.</h2>
-        <p class="lede r">Not "I use Copilot." I lead my company's training on Model Context Protocol and AI prompting, have shipped MCP integrations into three client products as a client-facing capability, and have used agentic coding workflows daily for over a year — holding AI-written code to the same review discipline and quality gates as anything else.</p>
-        <div class="stats r">
-          <div class="stat"><span class="n num" data-to="3">0</span><span class="l">Client products shipped with MCP</span></div>
-          <div class="stat"><span class="n num" data-to="95" data-suffix="%">0%</span><span class="l">Context reduction in Groundwork</span></div>
-          <div class="stat"><span class="n">1+ yr</span><span class="l">Daily agentic development</span></div>
-          <div class="stat"><span class="n">3rd</span><span class="l">Prize, internal hackathon 2026</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="slide" data-title="Groundwork" data-teaser="Range — five products, four years, one company">
-      <div class="wrap">
-        <p class="eyebrow r">Groundwork · try it</p>
-        <h2 class="wipe">Before an agent edits a file, it should know what it can break.</h2>
-        <p class="lede r">Groundwork builds a dependency graph of a repository and computes each proposed change's blast radius from it, auto-escalating edits that reach too far. It cut the context an agent loads per task from roughly 25,000 tokens to 800–1,000 — about 95%, verified with a side-by-side comparison test.</p>
-        <div class="race r">
-          <div class="race-head"><span class="tiny">Context loaded per task</span><button class="btn ghost" id="runCtx">Replay</button></div>
-          <div class="track slow">
-            <div class="track-top"><span class="track-name">Naive agent — whole-repo context</span><span class="track-time" id="tCtxA">0 tok</span></div>
-            <div class="lane slow"><i class="fill" id="fCtxA"></i></div>
-          </div>
-          <div class="track fast">
-            <div class="track-top"><span class="track-name">Groundwork — blast-radius scoped</span><span class="track-time" id="tCtxB">0 tok</span></div>
-            <div class="lane fast"><i class="fill" id="fCtxB"></i></div>
-          </div>
-          <p class="note">Python 3.11 · Pydantic v2 · networkx · MCP. Model-agnostic, consumable over MCP or CLI.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="slide" data-title="Range" data-teaser="The part most decks leave out — what I have, and what I am still learning">
-      <div class="wrap">
-        <p class="eyebrow r">Range</p>
-        <h2 class="wipe">Five products, four years, one company.</h2>
-        <p class="lede r">One company — but a client-services one: four external clients in four different domains (packaging LCA, healthcare SaaS, manufacturing ERP, survey analytics), each delivery answering to its own client's bar rather than a single internal standard. If you are wondering whether I have only been measured against one yardstick, make that the first question of the call. <strong style="color:var(--ink)">Click any of them.</strong></p>
-        <div class="rows r" id="rows">
-          <div class="row" data-row="0" aria-expanded="false"><span><span class="rn">Health4Community</span><br><span class="rs">.NET 10 · Angular 20 · Azure AD B2C · SQL Server</span></span><span class="caret">›</span></div>
-          <div class="rowbody">Enterprise multi-tenant SaaS for healthcare and clinic organisations, spanning HR and workforce management, process and compliance, and business administration. Re-architected off legacy ASP.NET MVC and shipped in two months by the five-member team I lead. Modular monolith · Clean Architecture / DDD · Azure DevOps CI/CD.</div>
-          <div class="row" data-row="1" aria-expanded="false"><span><span class="rn">PIQET</span><br><span class="rs">Angular 15 · .NET Core 6 · SQL Server · Redis</span></span><span class="caret">›</span></div>
-          <div class="rowbody">A packaging life-cycle-assessment tool measuring the environmental impact of packaging options. I cut report generation from 5–10 minutes to 5–10 seconds. Earlier, I built its Excel import/export and PDF report generation. I lead a team of three on it. Client Excellence Award, 2025.</div>
-          <div class="row" data-row="2" aria-expanded="false"><span><span class="rn">Groundwork</span><br><span class="rs">Python 3.11 · Pydantic v2 · networkx · MCP</span></span><span class="caret">›</span></div>
-          <div class="rowbody">A deterministic context and guardrail layer for AI coding agents in large repositories. Cuts per-task context ~95% and runs a plan / assess / validate loop that computes blast radius and auto-escalates risky edits. 3rd prize, iFour internal hackathon 2026.</div>
-          <div class="row" data-row="3" aria-expanded="false"><span><span class="rn">Bistly</span><br><span class="rs">Angular 12 · .NET Core 6 · Google Gemini API</span></span><span class="caret">›</span></div>
-          <div class="rowbody">A forms, surveys and audience analytics platform. I integrated the Google Gemini API for automated sign-up and survey generation and AI-driven response analysis — an early production use of LLMs in a client product — alongside configurable automation workflows and QR-code embedding.</div>
-          <div class="row" data-row="4" aria-expanded="false"><span><span class="rn">New Horizon ERP</span><br><span class="rs">Angular 12 · .NET Core 2.1 · SQL Server</span></span><span class="caret">›</span></div>
-          <div class="rowbody">A manufacturing ERP covering inventory, production, quality control, planning, finance and CRM. I developed and configured enhancements to the inventory and packaging modules — useful context for anyone whose product has to exchange data with an ERP.</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="slide" data-title="Honest list" data-teaser="How I work — four things you can rely on">
-      <div class="wrap">
-        <p class="eyebrow r">The part most decks leave out</p>
-        <h2 class="wipe">What I have, and what I am still learning.</h2>
-        <p class="lede r">You will find this out in the first technical call anyway. I would rather you hear it from me.</p>
-        <div class="grid3 stagger">
-          <div class="card"><span class="tag have">Have</span><p><strong style="color:var(--ink)">C# and .NET</strong> — .NET 10 and .NET Core in production, Clean Architecture, DDD, modular-monolith design, RESTful APIs and third-party integrations.</p></div>
-          <div class="card"><span class="tag have">Have</span><p><strong style="color:var(--ink)">TypeScript front ends</strong> — Angular 20, 15 and 12, component-driven SPA architecture, a config-driven reusable UI layer I designed and wrote the standards for.</p></div>
-          <div class="card"><span class="tag have">Have</span><p><strong style="color:var(--ink)">Relational databases</strong> — SQL Server and T-SQL, stored-procedure analysis and optimisation, schema design, query tuning, Redis caching.</p></div>
-          <div class="card"><span class="tag have">Have</span><p><strong style="color:var(--ink)">Delivery discipline</strong> — Azure DevOps CI/CD, branching and PR workflow, SonarQube and ESLint gates, code review, agile ceremonies, mentoring.</p></div>
-          <div class="card"><span class="tag learn">Learning</span><p><strong style="color:var(--ink)">Vue 3</strong> — my front-end years are in Angular. The concepts map almost one to one, and I am working through it on my own time, but I will not claim production experience I do not have.</p></div>
-          <div class="card"><span class="tag learn">Learning</span><p><strong style="color:var(--ink)">PostgreSQL</strong> — my production relational work is SQL Server. I know where the two differ and I am closing the gap deliberately.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="slide" data-title="How I work" data-teaser="Next step — let's talk">
-      <div class="wrap">
-        <p class="eyebrow r">How I work</p>
-        <h2 class="wipe">Four things you can rely on.</h2>
-        <div class="grid2 stagger">
-          <div class="card"><h3>I design ahead of the user</h3><p>What will they actually do, what breaks at the edges, and what requirement is coming in six months that today's schema should already accommodate. It is why Exhibit B's workforce suite modelled shift overlaps, approval chains and award-rule variations before any user hit them.</p></div>
-          <div class="card"><h3>I write the standards down</h3><p>Layered backend boundaries, a config-driven reusable front-end layer, SonarQube and ESLint gates — then I mentor people on them. They are what every pull request on the products I lead passes through today.</p></div>
-          <div class="card"><h3>I own outcomes, not commits</h3><p>I own client relationships for the products I lead, and I would rather raise an awkward problem early than deliver something on time that quietly does not work. That ownership is what the 2025 Client Excellence Award recognised.</p></div>
-          <div class="card"><h3>I am practical before I am theoretical</h3><p>I will not always have the textbook name for a pattern to hand. I will know how the system actually behaves under load, where it breaks, and what to do about it — Exhibit A only happened because I knew exactly how a ten-year-old pipeline behaved before touching it.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="slide" data-title="Let's talk" data-teaser="File closed · press ← to go back through the exhibits">
-      <div class="wrap">
-        <p class="eyebrow r">Next step</p>
-        <h2 class="wipe">Let's talk.</h2>
-        <p class="lede r">Give me a real problem from your codebase rather than a syntax quiz and you will learn more about me in an hour than any deck can tell you.</p>
-        <div class="links stagger">
-          <a href="mailto:it.dhruvjain@gmail.com">it.dhruvjain@gmail.com</a>
-          <a href="https://www.linkedin.com/in/connect-dhruvjain" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="tel:+917016581281">+91 70165 81281</a>
-          <a href="cv.html">Full CV ›</a>
-          <a href="Dhruv-Jain-CV.pdf" download="Dhruv-Jain-CV.pdf">Download CV (PDF)</a>
-        </div>
-        <p class="note r">What I am looking for: a senior or lead full-stack engineering role on a product team, fully remote.<br>Ahmedabad, India (IST, UTC+5:30) · B.E. Information Technology · Microsoft Certified: Azure Fundamentals, Azure Data Fundamentals.</p>
-      </div>
-    </section>
-
-  </main>
-
-  <div class="footbar">
-    <div class="teaser" id="teaser"><span class="tl">Next</span><span class="tt" id="teaserText"></span></div>
-    <div class="navs">
-      <span class="hint">← → to navigate</span>
-      <button class="nav" id="prev" aria-label="Previous slide">‹</button>
-      <button class="nav" id="next" aria-label="Next slide">›</button>
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="brand" href="#top">Dhruv Jain <span>· full-stack engineer &amp; team lead</span></a>
+    <nav class="jump" aria-label="Sections">
+      <a href="#piqet">Evidence</a>
+      <a href="#range">Range</a>
+      <a href="#skills">Skills</a>
+      <a href="#hire">Hiring</a>
+    </nav>
+    <div class="bar-cta">
+      <button class="btn icon" id="themeBtn" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
+      <a class="btn" href="cv.html">Full CV</a>
+      <a class="btn solid" href="mailto:it.dhruvjain@gmail.com">Email me</a>
     </div>
   </div>
-</div>
+</header>
+
+<main class="wrap" id="top">
+
+  <section class="hero">
+    <div class="eyebrow">Ahmedabad, India · IST (UTC+5:30) · fully remote</div>
+    <h1>Dhruv Jain</h1>
+    <div class="hero-role">Full-stack engineer &amp; team lead — C# / .NET · TypeScript · SQL Server</div>
+
+    <p class="thesis">I take on the problems everyone else has learned to work around.</p>
+    <p class="proof">Last year that was a ten-year-old report pipeline three successive leads had built around rather than into. No ticket. No client request. <strong>5–10 minutes down to 5–10 seconds</strong>, and the numbers stayed correct.</p>
+
+    <div class="kpis">
+      <div class="kpi"><b>60×</b><span>Faster reports, PIQET</span></div>
+      <div class="kpi"><b>4 yrs</b><span>3 of them leading</span></div>
+      <div class="kpi"><b>2</b><span>Live products I lead</span></div>
+      <div class="kpi"><b>5</b><span>Engineers on the larger team</span></div>
+    </div>
+
+    <p class="seeking">Looking for a <strong>senior or lead full-stack role</strong> on a product team, fully remote. Four years in, three of them leading: I set the engineering standards two products are built to, and I own the client relationship on both. <strong>Currently serving notice</strong> — available from <strong>11 October 2026</strong>.</p>
+
+    <div class="hero-cta">
+      <a class="btn solid" href="mailto:it.dhruvjain@gmail.com">it.dhruvjain@gmail.com</a>
+      <a class="btn" href="Dhruv-Jain-CV.pdf">Download CV (PDF)</a>
+      <a class="btn" href="https://www.linkedin.com/in/connect-dhruvjain" rel="me noopener">LinkedIn</a>
+    </div>
+  </section>
+
+  <section id="piqet">
+    <div class="eyebrow">Evidence — the work nobody asked for</div>
+    <h2>A report that took ten minutes now takes ten seconds.</h2>
+    <p class="lede measure">PIQET is a ten-year-old packaging life-cycle-assessment product. Its calculations lived in large, deeply nested SQL stored procedures, and the pipeline had run untouched for three years because the numbers are what the customer acts on — the downside of breaking them was real.</p>
+
+    <figure>
+      <div class="fig-head"><span>Report generation · same report, same inputs</span><span>Bar lengths to scale</span></div>
+      <div class="row">
+        <div class="row-top"><span>Before — nested stored procedures</span><b>5–10 min</b></div>
+        <div class="track"><div class="bar-fill slow"></div></div>
+      </div>
+      <div class="row">
+        <div class="row-top"><span>After — API calculation layer + Redis</span><b>5–10 sec</b></div>
+        <div class="track"><div class="bar-fill fast"></div></div>
+      </div>
+      <figcaption>Measured on the live product, not a synthetic benchmark. Roughly 60× faster. Client Excellence Award, 2025.</figcaption>
+    </figure>
+
+    <div class="grid g3">
+      <div class="card">
+        <h3>What I changed</h3>
+        <p>Moved the calculation layer out of the stored procedures and into the API behind a single source of truth, then added Redis caching for the repeated inputs. Nobody asked for it — every lead before me had built around those procedures rather than into them.</p>
+      </div>
+      <div class="card">
+        <h3>How I knew it was safe</h3>
+        <p>The whole risk here was correctness, so I proved it before cutover: replayed historical reports through both paths and diffed every output field to the decimal. The rewrite shipped only once the two agreed on all of them.</p>
+      </div>
+      <div class="card">
+        <h3>What happened after</h3>
+        <p>The rewrite has been in production since cutover, and the report numbers are still the ones the client acts on. I lead a team of three on the product and own the client relationship directly.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="h4c">
+    <div class="eyebrow">Evidence — can you pick up our stack?</div>
+    <h2>Legacy codebase to modern stack, shipped in two months.</h2>
+    <p class="lede measure">Health4Community is a multi-tenant SaaS platform for healthcare and clinic organisations — three systems under one roof, running on a legacy ASP.NET MVC codebase. Leading five engineers, I re-architected it onto .NET 10 (Clean Architecture, DDD) and Angular 20 and shipped the new version in two months.</p>
+
+    <div class="grid g3">
+      <div class="card">
+        <h3>The scope, so you can judge it</h3>
+        <p>Three systems inside one platform: <strong>billing</strong>, <strong>document management and SOP control</strong>, and <strong>HR with rostering</strong> — the last including automatic roster generation.</p>
+        <p>Serving three client organisations and around 50 users at cutover.</p>
+      </div>
+      <div class="card">
+        <h3>What I own on it</h3>
+        <p>The multi-tenant foundations — fine-grained permissions, tenant isolation, Azure AD B2C identity, per-tenant branding — and the whole HR and workforce side: attendance, timesheets with multi-level approvals, leave, rostering, configurable overtime and award loading.</p>
+      </div>
+      <div class="card">
+        <h3>The part that was actually hard</h3>
+        <p>Auto-building rosters. A generated roster has to satisfy availability, shift overlaps, approval chains, configurable overtime and award-rule variations at the same time — and still let a manager override any cell by hand without the rest falling apart. I modelled those constraints before anyone hit them, which is why later requirements fitted the model instead of forcing a rewrite.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="groundwork">
+    <div class="eyebrow">Evidence — AI practice, past the Copilot line</div>
+    <h2>Before an agent edits a file, it should know what it can break.</h2>
+    <p class="lede measure">Groundwork builds a dependency graph of a repository, computes each proposed change's blast radius from it, and escalates edits that reach further than the change should. Python 3.11, Pydantic v2, networkx — consumable over MCP or CLI, model-agnostic.</p>
+
+    <figure>
+      <div class="fig-head"><span>The loop, per proposed edit</span><span>Deterministic — same change, same set</span></div>
+      <div class="flow">
+        <div class="step"><em>01 · Plan</em><p>Agent proposes a change to a file.</p></div>
+        <div class="step"><em>02 · Assess</em><p>Resolve that file's dependents from the graph — the blast radius.</p></div>
+        <div class="step ok"><em>03a · Within scope</em><p>Load only that slice as context. Apply.</p></div>
+        <div class="step esc"><em>03b · Reaches too far</em><p>Escalate for review instead of applying quietly.</p></div>
+      </div>
+      <figcaption style="margin-top:18px;">The graph is computed from imports and references, not guessed by a model — so the same proposed change always resolves to the same dependency set, run to run.</figcaption>
+    </figure>
+
+    <figure>
+      <div class="fig-head"><span>Context loaded per task · 64-module repo</span><span>Tokens</span></div>
+      <div class="row">
+        <div class="row-top"><span>Naive agent — whole-repo context dump</span><b>~25,000</b></div>
+        <div class="track"><div class="bar-fill naive"></div></div>
+      </div>
+      <div class="row">
+        <div class="row-top"><span>Groundwork — blast-radius scoped</span><b>800–1,000</b></div>
+        <div class="track"><div class="bar-fill scoped"></div></div>
+      </div>
+      <figcaption>The honest framing: that baseline is a whole-repo dump, and no serious agent does that — retrieval-based tools already scope. What Groundwork adds over retrieval is determinism, and an escalation path for edits that reach outside the set.</figcaption>
+    </figure>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3>It isn't open source, and here's the deal</h3>
+        <p>Groundwork was built on company time and stays closed for now. I'd rather say that plainly than leave a "view source" link that goes nowhere.</p>
+        <p><strong>What I'll do instead:</strong> in the technical call I'll screen-share it and run the loop live — on a public repo of your choosing if you want a neutral one. Fifteen minutes and you'll know whether I understand dependency graphs or just talk about them.</p>
+      </div>
+      <div class="card">
+        <h3>The rest of the AI work</h3>
+        <p>I lead my company's training on Model Context Protocol and prompting, have shipped MCP integrations into three client products as a client-facing capability, and have used agentic workflows daily for over a year — holding AI-written code to the same review gates as anything hand-written.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="range">
+    <div class="eyebrow">Range</div>
+    <h2>Five products, four years, one company.</h2>
+    <p class="lede measure">One employer — but a client-services one: four external clients in four domains, each delivery answering to its own client's bar rather than a single internal standard. If you're wondering whether I've only been measured against one yardstick, make that the first question of the call.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th scope="col">Product</th><th scope="col">Stack</th><th scope="col">What I did</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="name">PIQET</td>
+            <td class="stack">Angular 15 · .NET Core 6<br>SQL Server · Redis</td>
+            <td class="what">Packaging life-cycle assessment. Cut report generation 60×; earlier built its Excel import/export and PDF reporting. Team lead, 3 engineers. Client Excellence Award 2025.</td>
+          </tr>
+          <tr>
+            <td class="name">Health4Community</td>
+            <td class="stack">.NET 10 · Angular 20<br>Azure AD B2C · SQL Server</td>
+            <td class="what">Enterprise multi-tenant healthcare SaaS — three systems: billing, document management and SOP control, and HR with auto-built rostering. Re-architected off legacy ASP.NET MVC in two months. Team lead, 5 engineers.</td>
+          </tr>
+          <tr>
+            <td class="name">Groundwork</td>
+            <td class="stack">Python 3.11 · Pydantic v2<br>networkx · MCP</td>
+            <td class="what">Deterministic context and guardrail layer for AI coding agents in large repositories. Plan / assess / validate loop with blast-radius escalation. Built solo; demo available on request.</td>
+          </tr>
+          <tr>
+            <td class="name">Bistly</td>
+            <td class="stack">Angular 12 · .NET Core 6<br>Google Gemini API</td>
+            <td class="what">Forms, surveys and audience analytics. Integrated Gemini for automated survey generation and response analysis — an early production use of LLMs in a client product.</td>
+          </tr>
+          <tr>
+            <td class="name">New Horizon ERP</td>
+            <td class="stack">Angular 12 · .NET Core 2.1<br>SQL Server</td>
+            <td class="what">Manufacturing ERP — inventory, production, QC, planning, finance, CRM. Built enhancements to the inventory and packaging modules. Useful if your product exchanges data with an ERP.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="eyebrow">The part most pages leave out</div>
+    <h2>What I have, and what I'm still learning.</h2>
+    <p class="lede measure">You'll find this out in the first technical call anyway. I'd rather you hear it from me. No percentage bars — I've never been able to say what "C# — 87%" would mean, and neither has anyone who's shown me one.</p>
+
+    <div class="grid g2">
+      <div class="card"><span class="tag have">Have</span><h3>C# and .NET</h3><p>.NET 10 and .NET Core in production, Clean Architecture, DDD, modular-monolith design, RESTful APIs, third-party integrations.</p></div>
+      <div class="card"><span class="tag have">Have</span><h3>TypeScript front ends</h3><p>Angular 20, 15 and 12, component-driven SPA architecture, and a config-driven reusable UI layer I designed and wrote the standards for.</p></div>
+      <div class="card"><span class="tag have">Have</span><h3>Relational databases</h3><p>SQL Server and T-SQL, stored-procedure analysis and optimisation, schema design, query tuning, Redis caching.</p></div>
+      <div class="card"><span class="tag have">Have</span><h3>Delivery discipline</h3><p>Azure DevOps CI/CD, branching and PR workflow, SonarQube and ESLint gates, code review, agile ceremonies, mentoring.</p></div>
+      <div class="card"><span class="tag learn">Learning</span><h3>Vue 3</h3><p>My front-end years are in Angular. The concepts map almost one to one and I'm working through it on my own time — but I won't claim production experience I don't have.</p></div>
+      <div class="card"><span class="tag learn">Learning</span><h3>PostgreSQL</h3><p>My production relational work is SQL Server. I know where the two differ and I'm closing the gap deliberately.</p></div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="eyebrow">How I work</div>
+    <h2>Four things you can rely on.</h2>
+    <div class="principles">
+      <div class="principle">
+        <h3>I design ahead of the user</h3>
+        <p>What will they actually do, what breaks at the edges, and what requirement is coming in six months that today's schema should already accommodate. It's why the workforce suite modelled shift overlaps, approval chains and award-rule variations before any user hit them.</p>
+      </div>
+      <div class="principle">
+        <h3>I write the standards down</h3>
+        <p>Layered backend boundaries, a config-driven reusable front-end layer, SonarQube and ESLint gates — then I mentor people on them. They're what every pull request on the products I lead passes through today.</p>
+      </div>
+      <div class="principle">
+        <h3>I own outcomes, not commits</h3>
+        <p>I own client relationships for the products I lead, and I'd rather raise an awkward problem early than deliver something on time that quietly doesn't work. That ownership is what the 2025 Client Excellence Award recognised.</p>
+      </div>
+      <div class="principle">
+        <h3>I trust behaviour over vocabulary</h3>
+        <p>I'd rather know how a system fails under load than what the pattern is called. The PIQET rewrite only happened because I knew exactly how a ten-year-old pipeline behaved before I touched it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="hire">
+    <div class="eyebrow">How to hire me</div>
+    <h2>The practical questions, answered.</h2>
+    <p class="lede measure">If something here doesn't work for you, better that we both know in week one than week six.</p>
+
+    <div class="qa">
+      <div class="pair"><div class="q">Where I am</div><div class="a">Ahmedabad, India — IST, UTC+5:30, no daylight saving. Fully remote throughout my career, with international clients.</div></div>
+      <div class="pair"><div class="q">Hours &amp; overlap</div><div class="a">My default day is 10:00–19:00 IST — a <strong>full working day of overlap with Europe</strong> and <strong>morning overlap with US Eastern</strong>. If your team's core hours need me earlier or later, <strong>I'll move my day</strong>, not just flex occasionally for stand-ups. Tell me the hours that actually work and I'll tell you straight whether I can hold them.</div></div>
+      <div class="pair"><div class="q">Work authorisation</div><div class="a">Indian citizen, based in Ahmedabad, no work authorisation elsewhere. For fully-remote roles I can work as an employee through an EOR or as a contractor — whichever your company uses. On-site or hybrid would need sponsorship.</div></div>
+      <div class="pair"><div class="q">Availability</div><div class="a"><strong>I'm currently serving my notice period</strong>, so I'm available from <strong>11 October 2026</strong> — no long wait, and no leaving a team mid-flight either: I'm handing over two live products properly on the way out.</div></div>
+      <div class="pair"><div class="q">Engagement</div><div class="a">Open to full-time employment or contract — whichever is simplest on your side. I have no preference.</div></div>
+      <div class="pair"><div class="q">Where my code is</div><div class="a">Almost all of it is client-owned and private, and my own tooling is built on company time — so there's no public repo to browse, and I'd rather say that than link an empty profile. <strong>Verify me by making me work instead:</strong> a real problem from your codebase, or fifteen minutes of me running my own tooling on screen.</div></div>
+      <div class="pair"><div class="q">Compensation</div><div class="a">Tell me your band and I'll tell you honestly whether it works. I'm more interested in the problem and the team, but I'm not going to pretend money is irrelevant.</div></div>
+      <div class="pair"><div class="q">What I'm looking for</div><div class="a">A product with real users whose day depends on it, a team that writes things down, and enough ownership to fix the thing I can see is broken. I'd rather go deep on one product than touch ten.</div></div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <h2>Let's talk.</h2>
+  <p class="lede measure">Bring me a real problem from your codebase — a slow endpoint, a gnarly migration, a bug nobody has had time for — and you'll learn more about me in an hour than any page can tell you. It's also the format I'm best in.</p>
+  <div class="foot-cta">
+    <a class="btn solid" href="mailto:it.dhruvjain@gmail.com">it.dhruvjain@gmail.com</a>
+    <a class="btn" href="https://www.linkedin.com/in/connect-dhruvjain" rel="me noopener">LinkedIn</a>
+    <a class="btn" href="tel:+917016581281">+91 70165 81281</a>
+    <a class="btn" href="Dhruv-Jain-CV.pdf">Download CV (PDF)</a>
+    <a class="btn" href="cv.html">Full CV page</a>
+  </div>
+  <p class="fine">B.E. Information Technology · Microsoft Certified: Azure Fundamentals, Azure Data Fundamentals · Client Excellence Award 2025 · 3rd prize, iFour internal hackathon 2026<br>Senior or lead full-stack engineering role, product team, fully remote.</p>
+</footer>
 
 <script>
-(function(){
-  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
-  var rail = document.getElementById('rail');
-  var counter = document.getElementById('counter');
-  var sealedEl = document.getElementById('sealed');
-  var teaser = document.getElementById('teaser');
-  var teaserText = document.getElementById('teaserText');
-  var prevBtn = document.getElementById('prev');
-  var nextBtn = document.getElementById('next');
-  var stage = document.getElementById('stage');
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var cur = -1, seen = {0:true}, idleTimer = null;
-
-  slides.forEach(function(s,i){
-    var b = document.createElement('button');
-    b.className = 'tick'; b.type='button';
-    b.innerHTML = '<span class="bar"></span><span class="lab">'+ s.dataset.title +'</span>';
-    b.addEventListener('click', function(){ go(i); });
-    rail.appendChild(b);
-  });
-  var ticks = Array.prototype.slice.call(rail.children);
-
-  function pad(n){ return (n<10?'0':'')+n; }
-
-  function paintRail(){
-    ticks.forEach(function(t,i){
-      t.dataset.state = i===cur ? 'now' : (seen[i] ? 'seen' : 'sealed');
-    });
-    var sealed = slides.length - Object.keys(seen).length;
-    sealedEl.textContent = sealed;
-    sealedEl.style.color = sealed === 0 ? 'var(--fast)' : 'var(--slow)';
-    counter.textContent = pad(cur+1) + ' / ' + slides.length;
-  }
-
-  function setTeaser(){
-    var nx = slides[cur+1];
-    teaserText.textContent = nx ? nx.dataset.teaser : slides[cur].dataset.teaser;
-    teaser.classList.remove('swap');
-    void teaser.offsetWidth;
-    teaser.classList.add('swap');
-  }
-
-  function countUp(slide){
-    slide.querySelectorAll('.num').forEach(function(el){
-      var to = parseFloat(el.dataset.to), sfx = el.dataset.suffix || '';
-      if(reduce){ el.textContent = to + sfx; return; }
-      var t0 = null, dur = 900;
-      function step(t){
-        if(!t0) t0 = t;
-        var p = Math.min(1,(t-t0)/dur);
-        var e = 1 - Math.pow(1-p,3);
-        el.textContent = Math.round(to*e) + sfx;
-        if(p<1) requestAnimationFrame(step);
-      }
-      setTimeout(function(){ requestAnimationFrame(step); }, 500);
-    });
-  }
-
-  function go(i){
-    if(i<0 || i>=slides.length || i===cur) return;
-    if(cur>=0){ slides[cur].classList.remove('is-active','in'); }
-    cur = i; seen[i] = true;
-    var s = slides[i];
-    s.classList.add('is-active');
-    stage.scrollTop = 0;
-    void s.offsetWidth;
-    s.classList.add('in');
-    prevBtn.disabled = (i===0);
-    nextBtn.disabled = (i===slides.length-1);
-    paintRail(); setTeaser(); countUp(s);
-    if(i===1) setTimeout(runRace, 900);
-    if(i===5) setTimeout(runCtx, 900);
-    nextBtn.classList.remove('beckon');
-    clearTimeout(idleTimer);
-    if(i < slides.length-1){
-      idleTimer = setTimeout(function(){ nextBtn.classList.add('beckon'); }, 7000);
+  (function(){
+    var themeBtn = document.getElementById('themeBtn');
+    var sysDark = window.matchMedia('(prefers-color-scheme: dark)');
+    function effectiveTheme(){
+      var t = document.documentElement.dataset.theme;
+      return t === 'dark' || t === 'light' ? t : (sysDark.matches ? 'dark' : 'light');
     }
-    ticks[i].scrollIntoView({block:'nearest', inline:'center', behavior:'smooth'});
-  }
-
-  /* ---- Exhibit A race ---- */
-  var fSlow=document.getElementById('fSlow'), fFast=document.getElementById('fFast');
-  var tSlow=document.getElementById('tSlow'), tFast=document.getElementById('tFast');
-  var raceRaf=null;
-  function resetRace(){
-    if(raceRaf) cancelAnimationFrame(raceRaf);
-    fSlow.style.width='0%'; fFast.style.width='0%';
-    tSlow.textContent='0:00'; tFast.textContent='0.0s';
-  }
-  function runRace(){
-    resetRace();
-    var DUR = reduce ? 300 : 3600;      /* 10 real minutes, compressed */
-    var FASTDUR = DUR/60;               /* true 60x ratio */
-    var t0 = null;
-    function step(t){
-      if(!t0) t0=t;
-      var el = t-t0;
-      var ps = Math.min(1, el/DUR), pf = Math.min(1, el/FASTDUR);
-      fSlow.style.width = (ps*100)+'%';
-      fFast.style.width = (pf*100)+'%';
-      var secs = Math.round(ps*600);
-      tSlow.textContent = Math.floor(secs/60)+':'+pad(secs%60);
-      tFast.textContent = pf>=1 ? '9.7s  ✓' : (pf*9.7).toFixed(1)+'s';
-      if(ps<1) raceRaf = requestAnimationFrame(step);
+    function paint(){
+      var dark = effectiveTheme() === 'dark';
+      themeBtn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', dark ? '#0e1114' : '#f4f5f6');
     }
-    raceRaf = requestAnimationFrame(step);
-  }
-  document.getElementById('runRace').addEventListener('click', runRace);
-  document.getElementById('resetRace').addEventListener('click', resetRace);
-
-  /* ---- Groundwork context bars ---- */
-  var fA=document.getElementById('fCtxA'), fB=document.getElementById('fCtxB');
-  var tA=document.getElementById('tCtxA'), tB=document.getElementById('tCtxB');
-  var ctxRaf=null;
-  function runCtx(){
-    if(ctxRaf) cancelAnimationFrame(ctxRaf);
-    var DUR = reduce ? 200 : 1500, t0=null;
-    function step(t){
-      if(!t0) t0=t;
-      var p = Math.min(1,(t-t0)/DUR), e = 1-Math.pow(1-p,3);
-      fA.style.width = (e*100)+'%';
-      fB.style.width = (e*3.6)+'%';
-      tA.textContent = Math.round(e*25000).toLocaleString()+' tok';
-      tB.textContent = Math.round(e*900).toLocaleString()+' tok';
-      if(p<1) ctxRaf = requestAnimationFrame(step);
-    }
-    ctxRaf = requestAnimationFrame(step);
-  }
-  document.getElementById('runCtx').addEventListener('click', runCtx);
-
-  /* ---- Range rows ---- */
-  document.getElementById('rows').addEventListener('click', function(e){
-    var row = e.target.closest('.row');
-    if(!row) return;
-    var body = row.nextElementSibling;
-    var open = row.getAttribute('aria-expanded')==='true';
-    row.setAttribute('aria-expanded', open ? 'false':'true');
-    body.classList.toggle('open', !open);
-  });
-
-  /* ---- navigation ---- */
-  nextBtn.addEventListener('click', function(){ go(cur+1); });
-  prevBtn.addEventListener('click', function(){ go(cur-1); });
-  document.addEventListener('keydown', function(e){
-    if(typing){ finishTyping(); return; }
-    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){ e.preventDefault(); go(cur+1); }
-    if(e.key==='ArrowLeft'||e.key==='PageUp'){ e.preventDefault(); go(cur-1); }
-    if(e.key==='Home') go(0);
-    if(e.key==='End') go(slides.length-1);
-  });
-  var tx=null;
-  document.addEventListener('touchstart',function(e){ tx=e.changedTouches[0].clientX; },{passive:true});
-  document.addEventListener('touchend',function(e){
-    if(tx===null) return;
-    var d = e.changedTouches[0].clientX - tx;
-    if(Math.abs(d)>60) go(cur + (d<0?1:-1));
-    tx=null;
-  },{passive:true});
-
-  /* ---- opening typewriter ---- */
-  var T1=document.getElementById('t1'), T2=document.getElementById('t2'), T3=document.getElementById('t3');
-  var chips=document.getElementById('chips');
-  var typing=false, timers=[];
-
-  function split(el){
-    if(el.dataset.split) return;
-    var text = el.textContent;
-    el.setAttribute('aria-label', text);
-    el.textContent = '';
-    text.split(' ').forEach(function(word, wi){
-      if(wi) el.appendChild(document.createTextNode(' '));
-      var w = document.createElement('span'); w.className='w';
-      for(var i=0;i<word.length;i++){
-        var c = document.createElement('span'); c.className='ch'; c.textContent=word[i];
-        w.appendChild(c);
-      }
-      el.appendChild(w);
+    themeBtn.addEventListener('click', function(){
+      var next = effectiveTheme() === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = next;
+      try{ localStorage.setItem('dj-theme', next); }catch(e){}
+      paint();
     });
-    el.dataset.split = '1';
-  }
-
-  function chars(el){ return Array.prototype.slice.call(el.querySelectorAll('.ch')); }
-
-  function typeEl(el, speed, done){
-    var cs = chars(el), i = 0, prev = null;
-    el.classList.add('typing');
-    (function tick(){
-      if(prev) prev.classList.remove('tip');
-      if(i >= cs.length){ if(done) done(); return; }
-      var c = cs[i];
-      c.style.visibility = 'visible';
-      c.classList.add('tip');
-      prev = c; i++;
-      var ch = c.textContent, d = speed;
-      if(ch === '.' || ch === ',') d = speed * 7;
-      else if(ch === '·') d = speed * 3;
-      timers.push(setTimeout(tick, d));
-    })();
-  }
-
-  function revealAll(el){
-    el.classList.add('typing');
-    chars(el).forEach(function(c){ c.style.visibility='visible'; c.classList.remove('tip'); });
-  }
-
-  function finishTyping(){
-    timers.forEach(clearTimeout); timers = [];
-    [T1,T2,T3].forEach(revealAll);
-    chips.classList.remove('rerun'); chips.classList.add('go');
-    typing = false;
-  }
-
-  function playOpening(){
-    timers.forEach(clearTimeout); timers = [];
-    [T1,T2,T3].forEach(split);
-    if(reduce){ finishTyping(); return; }
-    typing = true;
-    [T1,T2,T3].forEach(function(el){
-      el.classList.add('typing');
-      chars(el).forEach(function(c){ c.style.visibility='hidden'; c.classList.remove('tip'); });
-    });
-    typeEl(T1, 26, function(){
-      timers.push(setTimeout(function(){
-        typeEl(T2, 78, function(){
-          timers.push(setTimeout(function(){
-            typeEl(T3, 21, function(){
-              var last = chars(T3).pop();
-              if(last){ last.classList.add('tip'); timers.push(setTimeout(function(){ last.classList.remove('tip'); }, 1400)); }
-              typing = false;
-            });
-          }, 300));
-        });
-      }, 170));
-    });
-  }
-
-  function replayOpening(){
-    go(0);
-    chips.classList.remove('go');
-    chips.classList.add('rerun');
-    void chips.offsetWidth;
-    playOpening();
-    timers.push(setTimeout(function(){ chips.classList.remove('rerun'); chips.classList.add('go'); }, reduce ? 0 : 2500));
-  }
-
-  document.getElementById('replay').addEventListener('click', function(e){ e.stopPropagation(); replayOpening(); });
-  document.addEventListener('click', function(e){
-    if(typing && !e.target.closest('button') && !e.target.closest('a')) finishTyping();
-  });
-
-  /* ---- theme toggle ---- */
-  var themeBtn = document.getElementById('themeBtn');
-  var sysDark = window.matchMedia('(prefers-color-scheme: dark)');
-  function effectiveTheme(){
-    var t = document.documentElement.dataset.theme;
-    return t === 'dark' || t === 'light' ? t : (sysDark.matches ? 'dark' : 'light');
-  }
-  themeBtn.addEventListener('click', function(){
-    var next = effectiveTheme() === 'dark' ? 'light' : 'dark';
-    document.documentElement.dataset.theme = next;
-    try{ localStorage.setItem('dj-theme', next); }catch(e){}
-  });
-
-  go(0);
-  paintRail();
-  playOpening();
-  try{ window.focus(); }catch(e){}
-  document.addEventListener('pointerdown', function(){ try{ window.focus(); }catch(e){} });
-})();
+    if (sysDark.addEventListener) sysDark.addEventListener('change', paint);
+    paint();
+  })();
 </script>
 
 </body>
