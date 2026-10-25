@@ -4,17 +4,18 @@ Two static pages, no build step, no dependencies.
 
 | File | What it is |
 |---|---|
-| `index.html` | The front page — a single-scroll, evidence-first pitch: hero with the 60× result and role target, three evidence sections (PIQET, Health4Community, Groundwork), a five-product range table, a have/learning skills grid, working principles and a "How to hire me" Q&A. Plain HTML/CSS, one small script for the theme toggle |
+| `index.html` | The front page — who I am first, then proof, then the technical detail. Seven full-screen sections that slide over each other: intro, what I'm like to work with, a measured before/after report race, project cards (no product names) that open into detail panels, skills, location with live clocks, and contact |
 | `cv.html` | Full CV plus a "How to hire me" section with a live timezone-overlap calculator |
 | `deck.html` | Redirect stub to `/` — the deck used to live here; kept so shared links don't break |
 | `.nojekyll` | Tells GitHub Pages to serve the files as-is instead of running them through Jekyll |
 
-The two pages link to each other and share a light theme with a dark toggle (the choice is remembered in `localStorage`).
+`cv.html` has a light theme with a dark toggle. The front page uses its own fixed palette, one colour per section.
 
-Everything is inline. Two external requests, both from public CDNs:
+Everything is inline. External requests, all from public CDNs:
 
-- **Google Fonts** — `index.html` uses Archivo, Source Serif 4 and JetBrains Mono; `cv.html` uses Archivo, Figtree, Newsreader and JetBrains Mono. Real fallback stacks are declared, so the pages read correctly if it is blocked.
+- **Google Fonts** — `index.html` uses Big Shoulders Display, Instrument Serif, Instrument Sans and JetBrains Mono; `cv.html` uses Archivo, Figtree, Newsreader and JetBrains Mono. Real fallback stacks are declared, so the pages read correctly if it is blocked.
 - **three.js r128** from cdnjs — used only by `cv.html`, loaded *lazily* when the 3D panel scrolls into view. If WebGL is unavailable or the script fails, the panel swaps itself for a written fallback. Nothing else on the page depends on it.
+- **GSAP 3.12.5 + ScrollTrigger** (cdnjs) and **Lenis 1.1.13** (jsDelivr) — used only by `index.html` for smooth scrolling and transitions. If they fail to load, the page shows all its content without animation.
 
 ## The interactive bits
 
@@ -34,9 +35,13 @@ Everything is inline. Two external requests, both from public CDNs:
 
 **`index.html`** (the front page)
 
-- Deliberately static: one scroll, no slides, no reveals to wait for. The only interactive control is the dark-mode toggle (shared `dj-theme` key with `cv.html`).
-- The two before/after bar charts are drawn to scale in CSS and animate once on load; the animation is skipped under `prefers-reduced-motion`.
-- Sticky header with section jump links (hidden on phones) and a print stylesheet that drops the header and buttons.
+- Sections stack like sheets: each slides up over the last, its corners flattening as it settles, while the one underneath dims. Text fades in where it sits and never moves.
+- Hero: the name is "selected" like code in an editor, letters thicken near the pointer, a labelled cursor follows the mouse, and kites drift in the background.
+- Report race: "Run both" plays the old and new report times side by side at 20× speed.
+- Project cards tilt toward the pointer and open into a detail panel that grows out of the card (Escape or Back closes it, and each has its own `#work/...` link).
+- Live clocks show the visitor's time and my working day converted to it. Optional synthesised sound, off by default.
+- All motion is skipped under `prefers-reduced-motion`; hover effects only run with a mouse.
+- Product names are deliberately left out of this page, which describes each product by what it does.
 
 
 ## Publishing to GitHub Pages

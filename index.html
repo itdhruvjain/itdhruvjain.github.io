@@ -2,468 +2,787 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Dhruv Jain — Full-Stack Engineer &amp; Team Lead</title>
-<meta name="description" content="Dhruv Jain, full-stack engineer and team lead (C#/.NET, TypeScript, SQL Server) in Ahmedabad, India. Four years, three of them leading two live products, and a 60× report rewrite nobody asked for.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dhruv Jain — Full-stack engineer</title>
+<meta name="description" content="Dhruv Jain, full-stack engineer and team lead in Ahmedabad. I build the software a business runs on, and I talk to the people who use it.">
 <meta name="author" content="Dhruv Jain">
-<meta name="theme-color" content="#f4f5f6">
-<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#27306B">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%230f5c4a%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2246%22%20font-family%3D%22Helvetica%2CArial%2Csans-serif%22%20font-size%3D%2238%22%20font-weight%3D%22bold%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%3ED%3C%2Ftext%3E%3C%2Fsvg%3E">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Dhruv Jain — Full-Stack Engineer &amp; Team Lead">
-<meta property="og:description" content="Four years, three of them leading two live products, and a 60× report rewrite nobody asked for. Senior or lead full-stack role, fully remote.">
+<meta property="og:title" content="Dhruv Jain — Full-stack engineer">
+<meta property="og:description" content="Full-stack engineer and team lead in Ahmedabad. I build the software a business runs on, and I talk to the people who use it. Available from 12 November 2026.">
 <meta property="og:site_name" content="Dhruv Jain">
 <meta property="og:url" content="https://itdhruvjain.github.io/">
 <meta property="og:image" content="https://itdhruvjain.github.io/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Dhruv Jain — Full-Stack Engineer &amp; Team Lead">
-<meta name="twitter:description" content="Four years, three of them leading two live products, and a 60× report rewrite nobody asked for. Senior or lead full-stack role, fully remote.">
+<meta name="twitter:title" content="Dhruv Jain — Full-stack engineer">
+<meta name="twitter:description" content="Full-stack engineer and team lead in Ahmedabad. I build the software a business runs on, and I talk to the people who use it. Available from 12 November 2026.">
 <meta name="twitter:image" content="https://itdhruvjain.github.io/og.png">
-<script>(function(){try{var t=localStorage.getItem('dj-theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t;}catch(e){}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<!-- one link per family, so a family that fails to load cannot take the others down with it -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-  html{color-scheme:light dark;scroll-behavior:smooth;scroll-padding-top:72px;}
-  :root{
-    --paper:#f4f5f6;
-    --surface:#ffffff;
-    --sunken:#eceef0;
-    --ink:#14181c;
-    --muted:#5c666e;
-    --faint:#8b949b;
-    --line:#dde1e4;
-    --accent:#0f5c4a;
-    --accent-soft:#e3efea;
-    --warm:#a9501f;
-    --warm-soft:#f6ece3;
-    --fill-bg:#fdf3d4;
-    --fill-ink:#6b5310;
-    --fill-line:#d9b83d;
-    --shadow:0 1px 2px rgba(20,24,28,.05),0 8px 24px -16px rgba(20,24,28,.18);
-    --display:"Archivo","Helvetica Neue",Arial,sans-serif;
-    --body:"Source Serif 4",Georgia,"Times New Roman",serif;
-    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --paper:#0e1114;--surface:#171b1f;--sunken:#1f242a;--ink:#e8ebed;--muted:#9aa4ac;--faint:#6d777f;
-      --line:#2b3238;--accent:#5cc3a1;--accent-soft:#13322a;--warm:#e08b53;--warm-soft:#33220f;
-      --fill-bg:#3a3009;--fill-ink:#f0d98a;--fill-line:#7d6a1d;
-      --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -16px rgba(0,0,0,.8);
-    }
-  }
-  :root[data-theme="dark"]{
-    --paper:#0e1114;--surface:#171b1f;--sunken:#1f242a;--ink:#e8ebed;--muted:#9aa4ac;--faint:#6d777f;
-    --line:#2b3238;--accent:#5cc3a1;--accent-soft:#13322a;--warm:#e08b53;--warm-soft:#33220f;
-    --fill-bg:#3a3009;--fill-ink:#f0d98a;--fill-line:#7d6a1d;
-    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -16px rgba(0,0,0,.8);
-  }
+:root{
+  --indigo:#27306B; --madder:#7A2D36; --teal:#1F5C60; --night:#17152E;
+  --neem:#3B5530; --saffron:#8A4914; --plum:#4F2A55;
+  --fg:#F6F1E7; --muted:rgba(246,241,231,.78); --faint:rgba(246,241,231,.16);
+  --kite:#F4C542; --sel:#3D8BFF; --sel-bg:rgba(61,139,255,.30);
+  --display:"Big Shoulders Display","Big Shoulders",Impact,sans-serif;
+  --serif:"Instrument Serif",Georgia,serif;
+  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  --pad:clamp(16px,3vw,40px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--night);color:var(--fg);-webkit-font-smoothing:antialiased}
+html.lenis,html.lenis body{height:auto}
+html.cs-lock{overflow:hidden}
+body{font-family:var(--sans);font-size:17px;line-height:1.55;background:var(--night);overflow-x:hidden}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--sel-bg);color:var(--fg)}
+:focus-visible{outline:2px solid var(--kite);outline-offset:3px;border-radius:4px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.04em}
 
-  *{box-sizing:border-box;}
-  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;}
-  img{max-width:100%;}
-  h1,h2,h3,h4{font-family:var(--display);font-weight:700;letter-spacing:-.02em;text-wrap:balance;margin:0;line-height:1.1;}
-  p{margin:0;}
-  a{color:inherit;}
-  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
+/* ---------- header ---------- */
+.top{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;gap:18px;
+  padding:14px var(--pad);pointer-events:none}
+.top > *{pointer-events:auto}
+.brand{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:.02em;text-decoration:none;text-transform:uppercase}
+.chip{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+  padding:6px 11px;border-radius:99px;background:rgba(0,0,0,.28);backdrop-filter:blur(8px);border:1px solid var(--faint)}
+.chip i{width:7px;height:7px;border-radius:50%;background:#5BE08A;box-shadow:0 0 0 0 rgba(91,224,138,.6);animation:ping 2s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 7px rgba(91,224,138,0)}100%{box-shadow:0 0 0 0 rgba(91,224,138,0)}}
+.crumb{margin-left:auto;margin-right:auto;font-family:var(--mono);font-size:12px;color:var(--muted);
+  padding:6px 12px;border-radius:8px;background:rgba(0,0,0,.22);backdrop-filter:blur(8px)}
+.crumb b{color:var(--fg);font-weight:500}
+.nav{display:flex;gap:4px;align-items:center}
+.nav a,.nav button{font-family:var(--mono);font-size:12px;text-decoration:none;padding:7px 11px;border-radius:8px;
+  background:rgba(0,0,0,.22);backdrop-filter:blur(8px)}
+.nav a:hover,.nav button:hover{background:rgba(0,0,0,.4)}
+.nav button[aria-pressed="true"]{color:var(--kite)}
 
-  .wrap{max-width:1040px;margin:0 auto;padding-inline:20px;}
-  .measure{max-width:62ch;}
+/* ---------- layers: each section slides up over the last ---------- */
+.layer{position:sticky;top:0;min-height:100vh;min-height:100svh;overflow:hidden;
+  border-radius:28px 28px 0 0;box-shadow:0 -24px 60px rgba(0,0,0,.35);background:var(--bg)}
+.layer.is-first{border-radius:0}
+.inner{min-height:100vh;min-height:100svh;padding:110px var(--pad) 70px;display:flex;flex-direction:column;
+  justify-content:center;max-width:1320px;margin:0 auto;position:relative;transform-origin:50% 0}
+.shade{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;z-index:5}
+#hero{--bg:var(--indigo)} #why{--bg:var(--madder)} #proof{--bg:#9747FF;--kite:#0E0E0E;--muted:rgba(255,255,255,.92);--faint:rgba(255,255,255,.28)} #tech{--bg:var(--night)}
+#work{--bg:var(--neem)} #based{--bg:var(--saffron)} #now{--bg:var(--plum)}
+.file{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:22px;display:flex;gap:10px;align-items:center}
+.file::before{content:"";width:18px;height:1px;background:currentColor}
+h2.big{font-family:var(--serif);font-weight:400;font-size:clamp(44px,7.4vw,112px);line-height:.98;letter-spacing:-.01em;max-width:15ch}
+h2.big em{color:var(--kite)}
+.lede{font-size:clamp(18px,1.6vw,22px);color:var(--muted);max-width:56ch;margin-top:26px}
+.lede b{color:var(--fg);font-weight:600}
 
-  .bar{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid var(--line);}
-  @supports (background:color-mix(in srgb,red 50%,transparent)){
-    .bar{background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);}
-  }
-  .bar-in{display:flex;align-items:center;gap:14px;min-height:56px;flex-wrap:wrap;padding-block:8px;}
-  .brand{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;white-space:nowrap;}
-  .brand span{color:var(--faint);}
-  .jump{display:flex;gap:18px;margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;}
-  .jump a{color:var(--muted);text-decoration:none;}
-  .jump a:hover{color:var(--accent);}
-  .bar-cta{display:flex;gap:8px;margin-left:auto;align-items:center;}
-  @media(min-width:900px){.bar-cta{margin-left:0;}}
-  @media(max-width:899px){.jump{display:none;}.brand span{display:none;}}
-  .btn{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;border:1px solid var(--line);border-radius:3px;background:var(--surface);color:var(--ink);text-decoration:none;cursor:pointer;white-space:nowrap;display:inline-block;line-height:1.4;}
-  .btn:hover{border-color:var(--accent);color:var(--accent);}
-  .btn.solid{background:var(--accent);border-color:var(--accent);color:var(--surface);}
-  .btn.solid:hover{opacity:.88;color:var(--surface);}
-  .btn.icon{padding:5px 9px;font-size:14px;letter-spacing:0;line-height:1.2;}
+/* ---------- hero ---------- */
+#hero .inner{justify-content:center;align-items:flex-start}
+#hero.fine, #hero.fine a, #hero.fine button{cursor:none}
+.kicker{font-family:var(--serif);font-style:italic;font-size:clamp(24px,3vw,40px);color:var(--muted)}
+.name-wrap{position:relative;display:inline-block;margin:clamp(18px,2.6vw,40px) 0 0}
+.name{font-family:var(--display);text-transform:uppercase;font-weight:800;line-height:.82;
+  font-size:clamp(84px,17vw,268px);letter-spacing:-.005em;white-space:nowrap;position:relative;z-index:1}
+.name .ch{display:inline-block;font-weight:var(--w,800);transition:font-weight .25s ease-out}
+.hl{position:absolute;left:-.06em;top:.02em;bottom:-.02em;width:calc(100% + .12em);background:var(--sel-bg);
+  transform-origin:0 50%;transform:scaleX(0);z-index:0;border-radius:4px}
+.caret{position:absolute;top:.04em;bottom:0;width:3px;background:var(--kite);right:-.12em;animation:blink 1.05s steps(1) infinite;z-index:2}
+@keyframes blink{50%{opacity:0}}
+.pos{position:absolute;right:0;top:-30px;font-family:var(--mono);font-size:11px;background:var(--sel);color:#fff;
+  padding:3px 8px;border-radius:4px 4px 0 4px;white-space:nowrap;z-index:3}
+.hover-card{margin-top:18px;max-width:560px;background:#1D2250;border:1px solid rgba(255,255,255,.14);border-radius:10px;
+  box-shadow:0 18px 40px rgba(0,0,0,.35);font-family:var(--mono);font-size:13px;overflow:hidden}
+.hover-card .sig{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.1);overflow-wrap:anywhere}
+.k{color:#C792EA}.t{color:#7FDBCA}.s{color:#F4C542}.c{color:#8A93C4}
+.hover-card .doc{padding:12px 16px;font-family:var(--sans);font-size:15px;color:var(--muted)}
+.hover-card .doc b{color:var(--fg)}
+.hero-foot{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center}
+.hint{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;gap:10px;align-items:center}
+.hint::after{content:"";width:1px;height:28px;background:linear-gradient(var(--fg),transparent);animation:drip 1.8s infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;font-size:15px;
+  padding:12px 18px;border-radius:99px;background:var(--fg);color:var(--night);transition:transform .2s}
+html:not(.anim) .btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--fg);border:1px solid rgba(246,241,231,.4)}
+
+/* live-share style cursor */
+.cursor{position:fixed;left:0;top:0;z-index:60;pointer-events:none;display:none;align-items:flex-start;gap:2px}
+.cursor.on{display:flex}
+.cursor svg{width:22px;height:24px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+.cursor b{margin-top:16px;font-family:var(--mono);font-size:11px;font-weight:500;background:var(--sel);color:#fff;padding:3px 8px;border-radius:2px 8px 8px 8px;white-space:nowrap}
+
+/* kites */
+.kites{position:absolute;inset:0;pointer-events:none;z-index:0}
+.kite{position:absolute;left:var(--x);top:var(--y);width:var(--w);min-width:46px;animation:bob var(--t) ease-in-out var(--dl) infinite alternate}
+.kite svg{width:100%;height:auto;overflow:visible;display:block}
+@keyframes bob{from{transform:translate(0,0) rotate(-6deg)}to{transform:translate(14px,-18px) rotate(7deg)}}
+.inner > *:not(.kites):not(.shade){position:relative;z-index:1}
+
+/* ---------- hello ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;border-top:1px solid var(--faint)}
+.stat{padding:22px 18px 0 0}
+.stat b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(48px,6vw,92px);line-height:1;margin-bottom:6px}
+.stat span{font-size:14px;color:var(--muted)}
+
+/* ---------- report race ---------- */
+.race{margin-top:44px;max-width:900px;background:rgba(0,0,0,.2);border:1px solid var(--faint);border-radius:16px;padding:22px}
+.race-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.run{font-family:var(--mono);font-size:13px;padding:9px 14px;border-radius:8px;background:var(--kite);color:#2a2000;font-weight:500}
+#proof .run{background:#9747FF;color:#fff}
+#proof .lane.new .fill{background:#9747FF}
+#proof .race{background:#0E0E0E;border-color:#0E0E0E;--muted:rgba(246,241,231,.78)}
+#proof .lede b{color:#fff}
+.run:disabled{opacity:.6;cursor:default}
+.lane{display:grid;grid-template-columns:minmax(150px,230px) 1fr 70px;gap:14px;align-items:center;padding:10px 0}
+.lane small{display:block;color:var(--muted);font-size:13px}
+.track{height:14px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}
+.fill{height:100%;width:0;border-radius:99px;background:rgba(246,241,231,.55)}
+.lane.new .fill{background:var(--kite)}
+.clock{font-family:var(--mono);font-size:14px;text-align:right}
+.race-note{margin-top:12px;font-size:13px;color:var(--muted)}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:40px;max-width:1100px}
+.cols h3{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--kite);margin-bottom:8px;letter-spacing:.05em}
+.cols p{font-size:15px;color:var(--muted)}
 
 
-  section{padding-block:56px;border-top:1px solid var(--line);}
-  section:first-of-type{border-top:0;}
-  .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
-  h2{font-size:clamp(26px,3.6vw,38px);margin-bottom:16px;}
-  h3{font-size:19px;letter-spacing:-.01em;}
-  .lede{font-size:19px;color:var(--muted);}
+/* ---------- work ---------- */
+.cards{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;margin-top:40px}
+.card{grid-column:span 2;text-align:left;border-radius:16px;overflow:hidden;background:rgba(0,0,0,.2);
+  border:1px solid var(--faint);display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s;text-decoration:none}
+.card:nth-child(-n+2){grid-column:span 3}
+.card:hover{border-color:rgba(246,241,231,.4)}
+.cover{aspect-ratio:16/8;position:relative;display:grid;place-items:center;overflow:hidden;background:var(--cv)}
+.cover::before{content:"";position:absolute;inset:0;opacity:.18;
+  background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);background-size:28px 28px}
+.cover b{font-family:var(--display);font-weight:800;font-size:clamp(46px,5.4vw,84px);text-transform:uppercase;position:relative;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.card:hover .cover b{transform:scale(1.07)}
+.card-body{padding:16px 18px 18px}
+.card-body .tag{font-family:var(--mono);font-size:11px;color:var(--kite);letter-spacing:.05em}
+.card-body h3{font-size:20px;font-weight:600;margin:4px 0}
+.card-body p{font-size:14.5px;color:var(--muted)}
 
-  .hero{padding-block:48px 52px;}
-  .hero h1{font-size:clamp(44px,8vw,86px);letter-spacing:-.035em;line-height:.95;margin-bottom:10px;}
-  .hero-role{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:26px;}
-  .thesis{font-size:clamp(20px,2.6vw,25px);line-height:1.45;font-weight:600;font-family:var(--display);letter-spacing:-.015em;max-width:24ch;margin-bottom:14px;}
-  .proof{font-size:18px;color:var(--muted);max-width:56ch;}
-  .proof strong{color:var(--ink);font-weight:600;}
-  .kpis{display:flex;flex-wrap:wrap;gap:0;margin-block:30px;border:1px solid var(--line);border-radius:4px;background:var(--surface);overflow:hidden;}
-  .kpi{flex:1 1 150px;padding:14px 18px;border-right:1px solid var(--line);}
-  .kpi:last-child{border-right:0;}
-  @media(max-width:700px){
-    .kpi{flex-basis:45%;border-bottom:1px solid var(--line);}
-    .kpi:nth-child(2n){border-right:0;}
-    .kpi:nth-last-child(-n+2){border-bottom:0;}
-  }
-  .kpi b{display:block;font-family:var(--display);font-size:26px;letter-spacing:-.03em;font-variant-numeric:tabular-nums;}
-  .kpi span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);}
-  .seeking{border-left:3px solid var(--accent);padding:4px 0 4px 14px;font-size:17px;max-width:60ch;}
-  .hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px;}
+/* case study overlay */
+.cs{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:20px;background:rgba(10,9,24,.6);
+  backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.cs.open{opacity:1;visibility:visible}
+.cs-panel{width:min(860px,100%);max-height:88vh;overflow:auto;background:var(--night);border:1px solid var(--faint);border-radius:20px;
+  transform:translateY(24px) scale(.98);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.cs.open .cs-panel{transform:none}
+.cs-top{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:var(--night);border-bottom:1px solid var(--faint);z-index:1}
+.cs-top button{font-family:var(--mono);font-size:12px;padding:7px 12px;border-radius:8px;background:rgba(255,255,255,.08)}
+.cs-body{padding:26px 28px 32px}
+.cs-body h3{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4vw,52px);line-height:1}
+.cs-body .stack{font-family:var(--mono);font-size:12px;color:var(--kite);margin:10px 0 20px}
+.cs-body h4{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--muted);margin:22px 0 6px;letter-spacing:.05em;text-transform:uppercase}
+.cs-body p{color:var(--fg);opacity:.9;max-width:64ch}
 
-  figure{margin:26px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:20px;box-shadow:var(--shadow);}
-  .fig-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:18px;}
-  .row{display:grid;gap:6px;margin-bottom:16px;}
-  .row-top{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:11.5px;color:var(--muted);}
-  .row-top b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums;}
-  .track{height:10px;background:var(--sunken);border-radius:2px;overflow:hidden;}
-  .bar-fill{height:100%;border-radius:2px;transform-origin:left center;animation:grow .9s cubic-bezier(.2,.7,.3,1) both;}
-  .bar-fill.slow{background:var(--warm);width:100%;}
-  .bar-fill.fast{background:var(--accent);width:1.7%;min-width:5px;}
-  .bar-fill.naive{background:var(--warm);width:100%;}
-  .bar-fill.scoped{background:var(--accent);width:4%;min-width:5px;}
-  @keyframes grow{from{transform:scaleX(.55);opacity:.6}to{transform:scaleX(1);opacity:1}}
-  figcaption{font-family:var(--mono);font-size:10.5px;line-height:1.7;color:var(--faint);border-top:1px solid var(--line);padding-top:12px;}
-  @media (prefers-reduced-motion: reduce){.bar-fill{animation:none;}*{transition:none!important;}html{scroll-behavior:auto;}}
+/* ---------- based ---------- */
+.based{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
+.plate{display:inline-flex;gap:10px;align-items:center;margin-top:28px;font-family:var(--display);font-weight:800;font-size:34px;
+  background:#F6F1E7;color:#141414;padding:6px 18px;border-radius:8px;border:3px solid #141414;box-shadow:0 0 0 2px #F6F1E7;letter-spacing:.06em}
+.plate small{font-family:var(--mono);font-size:10px;font-weight:500;line-height:1.1;letter-spacing:0}
+.clocks{background:rgba(0,0,0,.2);border:1px solid var(--faint);border-radius:16px;padding:22px}
+.clocks .row{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--faint);gap:16px}
+.clocks .row:last-child{border:0}
+.clocks .row span{color:var(--muted);font-size:14px}
+.clocks .row b{font-family:var(--display);font-size:clamp(30px,3vw,44px);font-weight:700;white-space:nowrap}
+.clocks .row b.small{font-size:clamp(22px,2.2vw,30px)}
 
-  /* mechanism flow */
-  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;margin-top:6px;}
-  .step{flex:1 1 150px;background:var(--sunken);border:1px solid var(--line);border-radius:4px;padding:12px 14px;}
-  .step em{display:block;font-family:var(--mono);font-style:normal;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:5px;}
-  .step p{font-size:14.5px;line-height:1.5;color:var(--muted);}
-  .step.ok{border-color:var(--accent);background:var(--accent-soft);}
-  .step.ok p,.step.ok em{color:var(--accent);}
-  .step.esc{border-color:var(--warm);background:var(--warm-soft);}
-  .step.esc p,.step.esc em{color:var(--warm);}
+/* ---------- now / contact ---------- */
+.now-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:44px;padding-top:26px;border-top:1px solid var(--faint)}
+.now-grid h3{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--kite);margin-bottom:10px;letter-spacing:.05em}
+.now-grid p,.now-grid li{font-size:15px;color:var(--muted)}
+.now-grid ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.now-grid li{font-family:var(--mono);font-size:12px;padding:4px 9px;border-radius:6px;background:rgba(255,255,255,.08);color:var(--fg)}
+.cta{margin-top:56px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.mail{position:relative;display:inline-flex;align-items:center;gap:6px;font-family:var(--serif);font-size:clamp(28px,4vw,56px);text-decoration:none;
+  border-bottom:2px solid var(--kite);line-height:1.1}
+.copy{position:relative;margin-left:8px;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.1);display:inline-grid;place-items:center}
+.copy:hover{background:rgba(255,255,255,.2)}
+.copy-tip{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translate(-50%,4px);font-family:var(--mono);font-size:11px;
+  background:var(--kite);color:#2a2000;padding:3px 8px;border-radius:6px;opacity:0;transition:.2s;pointer-events:none}
+.copy.done .copy-tip{opacity:1;transform:translate(-50%,0)}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.foot{margin-top:60px;font-family:var(--mono);font-size:11px;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
-  .grid{display:grid;gap:14px;margin-top:26px;}
-  .g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
-  .g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
-  .card{background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:18px 20px;}
-  .card h3{margin-bottom:8px;}
-  .card p{font-size:16px;color:var(--muted);}
-  .card p strong{color:var(--ink);font-weight:600;}
-  .card p + p{margin-top:10px;}
-  .tag{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;padding:3px 7px;border-radius:2px;margin-bottom:10px;}
-  .tag.have{background:var(--accent-soft);color:var(--accent);}
-  .tag.learn{background:var(--warm-soft);color:var(--warm);}
+/* ---------- motion polish ---------- */
+.progress{position:fixed;top:0;left:0;right:0;height:2px;background:var(--kite);transform-origin:0 50%;transform:scaleX(0);z-index:70;pointer-events:none}
+.layer:not(.is-first)::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);z-index:6;pointer-events:none}
+.card{position:relative;transform-style:preserve-3d;will-change:transform}
+.card .glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:radial-gradient(420px circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.16),transparent 45%)}
+.card:hover .glare{opacity:1}
+.anim .cs-panel{transition:none}
+html:not(.anim) .card:hover{transform:translateY(-6px)}
 
-  .tbl-wrap{overflow-x:auto;margin-top:26px;border:1px solid var(--line);border-radius:5px;background:var(--surface);}
-  table{border-collapse:collapse;width:100%;min-width:620px;}
-  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top;font-size:15.5px;}
-  tr:last-child td{border-bottom:0;}
-  th{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:500;}
-  td.name{font-family:var(--display);font-weight:600;font-size:16px;white-space:nowrap;}
-  td.stack{font-family:var(--mono);font-size:11.5px;color:var(--muted);line-height:1.6;}
-  td.what{color:var(--muted);}
+/* ---------- simple story pieces ---------- */
+.hero-line{font-size:clamp(20px,2.1vw,30px);line-height:1.35;max-width:30ch;margin-top:26px;font-weight:500}
+.facts{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.facts li{font-family:var(--mono);font-size:12px;padding:7px 12px;border-radius:99px;background:rgba(0,0,0,.25);border:1px solid var(--faint)}
+.why{list-style:none;margin-top:44px;border-top:1px solid var(--faint)}
+.why li{display:grid;grid-template-columns:60px minmax(0,1fr) minmax(0,1.25fr);gap:12px 32px;padding:20px 0;border-bottom:1px solid var(--faint);align-items:baseline}
+.why .n{font-family:var(--mono);font-size:12px;color:var(--kite)}
+.why h3{font-family:var(--serif);font-weight:400;font-size:clamp(26px,2.4vw,36px);line-height:1.08}
+.why p{color:var(--muted);font-size:16px}
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 40px;margin-top:44px;padding-top:26px;border-top:1px solid var(--faint)}
+.skills h3{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--kite);margin-bottom:8px;letter-spacing:.05em}
+.skills p{font-size:17px}
+.learning{margin-top:36px;color:var(--muted);display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+.learning .mono{color:var(--kite)}
+@media (max-width:900px){
+  .why li{grid-template-columns:1fr;gap:6px}
+  .skills{grid-template-columns:1fr 1fr}
+}
+@media (max-width:520px){ .skills{grid-template-columns:1fr} }
 
-  .qa{display:grid;margin-top:26px;border-top:1px solid var(--line);}
-  .qa div.pair{display:grid;grid-template-columns:200px minmax(0,1fr);gap:20px;padding:16px 0;border-bottom:1px solid var(--line);}
-  .qa .q{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding-top:4px;}
-  .qa .a{font-size:16.5px;color:var(--muted);}
-  .qa .a strong{color:var(--ink);font-weight:600;}
-  @media(max-width:700px){.qa div.pair{grid-template-columns:1fr;gap:6px;}}
+/* ---------- reveal helpers (only hidden once the animation library is running) ---------- */
+.anim [data-r]{opacity:0}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.wi{display:inline-block}
 
-  .principles{display:grid;gap:22px;margin-top:26px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
-  .principle h3{margin-bottom:6px;}
-  .principle p{font-size:16px;color:var(--muted);}
-
-  footer{border-top:1px solid var(--line);padding-block:44px 60px;}
-  .foot-cta{display:flex;gap:10px;flex-wrap:wrap;margin-block:22px;}
-  .fine{font-family:var(--mono);font-size:11px;color:var(--faint);line-height:1.8;}
-
-  @media print{
-    .bar,.hero-cta,.foot-cta{display:none!important;}
-    body{font-size:12pt;background:#fff;color:#000;}
-    figure,.card,.tbl-wrap,.kpis{box-shadow:none;break-inside:avoid;}
-    section{padding-block:24px;}
-    .bar-fill{animation:none;}
-  }
+/* ---------- small screens ---------- */
+@media (max-width:900px){
+  .crumb{display:none}
+  .nav a:not(.keep){display:none}
+  .layer{position:relative;top:auto!important}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .cols,.based,.now-grid{grid-template-columns:1fr}
+  .now-grid{gap:22px}
+  .cards{grid-template-columns:1fr}
+  .card,.card:nth-child(-n+2){grid-column:auto}
+  .lane{grid-template-columns:1fr 60px}
+  .lane > div:first-child{grid-column:1/-1}
+  .inner{padding-top:96px}
+}
+@media (max-width:520px){
+  .top{gap:10px}
+  .chip .long,.snd-word{display:none}
+  .brand{font-size:19px}
+  .pos{font-size:10px}
+  .name-wrap{margin-top:50px}
+  .hover-card{font-size:12px}
+  .hover-card .doc{font-size:14px}
+  .kite:nth-child(n+3),#hero .kite:nth-child(n+2){display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
 </style>
 </head>
 <body>
 
-<header class="bar">
-  <div class="wrap bar-in">
-    <a class="brand" href="#top">Dhruv Jain <span>· full-stack engineer &amp; team lead</span></a>
-    <nav class="jump" aria-label="Sections">
-      <a href="#piqet">Evidence</a>
-      <a href="#range">Range</a>
-      <a href="#skills">Skills</a>
-      <a href="#hire">Hiring</a>
-    </nav>
-    <div class="bar-cta">
-      <button class="btn icon" id="themeBtn" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
-      <a class="btn" href="cv.html">Full CV</a>
-      <a class="btn solid" href="mailto:it.dhruvjain@gmail.com">Email me</a>
-    </div>
-  </div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<header class="top">
+  <a class="brand" href="#hero" data-go="#hero">Dhruv Jain</a>
+  <span class="chip"><i></i><span class="long">Open to roles ·&nbsp;</span>from 12 Nov</span>
+  <span class="crumb" aria-hidden="true">dhruv-jain / <b id="crumbFile">Hello.md</b></span>
+  <nav class="nav" aria-label="Sections">
+    <a href="#why" data-go="#why">Why me</a>
+    <a href="#work" data-go="#work">Work</a>
+    <a href="#tech" data-go="#tech">Skills</a>
+    <a class="keep" href="#now" data-go="#now">Contact</a>
+    <button id="sound" type="button" aria-pressed="false" title="Toggle sound">♪<span class="snd-word"> Sound</span> <span id="sndState">off</span></button>
+  </nav>
 </header>
 
-<main class="wrap" id="top">
-
-  <section class="hero">
-    <div class="eyebrow">Ahmedabad, India · IST (UTC+5:30) · fully remote</div>
-    <h1>Dhruv Jain</h1>
-    <div class="hero-role">Full-stack engineer &amp; team lead — C# / .NET · TypeScript · SQL Server</div>
-
-    <p class="thesis">I take on the problems everyone else has learned to work around.</p>
-    <p class="proof">Last year that was a ten-year-old report pipeline three successive leads had built around rather than into. No ticket. No client request. <strong>5–10 minutes down to 5–10 seconds</strong>, and the numbers stayed correct.</p>
-
-    <div class="kpis">
-      <div class="kpi"><b>60×</b><span>Faster reports, PIQET</span></div>
-      <div class="kpi"><b>4 yrs</b><span>3 of them leading</span></div>
-      <div class="kpi"><b>2</b><span>Live products I lead</span></div>
-      <div class="kpi"><b>5</b><span>Engineers on the larger team</span></div>
+<main>
+<!-- 01 HERO: who I am, in plain words -->
+<section class="layer is-first" id="hero" data-file="Hello.md" aria-label="Introduction">
+  <div class="inner">
+    <div class="kites" data-kites="hero"></div>
+    <p class="kicker" data-r>Hi, I'm</p>
+    <div class="name-wrap" id="nameWrap">
+      <span class="hl" id="hl"></span>
+      <h1 class="name" id="name" aria-label="Dhruv Jain">Dhruv Jain</h1>
+      <span class="caret" aria-hidden="true"></span>
+      <span class="pos" id="pos" aria-hidden="true">Ln 1, Col 1</span>
     </div>
-
-    <p class="seeking">Looking for a <strong>senior or lead full-stack role</strong> on a product team, fully remote. Four years in, three of them leading: I set the engineering standards two products are built to, and I own the client relationship on both. <strong>Currently serving notice</strong> — last working day <strong>11 November 2026</strong>, available from <strong>12 November 2026</strong>.</p>
-
-    <div class="hero-cta">
-      <a class="btn solid" href="mailto:it.dhruvjain@gmail.com">it.dhruvjain@gmail.com</a>
-      <a class="btn" href="Dhruv-Jain-CV.pdf">Download CV (PDF)</a>
-      <a class="btn" href="https://www.linkedin.com/in/connect-dhruvjain" rel="me noopener">LinkedIn</a>
+    <p class="hero-line" data-r>I build the software a business runs on, and I talk to the people who use it, so what I ship fixes their real problem.</p>
+    <ul class="facts" data-r>
+      <li>4 years shipping production software</li>
+      <li>Leads a team of 5</li>
+      <li>Based in India, open to remote</li>
+      <li>Available 12 Nov 2026</li>
+    </ul>
+    <div class="hero-foot" data-r>
+      <a class="btn" href="#why" data-go="#why" data-cursor="Why me">Why me</a>
+      <a class="btn ghost" href="mailto:it.dhruvjain@gmail.com" data-cursor="Say hello">it.dhruvjain@gmail.com</a>
+      <span class="hint">Scroll to step inside</span>
     </div>
-  </section>
+  </div>
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <svg viewBox="0 0 22 24"><path d="M2 2 L2 20 L7 15.5 L10.5 23 L13.8 21.5 L10.4 14 L17 14 Z" fill="#3D8BFF" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg>
+    <b id="cursorLabel">Dhruv</b>
+  </div>
+</section>
 
-  <section id="piqet">
-    <div class="eyebrow">Evidence — the work nobody asked for</div>
-    <h2>A report that took ten minutes now takes ten seconds.</h2>
-    <p class="lede measure">PIQET is a ten-year-old packaging life-cycle-assessment product. Its calculations lived in large, deeply nested SQL stored procedures, and the pipeline had run untouched for three years because the numbers are what the customer acts on — the downside of breaking them was real.</p>
+<!-- 02 WHY ME -->
+<section class="layer" id="why" data-file="WhyMe.md" aria-label="What sets me apart">
+  <div class="inner">
+    <p class="file">WhyMe.md</p>
+    <h2 class="big" data-split>What I'm like to <em>work with.</em></h2>
+    <ol class="why">
+      <li data-r><span class="n">01</span><h3>I fix the real problem, not the first request.</h3>
+        <p>Staff were chasing proof of completed procedures by email and shared drives. Nobody had asked me to fix it, so I built a working version to show the client. They adopted it, and now everyone manages that evidence in one place.</p></li>
+      <li data-r><span class="n">02</span><h3>I connect systems so nobody retypes anything.</h3>
+        <p>Payroll was reconciled by hand. I designed one export that packages hours, rates and approvals for any payment provider. When we later connected Xero, it plugged in with almost no rework.</p></li>
+      <li data-r><span class="n">03</span><h3>I make the numbers fast, and keep them right.</h3>
+        <p>I turned a ten-minute report into a ten-second one. Before switching over, I ran the old and new versions side by side and checked every figure to the decimal.</p></li>
+      <li data-r><span class="n">04</span><h3>I use AI to move fast, then check its work.</h3>
+        <p>My team rebuilt a three-year-old product in two months with AI coding tools, and I review AI-written code like anyone else's. I also run my company's AI training.</p></li>
+      <li data-r><span class="n">05</span><h3>I explain things in plain words.</h3>
+        <p>I deal with clients directly on the products I lead, and I raise problems early instead of hiding them. My delivery for one of those clients earned the company's Client Excellence Award in 2025.</p></li>
+    </ol>
+  </div>
+</section>
 
-    <figure>
-      <div class="fig-head"><span>Report generation · same report, same inputs</span><span>Bar lengths to scale</span></div>
-      <div class="row">
-        <div class="row-top"><span>Before — nested stored procedures</span><b>5–10 min</b></div>
-        <div class="track"><div class="bar-fill slow"></div></div>
+<!-- 03 PROOF: the race -->
+<section class="layer" id="proof" data-file="Proof.cs" aria-label="A ten-minute report made ten seconds">
+  <div class="inner">
+    <p class="file">Proof.cs · one example, measured</p>
+    <h2 class="big" data-split>A ten-minute report. Now it takes <em>ten seconds.</em></h2>
+    <p class="lede" data-r>This was on a packaging sustainability tool <b>used by most of Australia's largest companies</b>. Its reports ran on ten-year-old database code that nobody wanted to touch, and I fixed it without being asked.</p>
+    <div class="race" data-r>
+      <div class="race-head">
+        <span class="mono">Same report · same inputs · played back at 20× speed</span>
+        <button class="run" id="run" type="button">▶ Run both</button>
       </div>
-      <div class="row">
-        <div class="row-top"><span>After — API calculation layer + Redis</span><b>5–10 sec</b></div>
-        <div class="track"><div class="bar-fill fast"></div></div>
-      </div>
-      <figcaption>Measured on the live product, not a synthetic benchmark. Roughly 60× faster. Client Excellence Award, 2025.</figcaption>
-    </figure>
-
-    <div class="grid g3">
-      <div class="card">
-        <h3>What I changed</h3>
-        <p>Moved the calculation layer out of the stored procedures and into the API behind a single source of truth, then added Redis caching for the repeated inputs. Nobody asked for it — every lead before me had built around those procedures rather than into them.</p>
-      </div>
-      <div class="card">
-        <h3>How I knew it was safe</h3>
-        <p>The whole risk here was correctness, so I proved it before cutover: replayed historical reports through both paths and diffed every output field to the decimal. The rewrite shipped only once the two agreed on all of them.</p>
-      </div>
-      <div class="card">
-        <h3>What happened after</h3>
-        <p>The rewrite has been in production since cutover, and the report numbers are still the ones the client acts on. I lead a team of three on the product and own the client relationship directly.</p>
-      </div>
+      <div class="lane old"><div>Before<small>Old database code</small></div><div class="track"><div class="fill" id="fOld"></div></div><div class="clock" id="cOld">00:00</div></div>
+      <div class="lane new"><div>After<small>My rewrite, with caching</small></div><div class="track"><div class="fill" id="fNew"></div></div><div class="clock" id="cNew">00:00</div></div>
+      <p class="race-note">Measured on the live product: 5 to 10 minutes became 5 to 10 seconds, with the same results.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="h4c">
-    <div class="eyebrow">Evidence — can you pick up our stack?</div>
-    <h2>Legacy codebase to modern stack, shipped in two months.</h2>
-    <p class="lede measure">Health4Community is a multi-tenant SaaS platform for healthcare and clinic organisations — three systems under one roof, running on a legacy ASP.NET MVC codebase. Leading five engineers, I re-architected it onto .NET 10 (Clean Architecture, DDD) and Angular 20 and shipped the new version in two months.</p>
-
-    <div class="grid g3">
-      <div class="card">
-        <h3>The scope, so you can judge it</h3>
-        <p>Three systems inside one platform: <strong>billing</strong>, <strong>document management and SOP control</strong>, and <strong>HR with rostering</strong> — the last including automatic roster generation.</p>
-        <p>Serving three client organisations and around 50 users at cutover.</p>
-      </div>
-      <div class="card">
-        <h3>What I own on it</h3>
-        <p>The multi-tenant foundations — fine-grained permissions, tenant isolation, Azure AD B2C identity, per-tenant branding — and the whole HR and workforce side: attendance, timesheets with multi-level approvals, leave, rostering, configurable overtime and award loading.</p>
-      </div>
-      <div class="card">
-        <h3>The part that was actually hard</h3>
-        <p>Auto-building rosters. A generated roster has to satisfy availability, shift overlaps, approval chains, configurable overtime and award-rule variations at the same time — and still let a manager override any cell by hand without the rest falling apart. I modelled those constraints before anyone hit them, which is why later requirements fitted the model instead of forcing a rewrite.</p>
-      </div>
+<!-- 04 WORK: no product names, just what each one does -->
+<section class="layer" id="work" data-file="Work/" aria-label="Things I've built">
+  <div class="inner">
+    <p class="file">Work/ · 4 client products, 1 internal tool</p>
+    <h2 class="big" data-split>Things I've <em>built.</em></h2>
+    <div class="cards">
+      <a class="card" href="#work/packaging" data-case="packaging" data-r data-cursor="Open">
+        <div class="cover" style="--cv:#9747FF"><b>60×</b></div>
+        <div class="card-body"><span class="tag">SUSTAINABILITY · TEAM LEAD</span><h3>Packaging impact reports</h3><p>Used by most of Australia's largest companies to measure the environmental impact of their packaging.</p></div>
+      </a>
+      <a class="card" href="#work/clinics" data-case="clinics" data-r data-cursor="Open">
+        <div class="cover" style="--cv:#27306B"><b>2 months</b></div>
+        <div class="card-body"><span class="tag">HEALTHCARE · TEAM LEAD</span><h3>Running clinic groups</h3><p>Billing, documents, staff rosters and timesheets for healthcare organisations, rebuilt on a modern stack in two months.</p></div>
+      </a>
+      <a class="card" href="#work/forms" data-case="forms" data-r data-cursor="Open">
+        <div class="cover" style="--cv:#7A2D36"><b>Forms + AI</b></div>
+        <div class="card-body"><span class="tag">MARKETING TOOLS</span><h3>Sign-ups, surveys and audience insights</h3><p>Businesses build forms and promotions, and AI writes their surveys and reads the answers.</p></div>
+      </a>
+      <a class="card" href="#work/agents" data-case="agents" data-r data-cursor="Open">
+        <div class="cover" style="--cv:#4F2A55"><b>AI</b></div>
+        <div class="card-body"><span class="tag">AI TOOLING · SOLO</span><h3>Safety rails for AI coding</h3><p>Tells an AI coding agent what an edit could break before it makes the change.</p></div>
+      </a>
+      <a class="card" href="#work/erp" data-case="erp" data-r data-cursor="Open">
+        <div class="cover" style="--cv:#8A4914"><b>ERP</b></div>
+        <div class="card-body"><span class="tag">MANUFACTURING</span><h3>Running a factory</h3><p>Inventory and packaging improvements for a manufacturing ERP.</p></div>
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="groundwork">
-    <div class="eyebrow">Evidence — AI practice, past the Copilot line</div>
-    <h2>Before an agent edits a file, it should know what it can break.</h2>
-    <p class="lede measure">Groundwork builds a dependency graph of a repository, computes each proposed change's blast radius from it, and escalates edits that reach further than the change should. Python 3.11, Pydantic v2, networkx — consumable over MCP or CLI, model-agnostic.</p>
-
-    <figure>
-      <div class="fig-head"><span>The loop, per proposed edit</span><span>Deterministic — same change, same set</span></div>
-      <div class="flow">
-        <div class="step"><em>01 · Plan</em><p>Agent proposes a change to a file.</p></div>
-        <div class="step"><em>02 · Assess</em><p>Resolve that file's dependents from the graph — the blast radius.</p></div>
-        <div class="step ok"><em>03a · Within scope</em><p>Load only that slice as context. Apply.</p></div>
-        <div class="step esc"><em>03b · Reaches too far</em><p>Escalate for review instead of applying quietly.</p></div>
-      </div>
-      <figcaption style="margin-top:18px;">The graph is computed from imports and references, not guessed by a model — so the same proposed change always resolves to the same dependency set, run to run.</figcaption>
-    </figure>
-
-    <figure>
-      <div class="fig-head"><span>Context loaded per task · 64-module repo</span><span>Tokens</span></div>
-      <div class="row">
-        <div class="row-top"><span>Naive agent — whole-repo context dump</span><b>~25,000</b></div>
-        <div class="track"><div class="bar-fill naive"></div></div>
-      </div>
-      <div class="row">
-        <div class="row-top"><span>Groundwork — blast-radius scoped</span><b>800–1,000</b></div>
-        <div class="track"><div class="bar-fill scoped"></div></div>
-      </div>
-      <figcaption>The honest framing: that baseline is a whole-repo dump, and no serious agent does that — retrieval-based tools already scope. What Groundwork adds over retrieval is determinism, and an escalation path for edits that reach outside the set.</figcaption>
-    </figure>
-
-    <div class="grid g2">
-      <div class="card">
-        <h3>It isn't open source, and here's the deal</h3>
-        <p>Groundwork was built on company time and stays closed for now. I'd rather say that plainly than leave a "view source" link that goes nowhere.</p>
-        <p><strong>What I'll do instead:</strong> in the technical call I'll screen-share it and run the loop live — on a public repo of your choosing if you want a neutral one. Fifteen minutes and you'll know whether I understand dependency graphs or just talk about them.</p>
-      </div>
-      <div class="card">
-        <h3>The rest of the AI work</h3>
-        <p>I lead my company's training on Model Context Protocol and prompting, have shipped MCP integrations into three client products as a client-facing capability, and have used agentic workflows daily for over a year — holding AI-written code to the same review gates as anything hand-written.</p>
-      </div>
+<!-- 05 TECH: the technical detail, after the story -->
+<section class="layer" id="tech" data-file="Stack.json" aria-label="Technical skills">
+  <div class="inner">
+    <p class="file">Stack.json · for the technical reader</p>
+    <h2 class="big" data-split>Under the <em>hood.</em></h2>
+    <div class="skills">
+      <div data-r><h3>BACK END</h3><p>C#, .NET 10 and .NET Core, REST APIs, Clean Architecture, Python</p></div>
+      <div data-r><h3>FRONT END</h3><p>Angular (20, 15, 12), TypeScript, HTML, CSS, reusable UI components</p></div>
+      <div data-r><h3>DATA</h3><p>SQL Server, query tuning, Redis caching, reporting, Excel import and export</p></div>
+      <div data-r><h3>INTEGRATIONS</h3><p>Xero, Google Gemini, Azure AD B2C sign-in, MCP, third-party REST APIs</p></div>
+      <div data-r><h3>AI</h3><p>Shipped AI features for clients, daily AI-assisted coding (Claude), company AI trainer</p></div>
+      <div data-r><h3>SHIPPING</h3><p>Azure, Azure DevOps CI/CD, Git, code review, SonarQube, ESLint, written standards</p></div>
     </div>
-  </section>
+    <p class="learning" data-r><span class="mono">LEARNING NOW</span> Vue 3 and PostgreSQL. I'm open about it, so nobody's surprised in the interview.</p>
+  </div>
+</section>
 
-  <section id="range">
-    <div class="eyebrow">Range</div>
-    <h2>Five products, four years, one company.</h2>
-    <p class="lede measure">One employer — but a client-services one: four external clients in four domains, each delivery answering to its own client's bar rather than a single internal standard. If you're wondering whether I've only been measured against one yardstick, make that the first question of the call.</p>
-
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th scope="col">Product</th><th scope="col">Stack</th><th scope="col">What I did</th></tr></thead>
-        <tbody>
-          <tr>
-            <td class="name">PIQET</td>
-            <td class="stack">Angular 15 · .NET Core 6<br>SQL Server · Redis</td>
-            <td class="what">Packaging life-cycle assessment. Cut report generation 60×; earlier built its Excel import/export and PDF reporting. Team lead, 3 engineers. Client Excellence Award 2025.</td>
-          </tr>
-          <tr>
-            <td class="name">Health4Community</td>
-            <td class="stack">.NET 10 · Angular 20<br>Azure AD B2C · SQL Server</td>
-            <td class="what">Enterprise multi-tenant healthcare SaaS — three systems: billing, document management and SOP control, and HR with auto-built rostering. Re-architected off legacy ASP.NET MVC in two months. Team lead, 5 engineers.</td>
-          </tr>
-          <tr>
-            <td class="name">Groundwork</td>
-            <td class="stack">Python 3.11 · Pydantic v2<br>networkx · MCP</td>
-            <td class="what">Deterministic context and guardrail layer for AI coding agents in large repositories. Plan / assess / validate loop with blast-radius escalation. Built solo; demo available on request.</td>
-          </tr>
-          <tr>
-            <td class="name">Bistly</td>
-            <td class="stack">Angular 12 · .NET Core 6<br>Google Gemini API</td>
-            <td class="what">Forms, surveys and audience analytics. Integrated Gemini for automated survey generation and response analysis — an early production use of LLMs in a client product.</td>
-          </tr>
-          <tr>
-            <td class="name">New Horizon ERP</td>
-            <td class="stack">Angular 12 · .NET Core 2.1<br>SQL Server</td>
-            <td class="what">Manufacturing ERP — inventory, production, QC, planning, finance, CRM. Built enhancements to the inventory and packaging modules. Useful if your product exchanges data with an ERP.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section id="skills">
-    <div class="eyebrow">The part most pages leave out</div>
-    <h2>What I have, and what I'm still learning.</h2>
-    <p class="lede measure">You'll find this out in the first technical call anyway. I'd rather you hear it from me. No percentage bars — I've never been able to say what "C# — 87%" would mean, and neither has anyone who's shown me one.</p>
-
-    <div class="grid g2">
-      <div class="card"><span class="tag have">Have</span><h3>C# and .NET</h3><p>.NET 10 and .NET Core in production, Clean Architecture, DDD, modular-monolith design, RESTful APIs, third-party integrations.</p></div>
-      <div class="card"><span class="tag have">Have</span><h3>TypeScript front ends</h3><p>Angular 20, 15 and 12, component-driven SPA architecture, and a config-driven reusable UI layer I designed and wrote the standards for.</p></div>
-      <div class="card"><span class="tag have">Have</span><h3>Relational databases</h3><p>SQL Server and T-SQL, stored-procedure analysis and optimisation, schema design, query tuning, Redis caching.</p></div>
-      <div class="card"><span class="tag have">Have</span><h3>Delivery discipline</h3><p>Azure DevOps CI/CD, branching and PR workflow, SonarQube and ESLint gates, code review, agile ceremonies, mentoring.</p></div>
-      <div class="card"><span class="tag learn">Learning</span><h3>Vue 3</h3><p>My front-end years are in Angular. The concepts map almost one to one and I'm working through it on my own time — but I won't claim production experience I don't have.</p></div>
-      <div class="card"><span class="tag learn">Learning</span><h3>PostgreSQL</h3><p>My production relational work is SQL Server. I know where the two differ and I'm closing the gap deliberately.</p></div>
-    </div>
-  </section>
-
-  <section id="how">
-    <div class="eyebrow">How I work</div>
-    <h2>Four things you can rely on.</h2>
-    <div class="principles">
-      <div class="principle">
-        <h3>I design ahead of the user</h3>
-        <p>What will they actually do, what breaks at the edges, and what requirement is coming in six months that today's schema should already accommodate. It's why the workforce suite modelled shift overlaps, approval chains and award-rule variations before any user hit them.</p>
+<!-- 06 LOCATION -->
+<section class="layer" id="based" data-file="Ahmedabad.cs" aria-label="Where I am">
+  <div class="inner">
+    <div class="kites" data-kites="based"></div>
+    <div class="based">
+      <div>
+        <p class="file">Ahmedabad.cs</p>
+        <h2 class="big" data-split>Based in <em>Ahmedabad.</em></h2>
+        <p class="lede" data-r>I've worked with <b>international clients</b> for my whole career, and I'm ready to work remotely. My day overlaps with European working hours and Australian afternoons, and I'll move my hours when the team needs it.</p>
+        <span class="plate" data-r><small>IND</small>GJ 01</span>
       </div>
-      <div class="principle">
-        <h3>I write the standards down</h3>
-        <p>Layered backend boundaries, a config-driven reusable front-end layer, SonarQube and ESLint gates — then I mentor people on them. They're what every pull request on the products I lead passes through today.</p>
-      </div>
-      <div class="principle">
-        <h3>I own outcomes, not commits</h3>
-        <p>I own client relationships for the products I lead, and I'd rather raise an awkward problem early than deliver something on time that quietly doesn't work. That ownership is what the 2025 Client Excellence Award recognised.</p>
-      </div>
-      <div class="principle">
-        <h3>I trust behaviour over vocabulary</h3>
-        <p>I'd rather know how a system fails under load than what the pattern is called. The PIQET rewrite only happened because I knew exactly how a ten-year-old pipeline behaved before I touched it.</p>
+      <div class="clocks" data-r>
+        <div class="row"><span>My time now (IST)</span><b id="tIst">--:--</b></div>
+        <div class="row"><span>Your time now <br><small class="mono" id="tzName"></small></span><b id="tYou">--:--</b></div>
+        <div class="row"><span>My usual day, in your time</span><b class="small" id="tDay">10:00 – 19:00</b></div>
+        <div class="row"><span>Available from</span><b class="small">12 Nov 2026</b></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="hire">
-    <div class="eyebrow">How to hire me</div>
-    <h2>The practical questions, answered.</h2>
-    <p class="lede measure">If something here doesn't work for you, better that we both know in week one than week six.</p>
-
-    <div class="qa">
-      <div class="pair"><div class="q">Where I am</div><div class="a">Ahmedabad, India — IST, UTC+5:30, no daylight saving. Fully remote throughout my career, with international clients.</div></div>
-      <div class="pair"><div class="q">Hours &amp; overlap</div><div class="a">My default day is 10:00–19:00 IST — a <strong>full working day of overlap with Europe</strong> and <strong>morning overlap with US Eastern</strong>. If your team's core hours need me earlier or later, <strong>I'll move my day</strong>, not just flex occasionally for stand-ups. Tell me the hours that actually work and I'll tell you straight whether I can hold them.</div></div>
-      <div class="pair"><div class="q">Work authorisation</div><div class="a">Indian citizen, based in Ahmedabad, no work authorisation elsewhere. For fully-remote roles I can work as an employee through an EOR or as a contractor — whichever your company uses. On-site or hybrid would need sponsorship.</div></div>
-      <div class="pair"><div class="q">Availability</div><div class="a"><strong>I'm currently serving my notice period</strong>, my last working day is <strong>11 November 2026</strong> and I'm available from <strong>12 November 2026</strong> — no long wait, and no leaving a team mid-flight either: I'm handing over two live products properly on the way out.</div></div>
-      <div class="pair"><div class="q">Engagement</div><div class="a">Open to full-time employment or contract — whichever is simplest on your side. I have no preference.</div></div>
-      <div class="pair"><div class="q">Where my code is</div><div class="a">Almost all of it is client-owned and private, and my own tooling is built on company time — so there's no public repo to browse, and I'd rather say that than link an empty profile. <strong>Verify me by making me work instead:</strong> a real problem from your codebase, or fifteen minutes of me running my own tooling on screen.</div></div>
-      <div class="pair"><div class="q">Compensation</div><div class="a">Tell me your band and I'll tell you honestly whether it works. I'm more interested in the problem and the team, but I'm not going to pretend money is irrelevant.</div></div>
-      <div class="pair"><div class="q">What I'm looking for</div><div class="a">A product with real users whose day depends on it, a team that writes things down, and enough ownership to fix the thing I can see is broken. I'd rather go deep on one product than touch ten.</div></div>
+<!-- 07 CONTACT -->
+<section class="layer" id="now" data-file="Contact.md" aria-label="Contact">
+  <div class="inner">
+    <p class="file">Contact.md</p>
+    <h2 class="big" data-split>Let's <em>talk.</em></h2>
+    <p class="lede" data-r>I'm looking for a full-stack role where my work goes live fast and I can see who it helps. Give me a real problem from your business and you'll learn more in an hour than this page can show you.</p>
+    <div class="cta" data-r>
+      <a class="mail" id="mail" href="mailto:it.dhruvjain@gmail.com" data-cursor="Say hello">it.dhruvjain@gmail.com</a>
+      <button class="copy" id="copy" type="button" aria-label="Copy email address">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+        <span class="copy-tip">Copied</span>
+      </button>
+      <span class="sr-only" id="copyStatus" aria-live="polite"></span>
     </div>
-  </section>
+    <div class="links" data-r>
+      <a class="btn ghost" href="https://www.linkedin.com/in/connect-dhruvjain" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn ghost" href="https://itdhruvjain.github.io/Dhruv-Jain-CV.pdf" target="_blank" rel="noopener">CV (PDF)</a>
+      <a class="btn ghost" href="tel:+917016581281">+91 70165 81281</a>
+    </div>
+    <div class="foot"><span>B.E. Information Technology · Microsoft Certified: Azure Fundamentals, Azure Data Fundamentals</span><span>© 2026 Dhruv Jain</span></div>
+  </div>
+</section>
 </main>
 
-<footer class="wrap">
-  <h2>Let's talk.</h2>
-  <p class="lede measure">Bring me a real problem from your codebase — a slow endpoint, a gnarly migration, a bug nobody has had time for — and you'll learn more about me in an hour than any page can tell you. It's also the format I'm best in.</p>
-  <div class="foot-cta">
-    <a class="btn solid" href="mailto:it.dhruvjain@gmail.com">it.dhruvjain@gmail.com</a>
-    <a class="btn" href="https://www.linkedin.com/in/connect-dhruvjain" rel="me noopener">LinkedIn</a>
-    <a class="btn" href="tel:+917016581281">+91 70165 81281</a>
-    <a class="btn" href="Dhruv-Jain-CV.pdf">Download CV (PDF)</a>
-    <a class="btn" href="cv.html">Full CV page</a>
+<!-- case study viewer -->
+<div class="cs" id="cs" role="dialog" aria-modal="true" aria-labelledby="csTitle">
+  <div class="cs-panel">
+    <div class="cs-top"><span class="mono" id="csFile">Work/</span><button id="csClose" type="button">← Back to work · Esc</button></div>
+    <div class="cs-body" id="csBody"></div>
   </div>
-  <p class="fine">B.E. Information Technology · Microsoft Certified: Azure Fundamentals, Azure Data Fundamentals · Client Excellence Award 2025 · 3rd prize, iFour internal hackathon 2026<br>Senior or lead full-stack engineering role, product team, fully remote.</p>
-</footer>
+</div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
-  (function(){
-    var themeBtn = document.getElementById('themeBtn');
-    var sysDark = window.matchMedia('(prefers-color-scheme: dark)');
-    function effectiveTheme(){
-      var t = document.documentElement.dataset.theme;
-      return t === 'dark' || t === 'light' ? t : (sysDark.matches ? 'dark' : 'light');
-    }
-    function paint(){
-      var dark = effectiveTheme() === 'dark';
-      themeBtn.setAttribute('aria-pressed', dark ? 'true' : 'false');
-      var meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.setAttribute('content', dark ? '#0e1114' : '#f4f5f6');
-    }
-    themeBtn.addEventListener('click', function(){
-      var next = effectiveTheme() === 'dark' ? 'light' : 'dark';
-      document.documentElement.dataset.theme = next;
-      try{ localStorage.setItem('dj-theme', next); }catch(e){}
-      paint();
-    });
-    if (sysDark.addEventListener) sysDark.addEventListener('change', paint);
-    paint();
-  })();
-</script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const fine = matchMedia("(pointer: fine)").matches;
+  const desktop = () => matchMedia("(min-width: 901px)").matches;
+  const hasGsap = !!(window.gsap && window.ScrollTrigger) && !reduce;
 
+  /* ---------- kites ---------- */
+  const kiteSvg = (c1, c2) => `<svg viewBox="0 0 100 200" aria-hidden="true">
+    <path d="M50 60 Q 0 220 -160 460" fill="none" stroke="rgba(246,241,231,.35)" stroke-width=".9"/>
+    <path d="M50 110 q 8 14 0 26 q -8 12 0 26 q 8 12 0 24" fill="none" stroke="${c2}" stroke-width="2"/>
+    <path d="M44 132 l6 6 6-6 -6-6z M44 156 l6 6 6-6 -6-6z" fill="${c2}"/>
+    <polygon points="50,0 92,46 50,110 8,46" fill="${c1}"/>
+    <polygon points="50,0 92,46 50,46" fill="rgba(255,255,255,.18)"/>
+    <path d="M50 0 V110 M10 46 Q50 34 90 46" stroke="rgba(0,0,0,.35)" stroke-width="1.4" fill="none"/></svg>`;
+  const KITES = {
+    hero: [["72%","10%","5vw","5.2s","0s","#F4C542","#E9557A"],["84%","40%","7.5vw","6.4s",".6s","#E9557A","#F4C542"],
+           ["62%","58%","3.6vw","5.8s","1.1s","#4FB3E8","#F6F1E7"],["90%","14%","3vw","6.9s",".3s","#F6F1E7","#4FB3E8"]],
+    based: [["44%","9%","4vw","5.6s","0s","#F4C542","#27306B"],["50%","74%","2.8vw","6.2s",".8s","#4FB3E8","#F6F1E7"],
+            ["88%","8%","3.4vw","5.1s",".4s","#E9557A","#F4C542"]]
+  };
+  $$("[data-kites]").forEach(box => {
+    box.innerHTML = KITES[box.dataset.kites].map(([x, y, w, t, dl, c1, c2]) =>
+      `<span class="kite" style="--x:${x};--y:${y};--w:${w};--t:${t};--dl:${dl}">${kiteSvg(c1, c2)}</span>`).join("");
+  });
+
+  /* ---------- hero name: letters that thicken near the pointer ---------- */
+  const name = $("#name");
+  name.innerHTML = [...name.textContent].map(ch => ch === " " ? " " : `<span class="ch" aria-hidden="true">${ch}</span>`).join("");
+  const chars = $$(".ch", name);
+  const hero = $("#hero");
+  if (fine && !reduce) {
+    hero.addEventListener("pointermove", e => {
+      chars.forEach(c => {
+        const r = c.getBoundingClientRect();
+        const d = Math.hypot(e.clientX - (r.left + r.width / 2), e.clientY - (r.top + r.height / 2));
+        c.style.setProperty("--w", Math.round(Math.max(200, 900 - d * 1.6)));
+      });
+    });
+    hero.addEventListener("pointerleave", () => chars.forEach(c => c.style.removeProperty("--w")));
+  }
+
+  /* selection sweep with a live column readout */
+  const hl = $("#hl"), pos = $("#pos");
+  const total = name.textContent.length;
+  const sweep = p => { hl.style.transform = `scaleX(${p})`; const col = Math.round(p * total);
+    pos.textContent = col ? `Ln 1, Col ${col + 1} · ${col} selected` : "Ln 1, Col 1"; };
+  if (reduce) sweep(1);
+  else { const t0 = performance.now() + 500, dur = 1100;
+    const step = now => { const p = Math.min(1, Math.max(0, (now - t0) / dur)); sweep(1 - Math.pow(1 - p, 3)); if (p < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step); }
+
+
+  /* live-share style cursor in the hero */
+  const cur = $("#cursor"), curLabel = $("#cursorLabel");
+  if (fine && !reduce) {
+    hero.classList.add("fine");
+    let x = 0, y = 0, tx = 0, ty = 0, raf = 0;
+    const loop = () => { x += (tx - x) * .22; y += (ty - y) * .22; cur.style.transform = `translate(${x}px,${y}px)`; raf = requestAnimationFrame(loop); };
+    hero.addEventListener("pointerenter", () => { cur.classList.add("on"); if (!raf) loop(); });
+    hero.addEventListener("pointerleave", () => { cur.classList.remove("on"); cancelAnimationFrame(raf); raf = 0; });
+    hero.addEventListener("pointermove", e => { tx = e.clientX; ty = e.clientY; if (!cur.classList.contains("on")) { cur.classList.add("on"); x = tx; y = ty; if (!raf) loop(); } });
+    $$("[data-cursor]", hero).forEach(el => {
+      el.addEventListener("pointerenter", () => curLabel.textContent = el.dataset.cursor);
+      el.addEventListener("pointerleave", () => curLabel.textContent = "Dhruv");
+    });
+    /* kites drift a little against the pointer */
+    const kites = $(".kites", hero);
+    hero.addEventListener("pointermove", e => {
+      const dx = e.clientX / innerWidth - .5, dy = e.clientY / innerHeight - .5;
+      kites.style.transform = `translate(${dx * -24}px,${dy * -16}px)`;
+    });
+  }
+
+  /* ---------- sound (off by default, synthesised, no files) ---------- */
+  const soundBtn = $("#sound");
+  let ac = null, soundOn = false;
+  const NOTES = [523.25, 587.33, 659.25, 783.99, 880, 1046.5, 1174.66];
+  const pluck = (f, vol = .06, len = .5) => {
+    if (!soundOn || !ac) return;
+    const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime;
+    o.type = "sine"; o.frequency.value = f;
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + len);
+    o.connect(g).connect(ac.destination); o.start(t); o.stop(t + len + .05);
+  };
+  soundBtn.addEventListener("click", () => {
+    soundOn = !soundOn;
+    if (soundOn && !ac) { try { ac = new (window.AudioContext || window.webkitAudioContext)(); } catch (_) { soundOn = false; } }
+    soundBtn.setAttribute("aria-pressed", soundOn); $("#sndState").textContent = soundOn ? "on" : "off";
+    pluck(NOTES[0]); setTimeout(() => pluck(NOTES[2]), 90);
+  });
+  $$("a,button").forEach(el => el.addEventListener("pointerenter", () => pluck(1567.98, .015, .08)));
+
+  /* ---------- breadcrumb + section chime ---------- */
+  const layers = $$(".layer"), crumb = $("#crumbFile");
+  let current = -1;
+  const setActive = i => { if (i === current) return; current = i; crumb.textContent = layers[i].dataset.file; pluck(NOTES[i % NOTES.length], .05, .7); };
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) setActive(layers.indexOf(e.target)); }),
+    { rootMargin: "-50% 0px -50% 0px" });
+  layers.forEach(l => io.observe(l));
+
+  /* tall sections stick by their bottom edge so nothing gets covered before it is read */
+  const fitSticky = () => layers.forEach(l => { l.style.top = desktop() ? Math.min(0, innerHeight - l.offsetHeight) + "px" : ""; });
+  fitSticky(); addEventListener("resize", fitSticky);
+
+  /* ---------- report race (20x playback: 10 min -> 30 s, 10 s -> 0.5 s) ---------- */
+  const run = $("#run"), fOld = $("#fOld"), fNew = $("#fNew"), cOld = $("#cOld"), cNew = $("#cNew");
+  const mmss = s => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+  run.addEventListener("click", () => {
+    run.disabled = true; run.textContent = "Running…";
+    const t0 = performance.now(), SPEED = 20, OLD = 600, NEW = 10;
+    const frame = now => {
+      const sim = (now - t0) / 1000 * SPEED;
+      const po = Math.min(1, sim / OLD), pn = Math.min(1, sim / NEW);
+      fOld.style.width = po * 100 + "%"; fNew.style.width = pn * 100 + "%";
+      cOld.textContent = mmss(Math.min(sim, OLD)); cNew.textContent = mmss(Math.min(sim, NEW));
+      if (pn === 1 && !run.dataset.ding) { run.dataset.ding = 1; pluck(NOTES[4], .07, .6); }
+      if (po < 1) requestAnimationFrame(frame);
+      else { pluck(NOTES[0], .05, .6); run.disabled = false; run.textContent = "↻ Run again"; delete run.dataset.ding; }
+    };
+    requestAnimationFrame(frame);
+  });
+
+  /* ---------- clocks ---------- */
+  const fmt = (d, tz) => new Intl.DateTimeFormat([], { hour: "2-digit", minute: "2-digit", timeZone: tz }).format(d);
+  const youTz = Intl.DateTimeFormat().resolvedOptions().timeZone || "your time zone";
+  $("#tzName").textContent = youTz;
+  const paintClocks = () => {
+    const now = new Date();
+    $("#tIst").textContent = fmt(now, "Asia/Kolkata");
+    $("#tYou").textContent = fmt(now);
+    const day = new Date(); day.setUTCHours(4, 30, 0, 0);            /* 10:00 IST */
+    const end = new Date(day.getTime() + 9 * 3600e3);                 /* 19:00 IST */
+    $("#tDay").textContent = youTz === "Asia/Kolkata" || youTz === "Asia/Calcutta" ? "10:00 – 19:00" : `${fmt(day)} – ${fmt(end)}`;
+  };
+  paintClocks(); setInterval(paintClocks, 15000);
+
+  /* ---------- copy email ---------- */
+  const copy = $("#copy");
+  copy.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText("it.dhruvjain@gmail.com"); } catch (_) {
+      const ta = document.createElement("textarea"); ta.value = "it.dhruvjain@gmail.com"; document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); } catch (_) {} ta.remove(); }
+    copy.classList.add("done"); $("#copyStatus").textContent = "Email address copied";
+    pluck(NOTES[3], .05, .3); setTimeout(() => copy.classList.remove("done"), 1600);
+  });
+
+  /* ---------- case studies ---------- */
+  const CASES = {
+    packaging: { t: "Packaging impact reports", f: "Work/Packaging.cs", s: "Angular · .NET · SQL Server · Redis", b: [
+      ["What it does", "Companies use it to measure the environmental impact of their packaging choices before they make them. It's used by most of Australia's largest companies."],
+      ["What I did", "Reports took 5 to 10 minutes because the calculations ran in ten-year-old database code. I moved them into the application behind one source of truth and added caching, which brought reports down to 5 to 10 seconds. Earlier, I'd built its Excel import and export and its PDF reports."],
+      ["How I made it safe", "Clients act on these numbers, so I ran old reports through both versions and compared every figure to the decimal. We only switched over once they all matched."],
+      ["My role", "Team lead, and the client's direct contact. The work earned a Client Excellence Award in 2025."]] },
+    clinics: { t: "Running clinic groups", f: "Work/Clinics.cs", s: ".NET 10 · Angular 20 · Azure AD B2C · SQL Server", b: [
+      ["What it does", "One platform for healthcare organisations: billing, document and procedure management, and staff rostering, timesheets and leave. Several client organisations share it, each with its own branding and permissions."],
+      ["What I did", "I led five engineers in rebuilding it from an old codebase onto a modern stack, and we shipped the new version in two months."],
+      ["Problems I solved before anyone asked", "Payroll was reconciled by hand, so I built one export for any payment provider, which later connected to Xero with almost no rework. Staff were chasing proof of completed procedures by email, so I built a working version of automated evidence collection, and the client adopted it."],
+      ["The hard part", "Building rosters automatically. A roster has to respect availability, overlapping shifts, approvals and pay rules all at once, and a manager still has to be able to change any shift by hand."]] },
+    forms: { t: "Sign-ups, surveys and audience insights", f: "Work/Forms.cs", s: "Angular · .NET · SQL Server · Google Gemini API", b: [
+      ["What it does", "Businesses use it to build sign-up forms, surveys and promotions, and to understand their audience."],
+      ["What I did", "I connected Google's Gemini AI so it could write surveys and analyse the answers automatically. This was an early use of AI in a live client product. I also worked on its automation workflows and QR-code sharing."]] },
+    agents: { t: "Safety rails for AI coding", f: "Work/Agents.py", s: "Python · networkx · MCP", b: [
+      ["What it does", "Before an AI coding agent edits a file, it works out what else in the codebase depends on it. Small, safe changes go ahead. Changes that reach too far get flagged for a person to review."],
+      ["Why it matters", "The agent only reads the code that matters for a change, which cut what it loads per task by about 95% in testing. The same change always gives the same answer."],
+      ["Recognition", "3rd prize at my company's 2026 hackathon. It's internal, but I'm happy to demo it live in an interview."]] },
+    erp: { t: "Running a factory", f: "Work/Erp.cs", s: "Angular · .NET Core · SQL Server", b: [
+      ["What it does", "An ERP for manufacturers covering inventory, production, quality control, planning, finance and customers."],
+      ["What I did", "I built improvements to the inventory and packaging modules."]] }
+  };
+  const cs = $("#cs"), csBody = $("#csBody"), csFile = $("#csFile"), csClose = $("#csClose");
+  let opener = null, lenis = null;
+  const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  /* the panel grows out of the card that opened it (falls back to a short rise) */
+  const panel = $(".cs-panel");
+  const growFrom = card => {
+    if (!window.gsap || reduce) return;
+    gsap.killTweensOf(panel);
+    if (!card) return gsap.fromTo(panel, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: .5, ease: "expo.out", clearProps: "all" });
+    const a = card.getBoundingClientRect(), b = panel.getBoundingClientRect();
+    gsap.fromTo(panel,
+      { x: a.left + a.width / 2 - (b.left + b.width / 2), y: a.top + a.height / 2 - (b.top + b.height / 2),
+        scaleX: a.width / b.width, scaleY: a.height / b.height, opacity: .4 },
+      { x: 0, y: 0, scaleX: 1, scaleY: 1, opacity: 1, duration: .65, ease: "expo.out", clearProps: "all" });
+  };
+  const openCase = (key, push) => {
+    const c = CASES[key]; if (!c) return;
+    csFile.textContent = c.f;
+    csBody.innerHTML = `<h3 id="csTitle">${esc(c.t)}</h3><p class="stack">${esc(c.s)}</p>` + c.b.map(([h, p]) => `<h4>${esc(h)}</h4><p>${esc(p)}</p>`).join("");
+    cs.classList.add("open"); document.documentElement.classList.add("cs-lock"); lenis?.stop();
+    growFrom(push ? opener : null);
+    if (push) try { history.pushState({ cs: key }, "", "#work/" + key); } catch (_) {}
+    csClose.focus({ preventScroll: true }); pluck(NOTES[5], .04, .4);
+  };
+  const closeCase = fromPop => {
+    if (!cs.classList.contains("open")) return;
+    cs.classList.remove("open"); document.documentElement.classList.remove("cs-lock"); lenis?.start();
+    if (!fromPop && location.hash.startsWith("#work/")) try { history.back(); } catch (_) {}
+    opener?.focus({ preventScroll: true });
+  };
+  $$("[data-case]").forEach(a => a.addEventListener("click", e => { e.preventDefault(); opener = a; openCase(a.dataset.case, true); }));
+  csClose.addEventListener("click", () => closeCase(false));
+  cs.addEventListener("click", e => { if (e.target === cs) closeCase(false); });
+  addEventListener("keydown", e => { if (e.key === "Escape") closeCase(false); });
+  addEventListener("popstate", () => { const m = location.hash.match(/^#work\/(\w+)/); m ? openCase(m[1], false) : closeCase(true); });
+
+  /* ---------- in-page links ---------- */
+  $$("[data-go]").forEach(a => a.addEventListener("click", e => {
+    const t = $(a.dataset.go); if (!t) return; e.preventDefault();
+    lenis ? lenis.scrollTo(t, { duration: 1.4 }) : t.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+  }));
+
+  /* ---------- motion (skipped entirely if the libraries didn't load or motion is reduced) ---------- */
+  if (!hasGsap) return;
+  gsap.registerPlugin(ScrollTrigger);
+  document.documentElement.classList.add("anim");
+
+  if (window.Lenis) {
+    lenis = new Lenis({ lerp: .1 });
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0);
+  }
+
+  /* split headings into words that rise into place */
+  $$("[data-split]").forEach(h => {
+    const walk = node => [...node.childNodes].forEach(n => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) frag.appendChild(document.createTextNode(part));
+          else { const w = document.createElement("span"); w.className = "w"; w.innerHTML = `<span class="wi">${part}</span>`; frag.appendChild(w); }
+        });
+        n.replaceWith(frag);
+      } else walk(n);
+    });
+    walk(h);
+    gsap.from($$(".wi", h), { opacity: 0, duration: .9, ease: "power2.out", stagger: .05,
+      scrollTrigger: { trigger: h, start: "top 85%" } });
+  });
+
+  /* hero content arrives on load, not on scroll */
+  gsap.to($$("[data-r]", hero), { opacity: 1, duration: 1, ease: "power2.out", stagger: .12, delay: .9 });
+
+  /* generic reveals */
+  /* an observer rather than scroll triggers, so jumping straight to a section still reveals it */
+  let queue = [], flushing = 0;
+  const reveal = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { queue.push(e.target); reveal.unobserve(e.target); } });
+    cancelAnimationFrame(flushing);
+    flushing = requestAnimationFrame(() => { gsap.to(queue, { opacity: 1, duration: .9, ease: "power2.out", stagger: .08 }); queue = []; });
+  }, { rootMargin: "0px 0px -8% 0px" });
+  $$("[data-r]").filter(el => !hero.contains(el)).forEach(el => reveal.observe(el));
+
+  /* hero intro: name grows from hairline to heavy */
+  gsap.fromTo(chars, { "--w": 100, opacity: 0 }, { "--w": 800, opacity: 1, duration: 1.3, ease: "expo.out", stagger: .04,
+    onComplete: () => chars.forEach(c => c.style.removeProperty("--w")) });
+
+  /* stat counters */
+  $$("[data-count]").forEach(el => {
+    const o = { v: 0 }, end = +el.dataset.count, suf = el.dataset.suffix || "";
+    gsap.to(o, { v: end, duration: 1.6, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%" },
+      onUpdate: () => el.textContent = Math.round(o.v) + suf });
+  });
+
+
+  /* thin progress line across the top */
+  const bar = $("#progress");
+  ScrollTrigger.create({ start: 0, end: "max", onUpdate: st => gsap.set(bar, { scaleX: st.progress }) });
+
+  /* each section arrives like a sheet: rounded corners that flatten as it settles */
+  layers.slice(1).forEach(l => {
+    gsap.fromTo(l, { borderTopLeftRadius: 64, borderTopRightRadius: 64 },
+      { borderTopLeftRadius: 0, borderTopRightRadius: 0, ease: "none",
+        scrollTrigger: { trigger: l, start: "top bottom", end: "top top", scrub: true } });
+  });
+
+  if (fine) {
+    /* cards lean toward the pointer, with a soft light across them */
+    $$(".card").forEach(card => {
+      const glare = document.createElement("span"); glare.className = "glare"; card.appendChild(glare);
+      card.addEventListener("pointermove", e => {
+        const r = card.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+        card.style.setProperty("--gx", px * 100 + "%"); card.style.setProperty("--gy", py * 100 + "%");
+        gsap.to(card, { rotateY: (px - .5) * 8, rotateX: (.5 - py) * 8, y: -6, transformPerspective: 900, duration: .4, ease: "power2.out" });
+      });
+      card.addEventListener("pointerleave", () => gsap.to(card, { rotateY: 0, rotateX: 0, y: 0, duration: .7, ease: "elastic.out(1,.6)" }));
+    });
+
+    /* buttons lean toward the cursor and spring back */
+    $$(".btn, .run, .copy, .nav a, .nav button").forEach(el => {
+      el.addEventListener("pointermove", e => {
+        const r = el.getBoundingClientRect();
+        gsap.to(el, { x: (e.clientX - r.left - r.width / 2) * .25, y: (e.clientY - r.top - r.height / 2) * .35, duration: .3, ease: "power2.out" });
+      });
+      el.addEventListener("pointerleave", () => gsap.to(el, { x: 0, y: 0, duration: .8, ease: "elastic.out(1,.4)" }));
+    });
+  }
+
+  /* each section stays put and dims as the next one slides over it */
+  const mm = gsap.matchMedia();
+  mm.add("(min-width: 901px)", () => {
+    layers.slice(0, -1).forEach((l, i) => {
+      const next = layers[i + 1];
+      const shade = document.createElement("div"); shade.className = "shade"; l.appendChild(shade);
+      gsap.timeline({ scrollTrigger: { trigger: next, start: "top bottom", end: "top top", scrub: true } })
+        .to(shade, { opacity: .55, ease: "none" }, 0);
+    });
+    /* the hero name drifts apart as you leave */
+    gsap.to(chars, { xPercent: i => (i - chars.length / 2) * 14, ease: "none",
+      scrollTrigger: { trigger: layers[1], start: "top bottom", end: "top top", scrub: true } });
+    return () => $$(".shade").forEach(s => s.remove());
+  });
+
+  addEventListener("load", () => { fitSticky(); ScrollTrigger.refresh(); });  if (location.hash.startsWith("#work/")) openCase(location.hash.slice(6), false);
+})();
+</script>
 </body>
 </html>
