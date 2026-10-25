@@ -27,7 +27,7 @@ Everything is inline. External requests, all from public CDNs:
 - **Skill chips**: click a technology and the Projects section filters to where it was actually used, with a summary line ("Angular — used in 4 of 5 projects"). Click again to clear.
 - **Project cards**: click to expand.
 - **Command palette**: press `/` or `⌘K` / `Ctrl+K` to jump to any section, project, skill or action — including switching lens, toggling theme, copying the email address and printing.
-- **Playground → PIQET rewrite**: drag-to-compare slider between the before and after states. It is a real `<input type="range">` underneath, so it works with a keyboard and assistive tech.
+- **Playground → report rewrite**: drag-to-compare slider between the before and after states. It is a real `<input type="range">` underneath, so it works with a keyboard and assistive tech.
 - **Playground → blast radius**: a rotating 3D dependency graph. Hover a node to light up everything depending on it; click one to propose a change and see the two-hop reach, with risk auto-escalating past thirteen affected modules. Illustrative 64-module graph, labelled as such.
 - **Timezone calculator**: converts the working day into the visitor's zone and computes the overlap.
 - Scroll-triggered reveals, count-up stats, and a timeline rail that draws itself — all skipped when the visitor has `prefers-reduced-motion` set.
