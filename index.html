@@ -735,7 +735,7 @@ html:not(.anim) .card:hover{transform:translateY(-6px)}
   const reveal = new IntersectionObserver(es => {
     es.forEach(e => { if (e.isIntersecting) { queue.push(e.target); reveal.unobserve(e.target); } });
     cancelAnimationFrame(flushing);
-    flushing = requestAnimationFrame(() => { gsap.to(queue, { opacity: 1, duration: .9, ease: "power2.out", stagger: .08 }); queue = []; });
+    flushing = requestAnimationFrame(() => { if (queue.length) gsap.to(queue, { opacity: 1, duration: .9, ease: "power2.out", stagger: .08 }); queue = []; });
   }, { rootMargin: "0px 0px -8% 0px" });
   $$("[data-r]").filter(el => !hero.contains(el)).forEach(el => reveal.observe(el));
 
