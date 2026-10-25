@@ -4,7 +4,7 @@ Two static pages, no build step, no dependencies.
 
 | File | What it is |
 |---|---|
-| `index.html` | The front page — who I am first, then proof, then the technical detail. Seven full-screen sections that slide over each other: intro, what I'm like to work with, a measured before/after report race, project cards (no product names) that open into detail panels, skills, location with live clocks, and contact |
+| `index.html` | The front page — who I am first, then proof, then the technical detail. Eight full-screen sections that slide over each other: intro, what I'm like to work with, a measured before/after report race, project cards (no product names) that open into detail panels, skills, my first month in a new team, location with live clocks, and contact with recognition |
 | `cv.html` | Full CV plus a "How to hire me" section with a live timezone-overlap calculator |
 | `deck.html` | Redirect stub to `/` — the deck used to live here; kept so shared links don't break |
 | `.nojekyll` | Tells GitHub Pages to serve the files as-is instead of running them through Jekyll |

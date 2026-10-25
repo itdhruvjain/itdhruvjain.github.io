@@ -60,14 +60,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   padding:6px 11px;border-radius:99px;background:rgba(0,0,0,.28);backdrop-filter:blur(8px);border:1px solid var(--faint)}
 .chip i{width:7px;height:7px;border-radius:50%;background:#5BE08A;box-shadow:0 0 0 0 rgba(91,224,138,.6);animation:ping 2s infinite}
 @keyframes ping{70%{box-shadow:0 0 0 7px rgba(91,224,138,0)}100%{box-shadow:0 0 0 0 rgba(91,224,138,0)}}
-.crumb{margin-left:auto;margin-right:auto;font-family:var(--mono);font-size:12px;color:var(--muted);
-  padding:6px 12px;border-radius:8px;background:rgba(0,0,0,.22);backdrop-filter:blur(8px)}
-.crumb b{color:var(--fg);font-weight:500}
-.nav{display:flex;gap:4px;align-items:center}
+.nav{display:flex;gap:4px;align-items:center;margin-left:auto}
 .nav a,.nav button{font-family:var(--mono);font-size:12px;text-decoration:none;padding:7px 11px;border-radius:8px;
   background:rgba(0,0,0,.22);backdrop-filter:blur(8px)}
 .nav a:hover,.nav button:hover{background:rgba(0,0,0,.4)}
 .nav button[aria-pressed="true"]{color:var(--kite)}
+.nav a.is-on{color:var(--kite);box-shadow:inset 0 -2px 0 var(--kite)}
 
 /* ---------- layers: each section slides up over the last ---------- */
 .layer{position:sticky;top:0;min-height:100vh;min-height:100svh;overflow:hidden;
@@ -76,7 +74,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .inner{min-height:100vh;min-height:100svh;padding:110px var(--pad) 70px;display:flex;flex-direction:column;
   justify-content:center;max-width:1320px;margin:0 auto;position:relative;transform-origin:50% 0}
 .shade{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;z-index:5}
-#hero{--bg:var(--indigo)} #why{--bg:var(--madder)} #proof{--bg:#9747FF;--kite:#0E0E0E;--muted:rgba(255,255,255,.92);--faint:rgba(255,255,255,.28)} #tech{--bg:var(--night)}
+#hero{--bg:var(--indigo)} #why{--bg:var(--madder)} #proof{--bg:#9747FF;--kite:#0E0E0E;--muted:rgba(255,255,255,.92);--faint:rgba(255,255,255,.28)} #tech{--bg:var(--night)} #start{--bg:var(--teal)}
 #work{--bg:var(--neem)} #based{--bg:var(--saffron)} #now{--bg:var(--plum)}
 .file{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:22px;display:flex;gap:10px;align-items:center}
 .file::before{content:"";width:18px;height:1px;background:currentColor}
@@ -244,6 +242,17 @@ html:not(.anim) .card:hover{transform:translateY(-6px)}
 }
 @media (max-width:520px){ .skills{grid-template-columns:1fr} }
 
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:44px;padding-top:26px;border-top:1px solid var(--faint)}
+.steps .n{font-family:var(--mono);font-size:12px;color:var(--kite)}
+.steps h3{font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.2vw,32px);line-height:1.08;margin:8px 0 8px}
+.steps p{color:var(--muted);font-size:15.5px}
+.awards{margin-top:44px;display:flex;gap:14px 20px;align-items:baseline;flex-wrap:wrap}
+.awards .mono{color:var(--kite)}
+.awards ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.awards li{font-size:14px;padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.08);border:1px solid var(--faint)}
+@media (max-width:900px){ .steps{grid-template-columns:1fr 1fr} }
+@media (max-width:520px){ .steps{grid-template-columns:1fr} }
+
 /* ---------- reveal helpers (only hidden once the animation library is running) ---------- */
 .anim [data-r]{opacity:0}
 .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
@@ -251,7 +260,6 @@ html:not(.anim) .card:hover{transform:translateY(-6px)}
 
 /* ---------- small screens ---------- */
 @media (max-width:900px){
-  .crumb{display:none}
   .nav a:not(.keep){display:none}
   .layer{position:relative;top:auto!important}
   .stats{grid-template-columns:repeat(2,1fr)}
@@ -284,7 +292,6 @@ html:not(.anim) .card:hover{transform:translateY(-6px)}
 <header class="top">
   <a class="brand" href="#hero" data-go="#hero">Dhruv Jain</a>
   <span class="chip"><i></i><span class="long">Open to roles ·&nbsp;</span>from 12 Nov</span>
-  <span class="crumb" aria-hidden="true">dhruv-jain / <b id="crumbFile">Hello.md</b></span>
   <nav class="nav" aria-label="Sections">
     <a href="#why" data-go="#why">Why me</a>
     <a href="#work" data-go="#work">Work</a>
@@ -296,7 +303,7 @@ html:not(.anim) .card:hover{transform:translateY(-6px)}
 
 <main>
 <!-- 01 HERO: who I am, in plain words -->
-<section class="layer is-first" id="hero" data-file="Hello.md" aria-label="Introduction">
+<section class="layer is-first" id="hero" aria-label="Introduction">
   <div class="inner">
     <div class="kites" data-kites="hero"></div>
     <p class="kicker" data-r>Hi, I'm</p>
@@ -326,29 +333,31 @@ html:not(.anim) .card:hover{transform:translateY(-6px)}
 </section>
 
 <!-- 02 WHY ME -->
-<section class="layer" id="why" data-file="WhyMe.md" aria-label="What sets me apart">
+<section class="layer" id="why" aria-label="What sets me apart">
   <div class="inner">
-    <p class="file">WhyMe.md</p>
+    <p class="file">Why me</p>
     <h2 class="big" data-split>What I'm like to <em>work with.</em></h2>
     <ol class="why">
       <li data-r><span class="n">01</span><h3>I fix the real problem, not the first request.</h3>
-        <p>Staff were chasing proof of completed procedures by email and shared drives. Nobody had asked me to fix it, so I built a working version to show the client. They adopted it, and now everyone manages that evidence in one place.</p></li>
+        <p>Staff were chasing proof of completed procedures by email and shared drives. I proposed automating it, and when the client wasn't convinced, I built a working version to show them. They adopted it, and now everyone manages that evidence in one place.</p></li>
       <li data-r><span class="n">02</span><h3>I connect systems so nobody retypes anything.</h3>
         <p>Payroll was reconciled by hand. I designed one export that packages hours, rates and approvals for any payment provider. When we later connected Xero, it plugged in with almost no rework.</p></li>
       <li data-r><span class="n">03</span><h3>I make the numbers fast, and keep them right.</h3>
         <p>I turned a ten-minute report into a ten-second one. Before switching over, I ran the old and new versions side by side and checked every figure to the decimal.</p></li>
       <li data-r><span class="n">04</span><h3>I use AI to move fast, then check its work.</h3>
-        <p>My team rebuilt a three-year-old product in two months with AI coding tools, and I review AI-written code like anyone else's. I also run my company's AI training.</p></li>
-      <li data-r><span class="n">05</span><h3>I explain things in plain words.</h3>
-        <p>I deal with clients directly on the products I lead, and I raise problems early instead of hiding them. My delivery for one of those clients earned the company's Client Excellence Award in 2025.</p></li>
+        <p>My team rebuilt a three-year-old product in two months with AI coding tools. When the AI kept missing knock-on effects between modules, we kept a written map of those dependencies, updated it with every change, and I checked it before merging. I also run my company's AI training.</p></li>
+      <li data-r><span class="n">05</span><h3>I write it down.</h3>
+        <p>Our coding standards, commit conventions and review gates are documented, not tribal knowledge. Every commit links back to the requirement or bug it came from, so anyone can see why a change was made.</p></li>
+      <li data-r><span class="n">06</span><h3>I own it, and I say things plainly.</h3>
+        <p>I've been the only engineer on a project, from design to deployment, and I lead a team of five today. I deal with clients directly and raise problems early. My delivery for one client earned the company's Client Excellence Award in 2025.</p></li>
     </ol>
   </div>
 </section>
 
 <!-- 03 PROOF: the race -->
-<section class="layer" id="proof" data-file="Proof.cs" aria-label="A ten-minute report made ten seconds">
+<section class="layer" id="proof" aria-label="A ten-minute report made ten seconds">
   <div class="inner">
-    <p class="file">Proof.cs · one example, measured</p>
+    <p class="file">One example, measured</p>
     <h2 class="big" data-split>A ten-minute report. Now it takes <em>ten seconds.</em></h2>
     <p class="lede" data-r>This was on a packaging sustainability tool <b>used by most of Australia's largest companies</b>. Its reports ran on ten-year-old database code that nobody wanted to touch, and I fixed it without being asked.</p>
     <div class="race" data-r>
@@ -364,9 +373,9 @@ html:not(.anim) .card:hover{transform:translateY(-6px)}
 </section>
 
 <!-- 04 WORK: no product names, just what each one does -->
-<section class="layer" id="work" data-file="Work/" aria-label="Things I've built">
+<section class="layer" id="work" aria-label="Things I've built">
   <div class="inner">
-    <p class="file">Work/ · 4 client products, 1 internal tool</p>
+    <p class="file">4 client products and 1 internal tool</p>
     <h2 class="big" data-split>Things I've <em>built.</em></h2>
     <div class="cards">
       <a class="card" href="#work/packaging" data-case="packaging" data-r data-cursor="Open">
@@ -394,9 +403,9 @@ html:not(.anim) .card:hover{transform:translateY(-6px)}
 </section>
 
 <!-- 05 TECH: the technical detail, after the story -->
-<section class="layer" id="tech" data-file="Stack.json" aria-label="Technical skills">
+<section class="layer" id="tech" aria-label="Technical skills">
   <div class="inner">
-    <p class="file">Stack.json · for the technical reader</p>
+    <p class="file">For the technical reader</p>
     <h2 class="big" data-split>Under the <em>hood.</em></h2>
     <div class="skills">
       <div data-r><h3>BACK END</h3><p>C#, .NET 10 and .NET Core, REST APIs, Clean Architecture, Python</p></div>
@@ -410,13 +419,27 @@ html:not(.anim) .card:hover{transform:translateY(-6px)}
   </div>
 </section>
 
-<!-- 06 LOCATION -->
-<section class="layer" id="based" data-file="Ahmedabad.cs" aria-label="Where I am">
+<!-- 06 FIRST MONTH -->
+<section class="layer" id="start" aria-label="My first month with you">
+  <div class="inner">
+    <p class="file">If you hire me</p>
+    <h2 class="big" data-split>My first <em>month</em> with you.</h2>
+    <ol class="steps">
+      <li data-r><span class="n">Week 1</span><h3>Learn the business</h3><p>What does each system do for real people, and where do they lose time? I start there, before I touch the code.</p></li>
+      <li data-r><span class="n">Week 1–2</span><h3>Talk to the people who use it</h3><p>I'll sit with the teams who rely on the software and ask why things work the way they do, not just how.</p></li>
+      <li data-r><span class="n">Week 2–3</span><h3>Trace real work end to end</h3><p>I'll follow a real transaction or report through the code to check my understanding against what actually happens.</p></li>
+      <li data-r><span class="n">Week 3–4</span><h3>Ship small, useful things</h3><p>I'll take on small tasks early, starting with the parts that are riskiest or break most often, and write down what I learn as I go.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 07 LOCATION -->
+<section class="layer" id="based" aria-label="Where I am">
   <div class="inner">
     <div class="kites" data-kites="based"></div>
     <div class="based">
       <div>
-        <p class="file">Ahmedabad.cs</p>
+        <p class="file">Where I am</p>
         <h2 class="big" data-split>Based in <em>Ahmedabad.</em></h2>
         <p class="lede" data-r>I've worked with <b>international clients</b> for my whole career, and I'm ready to work remotely. My day overlaps with European working hours and Australian afternoons, and I'll move my hours when the team needs it.</p>
         <span class="plate" data-r><small>IND</small>GJ 01</span>
@@ -431,10 +454,10 @@ html:not(.anim) .card:hover{transform:translateY(-6px)}
   </div>
 </section>
 
-<!-- 07 CONTACT -->
-<section class="layer" id="now" data-file="Contact.md" aria-label="Contact">
+<!-- 08 CONTACT -->
+<section class="layer" id="now" aria-label="Contact">
   <div class="inner">
-    <p class="file">Contact.md</p>
+    <p class="file">Contact</p>
     <h2 class="big" data-split>Let's <em>talk.</em></h2>
     <p class="lede" data-r>I'm looking for a full-stack role where my work goes live fast and I can see who it helps. Give me a real problem from your business and you'll learn more in an hour than this page can show you.</p>
     <div class="cta" data-r>
@@ -450,6 +473,7 @@ html:not(.anim) .card:hover{transform:translateY(-6px)}
       <a class="btn ghost" href="https://itdhruvjain.github.io/Dhruv-Jain-CV.pdf" target="_blank" rel="noopener">CV (PDF)</a>
       <a class="btn ghost" href="tel:+917016581281">+91 70165 81281</a>
     </div>
+    <div class="awards" data-r><span class="mono">RECOGNITION</span><ul><li>Client Excellence Award, 2025</li><li>Rising Star Award, 2024</li><li>Employee of the Quarter, Jan 2023</li><li>3rd prize, internal hackathon, 2026</li></ul></div>
     <div class="foot"><span>B.E. Information Technology · Microsoft Certified: Azure Fundamentals, Azure Data Fundamentals</span><span>© 2026 Dhruv Jain</span></div>
   </div>
 </section>
@@ -458,7 +482,7 @@ html:not(.anim) .card:hover{transform:translateY(-6px)}
 <!-- case study viewer -->
 <div class="cs" id="cs" role="dialog" aria-modal="true" aria-labelledby="csTitle">
   <div class="cs-panel">
-    <div class="cs-top"><span class="mono" id="csFile">Work/</span><button id="csClose" type="button">← Back to work · Esc</button></div>
+    <div class="cs-top"><span class="mono" id="csFile">Project</span><button id="csClose" type="button">← Back to work · Esc</button></div>
     <div class="cs-body" id="csBody"></div>
   </div>
 </div>
@@ -560,10 +584,10 @@ html:not(.anim) .card:hover{transform:translateY(-6px)}
   });
   $$("a,button").forEach(el => el.addEventListener("pointerenter", () => pluck(1567.98, .015, .08)));
 
-  /* ---------- breadcrumb + section chime ---------- */
-  const layers = $$(".layer"), crumb = $("#crumbFile");
+  /* ---------- active menu link + section chime ---------- */
+  const layers = $$(".layer");
   let current = -1;
-  const setActive = i => { if (i === current) return; current = i; crumb.textContent = layers[i].dataset.file; pluck(NOTES[i % NOTES.length], .05, .7); };
+  const setActive = i => { if (i === current) return; current = i; $$(".nav a").forEach(a => a.classList.toggle("is-on", a.dataset.go === "#" + layers[i].id)); pluck(NOTES[i % NOTES.length], .05, .7); };
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) setActive(layers.indexOf(e.target)); }),
     { rootMargin: "-50% 0px -50% 0px" });
   layers.forEach(l => io.observe(l));
@@ -616,24 +640,24 @@ html:not(.anim) .card:hover{transform:translateY(-6px)}
 
   /* ---------- case studies ---------- */
   const CASES = {
-    packaging: { t: "Packaging impact reports", f: "Work/Packaging.cs", s: "Angular · .NET · SQL Server · Redis", b: [
+    packaging: { t: "Packaging impact reports", f: "Sustainability · Team lead", s: "Angular · .NET · SQL Server · Redis", b: [
       ["What it does", "Companies use it to measure the environmental impact of their packaging choices before they make them. It's used by most of Australia's largest companies."],
       ["What I did", "Reports took 5 to 10 minutes because the calculations ran in ten-year-old database code. I moved them into the application behind one source of truth and added caching, which brought reports down to 5 to 10 seconds. Earlier, I'd built its Excel import and export and its PDF reports."],
-      ["How I made it safe", "Clients act on these numbers, so I ran old reports through both versions and compared every figure to the decimal. We only switched over once they all matched."],
+      ["How I made it safe", "Clients act on these numbers, so I built the new engine alongside the old one instead of replacing it, and added a check that ran both and compared every figure to the decimal. We only switched over once they all matched. The team was building another feature in the same code at the time, so I kept the two pieces of work separate."],
       ["My role", "Team lead, and the client's direct contact. The work earned a Client Excellence Award in 2025."]] },
-    clinics: { t: "Running clinic groups", f: "Work/Clinics.cs", s: ".NET 10 · Angular 20 · Azure AD B2C · SQL Server", b: [
+    clinics: { t: "Running clinic groups", f: "Healthcare · Team lead", s: ".NET 10 · Angular 20 · Azure AD B2C · SQL Server", b: [
       ["What it does", "One platform for healthcare organisations: billing, document and procedure management, and staff rostering, timesheets and leave. Several client organisations share it, each with its own branding and permissions."],
       ["What I did", "I led five engineers in rebuilding it from an old codebase onto a modern stack, and we shipped the new version in two months."],
-      ["Problems I solved before anyone asked", "Payroll was reconciled by hand, so I built one export for any payment provider, which later connected to Xero with almost no rework. Staff were chasing proof of completed procedures by email, so I built a working version of automated evidence collection, and the client adopted it."],
+      ["Problems I solved before anyone asked", "Payroll was reconciled by hand, so I built one export for any payment provider, which later connected to Xero with almost no rework. Staff were chasing proof of completed procedures by email. I proposed collecting it automatically, built a working version when the client wasn't convinced, and they adopted it."],
       ["The hard part", "Building rosters automatically. A roster has to respect availability, overlapping shifts, approvals and pay rules all at once, and a manager still has to be able to change any shift by hand."]] },
-    forms: { t: "Sign-ups, surveys and audience insights", f: "Work/Forms.cs", s: "Angular · .NET · SQL Server · Google Gemini API", b: [
+    forms: { t: "Sign-ups, surveys and audience insights", f: "Marketing tools", s: "Angular · .NET · SQL Server · Google Gemini API", b: [
       ["What it does", "Businesses use it to build sign-up forms, surveys and promotions, and to understand their audience."],
       ["What I did", "I connected Google's Gemini AI so it could write surveys and analyse the answers automatically. This was an early use of AI in a live client product. I also worked on its automation workflows and QR-code sharing."]] },
-    agents: { t: "Safety rails for AI coding", f: "Work/Agents.py", s: "Python · networkx · MCP", b: [
+    agents: { t: "Safety rails for AI coding", f: "AI tooling · Solo", s: "Python · networkx · MCP", b: [
       ["What it does", "Before an AI coding agent edits a file, it works out what else in the codebase depends on it. Small, safe changes go ahead. Changes that reach too far get flagged for a person to review."],
       ["Why it matters", "The agent only reads the code that matters for a change, which cut what it loads per task by about 95% in testing. The same change always gives the same answer."],
       ["Recognition", "3rd prize at my company's 2026 hackathon. It's internal, but I'm happy to demo it live in an interview."]] },
-    erp: { t: "Running a factory", f: "Work/Erp.cs", s: "Angular · .NET Core · SQL Server", b: [
+    erp: { t: "Running a factory", f: "Manufacturing", s: "Angular · .NET Core · SQL Server", b: [
       ["What it does", "An ERP for manufacturers covering inventory, production, quality control, planning, finance and customers."],
       ["What I did", "I built improvements to the inventory and packaging modules."]] }
   };
