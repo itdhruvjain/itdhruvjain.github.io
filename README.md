@@ -78,7 +78,7 @@ Then enable Pages in **Settings → Pages** as in step 4.
 
 1. **Working hours** currently read `10:00 – 19:00 IST`. Change them if that is not your real day — the timezone calculator keys off this value (search for `10, 0` and `19, 0` in the script at the bottom of the file, and the `10:00 – 19:00 IST` text in the markup).
 2. **Work authorisation** shows an "Ask me" chip. The front page now states the position plainly (Indian citizen, remote via EOR or contract, sponsorship needed for on-site) — bring the CV in line with it.
-3. **Availability** shows an "Ask me" chip in place of a notice period. The front page says "currently serving notice" — bring the CV in line with it.
+3. **Availability** states the last working day (11 November 2026) and start date (12 November 2026), matching the front page. Update both pages once those dates pass.
 
 ## Editing
 
