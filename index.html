@@ -635,7 +635,7 @@ html:not(.anim) .card:hover{transform:translateY(-6px)}
   /* ---------- case studies ---------- */
   const CASES = {
     packaging: { t: "Packaging impact reports", f: "Sustainability · Team lead", s: "Angular · .NET · SQL Server · Redis", b: [
-      ["What it does", "Companies use it to measure the environmental impact of their packaging choices before they make them. It's used by most of Australia's largest companies."],
+      ["What it does", "It's a web tool for a quick life cycle assessment of packaging. Designers, material scientists and brand owners describe the packaging options they're considering, and it calculates each one's environmental impact and resource use from a large international dataset. They can compare options side by side before choosing one, and produce reports against their own sustainability targets, without needing an assessment expert. It's used by most of Australia's largest companies, and by global brands too."],
       ["What I did", "Reports took 5 to 10 minutes because the calculations ran in ten-year-old database code. I moved them into the application behind one source of truth and added caching, which brought reports down to 5 to 10 seconds. Earlier, I'd built its Excel import and export and its PDF reports."],
       ["How I made it safe", "Clients act on these numbers, so I built the new engine alongside the old one instead of replacing it, and added a check that ran both and compared every figure to the decimal. We only switched over once they all matched. The team was building another feature in the same code at the time, so I kept the two pieces of work separate."],
       ["My role", "Team lead, and the client's direct contact. The work earned a Client Excellence Award in 2025."]] },
