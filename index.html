@@ -748,9 +748,9 @@ html.smooth{scroll-behavior:auto}
     <p class="label" data-reveal>Contact</p>
     <h2 data-split>Bring me a real <em>problem.</em></h2>
     <p class="lead" data-reveal="2">I’m looking for a full-stack role where work goes live fast and the impact is visible. Tell me about something that slows your team down. It will tell you more about me than this page can.</p>
-    <button class="mail" type="button" id="mail" data-reveal="3">it.dhruvjain@gmail.com <small id="mailNote">Copy</small></button>
+    <button class="mail" type="button" id="mail" data-reveal="3">hello.dhruvjain@gmail.com <small id="mailNote">Copy</small></button>
     <div class="c-links" data-reveal="3">
-      <a class="btn" href="mailto:it.dhruvjain@gmail.com">Email</a>
+      <a class="btn" href="mailto:hello.dhruvjain@gmail.com">Email</a>
       <a class="btn" href="https://www.linkedin.com/in/connect-dhruvjain" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn" href="Dhruv-Jain-CV.pdf" target="_blank" rel="noopener">Download CV</a>
       <a class="btn" href="tel:+917016581281">+91 70165 81281</a>
@@ -979,8 +979,8 @@ html.smooth{scroll-behavior:auto}
   const mail = document.getElementById('mail'), note = document.getElementById('mailNote');
   mail.addEventListener('click', async () => {
     window.track && track('email-copied');
-    try { await navigator.clipboard.writeText('it.dhruvjain@gmail.com'); note.textContent = 'Copied'; }
-    catch { location.href = 'mailto:it.dhruvjain@gmail.com'; }
+    try { await navigator.clipboard.writeText('hello.dhruvjain@gmail.com'); note.textContent = 'Copied'; }
+    catch { location.href = 'mailto:hello.dhruvjain@gmail.com'; }
     setTimeout(() => note.textContent = 'Copy', 1800);
   });
 
