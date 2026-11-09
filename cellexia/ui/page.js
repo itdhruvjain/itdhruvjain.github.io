@@ -1,12 +1,11 @@
-// Page shell for /cellexia/: analytics, theme, section nav, duties explainer, print, lazy hub.
-import { DUTY_MARKETS, DEFAULT_VALUE } from '../data/duties.js';
-import { landedCost } from '../lib/duties.js';
+// Page shell for /cellexia/: analytics, theme, section nav, the water opener, print, lazy hub.
 
 const $ = s => document.querySelector(s);
+const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ---------------- analytics (GoatCounter, cookie-free) ----------------
    Share links like https://itdhruvjain.github.io/cellexia/?ref=cellexia
-   The ref is kept for the session and appended to event names: "demo_play--cellexia". */
+   The ref is kept for the session and appended to event names: "cellexia-tour_start--cellexia". */
 let ref = '';
 try {
   const q = (new URLSearchParams(location.search).get('ref') || '').toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 40);
@@ -48,16 +47,29 @@ syncThemeBtn();
 
 /* ---------------- section nav: highlight where you are ---------------- */
 const navLinks = [...document.querySelectorAll('.cx-secnav a')];
-const sections = navLinks.map(a => document.getElementById(a.hash.slice(1))).filter(Boolean);
 const spy = new IntersectionObserver(es => es.forEach(en => {
   if (!en.isIntersecting) return;
-  navLinks.forEach(a => {
-    const on = a.hash === '#' + en.target.id;
-    if (on) { a.setAttribute('aria-current', 'location'); a.scrollIntoView?.({ block: 'nearest', inline: 'nearest' }); }
-    else a.removeAttribute('aria-current');
-  });
+  navLinks.forEach(a => a.hash === '#' + en.target.id ? a.setAttribute('aria-current', 'location') : a.removeAttribute('aria-current'));
 }), { rootMargin: '-40% 0px -55% 0px' });
-sections.forEach(s => spy.observe(s));
+navLinks.map(a => document.getElementById(a.hash.slice(1))).filter(Boolean).forEach(s => spy.observe(s));
+
+/* ---------------- the water question ----------------
+   A short, paced sequence: question → "not on their own" → bond forms → team appears → the connector joins them.
+   Every line is in the page from the start (for screen readers and no-JS); the animation only reveals it. */
+const why = $('#why');
+const BEATS = [1300, 2400, 2600, 2600, 2400]; // ms before stages 1..5
+let wTimers = [];
+function setStage(n) { for (let i = 1; i <= 5; i++) why.classList.toggle('is-s' + i, i <= n); }
+function playWater() {
+  wTimers.forEach(clearTimeout); wTimers = [];
+  why.classList.add('is-anim');
+  if (reduced()) { setStage(5); return; }
+  setStage(0);
+  let t = 0;
+  BEATS.forEach((ms, i) => { t += ms; wTimers.push(setTimeout(() => setStage(i + 1), t)); });
+}
+playWater();
+$('#cx-w-replay').addEventListener('click', () => { track('why_replay'); playWater(); });
 
 /* ---------------- lazy Ops Hub ---------------- */
 const hubEl = $('#cx-hub');
@@ -77,51 +89,10 @@ if ('IntersectionObserver' in window) {
 
 $('#cx-play').addEventListener('click', async () => {
   const hub = await loadHub();
-  document.getElementById('hub').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  document.getElementById('hub').scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth' });
   if (hub) hub.startTour();
 });
 
-/* ---------------- "water" layer: add the missing link ---------------- */
-const water = $('#cx-water'), wBtn = $('#cx-w-btn');
-wBtn.addEventListener('click', () => {
-  const on = !water.classList.contains('is-joined');
-  water.classList.toggle('is-joined', on);
-  wBtn.setAttribute('aria-pressed', on);
-  wBtn.textContent = on ? 'Take the link away' : 'Add the missing link';
-  $('#cx-w-res').innerHTML = on ? 'H<sub>2</sub>O 💧' : 'no water yet';
-  $('#cx-w-cap').textContent = on
-    ? 'Same people, now connected: work flows between them, and one person understands all of it.'
-    : 'Good people, separate tools: every hand-off between them is done by hand.';
-  if (on) track('why_connect', true);
-});
-
-/* ---------------- duties explainer ---------------- */
-const mSel = $('#cx-d-market'), vIn = $('#cx-d-value'), vOut = $('#cx-d-value-out');
-mSel.innerHTML = Object.entries(DUTY_MARKETS).map(([k, m]) => `<option value="${k}">${m.name}</option>`).join('');
-const money = (cur, n) => cur + (Math.round(n * 100) / 100).toFixed(2);
-function calc() {
-  const k = mSel.value, m = DUTY_MARKETS[k], v = +vIn.value;
-  vOut.textContent = money(m.cur, v);
-  $('#cx-d-cur').textContent = m.code;
-  const a = landedCost(m, v, 'today'), b = landedCost(m, v, 'prepaid');
-  $('#cx-d-today').innerHTML = `
-    <div class="cx-d-row"><span>At checkout</span><b>${money(m.cur, a.checkout)}</b></div>
-    <div class="cx-d-row cx-d-door"><span>At the door (duty ${money(m.cur, a.duty)} + tax ${money(m.cur, a.tax)} + courier fee ${money(m.cur, a.atDoor ? a.fee : 0)})</span><b>${money(m.cur, a.atDoor)}</b></div>
-    <div class="cx-d-row cx-d-total"><span>Total paid</span><b>${money(m.cur, a.total)}</b></div>
-    <p class="cx-d-note">${a.atDoor ? `A surprise of <b>${a.surprise}%</b> on top of what they agreed to pay.` : 'No surprise charge at this value.'}</p>`;
-  $('#cx-d-pre').innerHTML = `
-    <div class="cx-d-row"><span>At checkout (incl. duties and taxes)</span><b>${money(m.cur, b.checkout)}</b></div>
-    <div class="cx-d-row"><span>At the door</span><b>${money(m.cur, 0)}</b></div>
-    <div class="cx-d-row cx-d-total"><span>Total paid</span><b>${money(m.cur, b.total)}</b></div>
-    <p class="cx-d-note">One price, known up front${b.total < a.total ? `, and <b>${money(m.cur, a.total - b.total)}</b> less than paying the courier` : ''}.</p>`;
-}
-mSel.addEventListener('change', () => { vIn.value = DEFAULT_VALUE[mSel.value]; calc(); });
-vIn.addEventListener('input', calc);
-mSel.value = 'US'; vIn.value = DEFAULT_VALUE.US; calc();
-
 /* ---------------- print + contact ---------------- */
 $('#cx-print').addEventListener('click', () => { track('plan_print'); window.print(); });
-document.addEventListener('click', e => {
-  const a = e.target.closest('a[href^="mailto:"]');
-  if (a) track('cta_email');
-});
+document.addEventListener('click', e => { if (e.target.closest('a[href^="mailto:"]')) track('cta_email'); });

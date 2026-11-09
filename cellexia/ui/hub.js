@@ -54,13 +54,7 @@ export function initHub(root, { track = () => {}, toast = () => {} } = {}) {
 
   /* ------------------------------------------------------------ shared bits */
   const chip = (tone, text) => `<span class="cx-chip cx-${tone}">${esc(text)}</span>`;
-  const how = (title, h) => `<details class="cx-how"><summary>How this works${title ? ': ' + esc(title) : ''}</summary>
-    <ol class="cx-how-flow">
-      <li><b>Trigger</b><span>${esc(h.trigger)}</span></li>
-      <li><b>System</b><span>${esc(h.system)}</span></li>
-      <li><b>API</b><code>${esc(h.api)}</code></li>
-      <li><b>A person approves</b><span>${esc(h.approve)}</span></li>
-    </ol></details>`;
+  const how = () => ''; // technical detail removed to keep the demo light
   const mark = ok => ok === true ? '<i class="cx-ok" aria-label="Passes">✓</i>' : ok === false ? '<i class="cx-no" aria-label="Fails">✗</i>' : '<i class="cx-nb" aria-label="Note">i</i>';
 
   const triaged = () => S.emails.map(e => ({ e, t: triage(e, ctx) }));
@@ -87,17 +81,13 @@ export function initHub(root, { track = () => {}, toast = () => {} } = {}) {
         <li><span class="cx-k-l">Open tickets</span><span class="cx-k-v">${open}</span><span class="cx-k-d">${people} need a person</span></li>
         <li><span class="cx-k-l">Stuck parcels</span><span class="cx-k-v">${flagged}</span><span class="cx-k-d">${overallOnTime(laneSummary(S.shipments, LANES))}% on time (30 days)</span></li>
         <li><span class="cx-k-l">Ad spend → revenue</span><span class="cx-k-v">${eur(tot.spend)} → ${eur(tot.rev)}</span><span class="cx-k-d">${tot.roas.toFixed(1)}× ROAS, last 7 days</span></li>`;
-    $('#cx-att').innerHTML = attention.map(([s, t, d, v, isNew]) => `<li class="${isNew ? 'cx-new' : ''}"><span class="cx-sev cx-${s}" aria-hidden="true"></span><div><b>${esc(t)}</b><p>${esc(d)}</p></div><button type="button" class="cx-link" data-go="${v}">Open <span class="cx-vh">${esc(TABS.find(x => x[0] === v)[1])}</span></button></li>`).join('');
+    const att = $('#cx-att'); if (att) att.innerHTML = attention.map(([s, t, d, v, isNew]) => `<li class="${isNew ? 'cx-new' : ''}"><span class="cx-sev cx-${s}" aria-hidden="true"></span><div><b>${esc(t)}</b><p>${esc(d)}</p></div><button type="button" class="cx-link" data-go="${v}">Open <span class="cx-vh">${esc(TABS.find(x => x[0] === v)[1])}</span></button></li>`).join('');
   }
   function renderToday() {
     $('#cx-panel-today').innerHTML = `
       <section class="cx-card cx-tour" id="cx-tour" aria-label="Guided tour"></section>
       <h3 class="cx-glance-h">Today at a glance</h3>
-      <ul class="cx-kpis" id="cx-kpis" aria-label="Key numbers"></ul>
-      <section class="cx-card" aria-labelledby="cx-att-h">
-        <h3 id="cx-att-h">Needs attention</h3>
-        <ul class="cx-alerts" id="cx-att"></ul>
-      </section>`;
+      <ul class="cx-kpis" id="cx-kpis" aria-label="Key numbers"></ul>`;
     todayData();
   }
 
@@ -230,7 +220,7 @@ export function initHub(root, { track = () => {}, toast = () => {} } = {}) {
   /* ------------------------------------------------------------ CUSTOMER VOICE */
   function renderVoice() {
     $('#cx-panel-voice').innerHTML = `
-      <p class="cx-small">Theme names follow the public complaint themes I found. Counts, trends and reviews are invented. Trustpilot shows no replies to negative reviews today, so every reply below would be a first.</p>
+      <p class="cx-small">Themes from public reviews; counts and reviews are invented.</p>
       <ul class="cx-themes">${S.themes.map((t, i) => {
         const now7 = t.trend.at(-1), prev = t.trend.at(-2), up = now7 > prev, down = now7 < prev, mx = Math.max(...t.trend);
         return `<li class="cx-card cx-theme ${t.isNew ? 'cx-new' : ''}">

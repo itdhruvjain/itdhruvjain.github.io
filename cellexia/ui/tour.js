@@ -55,138 +55,116 @@ export function mountTour(el, { S, now, ctx, onResult, track = () => {}, toast =
   /* ---------------- chapters ---------------- */
   const CHAPTERS = [
     {
-      key: 'refund', short: 'Refund request', tab: 'support', tabName: 'Support inbox',
-      nodes: [['mail', 'Customer email'], ['hub', 'Hub reads it'], ['store', 'Finds the order'], ['check', '60-day rule'], ['pen', 'Drafts reply'], ['person', 'You approve']],
-      how: { trigger: 'New email or helpdesk ticket (helpdesk webhook; tool to confirm)', system: 'Ops service: intent detection, Shopify order lookup, 60-day rule from config', api: 'Shopify Admin GraphQL orders(query: "name:CX-…") · helpdesk API: create draft', approve: 'A support agent approves, edits or escalates every reply' },
+      key: 'refund', short: 'Refund request', tab: 'support', tabName: 'Support',
+      nodes: [['mail', 'Email'], ['hub', 'Hub reads it'], ['store', 'Finds order'], ['check', '60-day rule'], ['pen', 'Drafts reply'], ['person', 'You approve']],
       steps: [
-        { at: 0, title: 'A customer asks for her money back',
-          text: 'It’s 7:40 in the morning. Helen in the UK writes in to say the neck cream isn’t for her.',
-          body: () => card('Helen W.', 'helen.w@example.com · just now', 'Hi, the neck cream isn’t for me. Can I send it back for a refund? Order CX-DEMO-10612.') },
-        { at: 2, title: 'The hub finds her order by itself',
-          text: 'It reads the email, spots the order number and pulls the order from Shopify. Nobody has to copy and paste between tabs.',
-          body: () => facts([['Order', `<span class="cx-mono">${helenOrder.id}</span>`], ['Product', esc(helenOrder.items)], ['Paid', esc(helenOrder.total)], ['Delivered', '12 days ago']]) },
+        { at: 2, title: 'A customer asks for a refund',
+          text: 'The hub reads her email and finds her order on its own.',
+          body: () => card('Helen W.', 'just now', 'Hi, the neck cream isn’t for me. Can I send it back for a refund? Order CX-DEMO-10612.') +
+            facts([['Order', `<span class="cx-mono">${helenOrder.id}</span>`], ['Product', esc(helenOrder.items)], ['Paid', esc(helenOrder.total)], ['Delivered', '12 days ago']]) },
         { at: 3, title: 'It checks your 60-day guarantee', try: true,
-          text: 'This is the rule your team checks by hand today. Drag the slider to see what happens on different days.',
-          body: () => `<label class="cx-t-lab" for="cx-t-day">Days since the parcel was delivered: <output id="cx-t-day-o">${st.refundDay}</output></label>
+          text: 'Drag the slider.',
+          body: () => `<label class="cx-t-lab" for="cx-t-day">Days since delivery: <output id="cx-t-day-o">${st.refundDay}</output></label>
             <input type="range" id="cx-t-day" min="1" max="90" value="${st.refundDay}" data-k="refundDay">
             <div class="cx-t-zone" aria-hidden="true"><i style="width:${POLICY.guaranteeDays / 90 * 100}%"></i><span>Guarantee: ${POLICY.guaranteeDays} days</span><b data-out="mark"></b></div>
             <div data-out="main" aria-live="polite"></div>`,
           out: { main: () => { const g = guaranteeCheck({ deliveredAt: new Date(now - st.refundDay * D - H) }, now, POLICY); return g.ok
-              ? verdict('good', `✓ Day ${g.day} of ${POLICY.guaranteeDays}: refund approved`, `A return number is created and a reply is drafted.`)
-              : verdict('bad', `✗ Day ${g.day}: outside the ${POLICY.guaranteeDays}-day guarantee`, 'The hub drafts a kind “sorry, but here’s an offer” reply and flags it for a person to decide.'); },
+              ? verdict('good', `✓ Day ${g.day}: refund approved`, 'Return number created, reply drafted.')
+              : verdict('bad', `✗ Day ${g.day}: outside the guarantee`, 'A kind offer is drafted, and a person decides.'); },
             mark: m => { m.style.left = `calc(${st.refundDay / 90 * 100}% - 1px)`; return ''; } } },
-        { at: 5, title: 'It writes the reply. A person approves it',
-          text: 'The draft uses only facts from the order and your policy. Nothing is sent until someone on your team clicks Approve.',
-          body: () => `<label class="cx-vh" for="cx-t-draft">Drafted reply</label><textarea id="cx-t-draft" rows="7" readonly>${esc(helenTriage(st.refundDay).draft)}</textarea>
-            <div class="cx-acts"><button type="button" class="cx-btn" data-demo="Approved. In real life this sends from your helpdesk.">Approve &amp; send</button><span class="cx-small">Demo button. Nothing is sent.</span></div>
-            ${compare('Open the email, find the order in Shopify, count the days, write a reply. About 6–8 minutes each (my estimate).', 'Read the draft and click Approve. About a minute.')}` },
+        { at: 5, title: 'A person approves the reply',
+          text: 'Nothing is sent until someone clicks Approve.',
+          body: () => `<label class="cx-vh" for="cx-t-draft">Drafted reply</label><textarea id="cx-t-draft" rows="6" readonly>${esc(helenTriage(st.refundDay).draft)}</textarea>
+            <div class="cx-acts"><button type="button" class="cx-btn" data-demo="Approved (demo, nothing sent).">Approve &amp; send</button></div>
+            ${compare('Find the order, count the days, write a reply.', 'Read it, click Approve.')}` },
       ],
     },
     {
       key: 'order', short: 'Order to the US', tab: 'delivery', tabName: 'Delivery',
-      nodes: [['store', 'New order'], ['hub', 'Hub checks it'], ['globe', 'Where is it going?'], ['mail', 'Heads-up email'], ['person', 'Customer']],
-      how: { trigger: 'Shopify orders/create webhook', system: 'Ops service checks the shipping country against the duty table', api: 'Email tool event, e.g. Klaviyo POST /api/events "Duties notice" (tool to confirm)', approve: 'Ops approves the email template once; then it sends per order' },
+      nodes: [['store', 'New order'], ['hub', 'Hub checks it'], ['globe', 'Which country?'], ['mail', 'Heads-up'], ['person', 'Customer']],
       steps: [
-        { at: 0, title: 'A new order comes in from the US',
-          text: 'Shopify tells the hub the moment an order is placed, at any hour.',
-          body: () => facts([['Order', '<span class="cx-mono">CX-DEMO-10650</span>'], ['Product', 'Deep Wrinkle Filler Gel ×1'], ['Paid', '$89.00'], ['Ship to', 'United States']]) },
-        { at: 2, title: 'Will the courier ask for import fees?', try: true,
-          text: 'Inside the EU, parcels arrive with nothing more to pay. Outside it, the courier may ask for duties at the door (my assumption, based on reviews). Pick a country.',
+        { at: 1, title: 'A new order from the US',
+          text: 'Shopify tells the hub the moment it’s placed.',
+          body: () => facts([['Order', '<span class="cx-mono">CX-DEMO-10650</span>'], ['Product', 'Deep Wrinkle Filler Gel'], ['Paid', '$89.00'], ['Ship to', 'United States']]) },
+        { at: 2, title: 'Will the courier charge import fees?', try: true,
+          text: 'Pick a country.',
           body: () => `<div class="cx-t-pills" role="group" aria-label="Ship to">${['DE', 'FR', 'IE', 'UK', 'US', 'CA', 'AU'].map(c => `<button type="button" class="cx-t-pill" data-country="${c}" aria-pressed="${st.country === c}">${esc(LANE[c].name)}</button>`).join('')}</div><div data-out="main" aria-live="polite"></div>`,
           out: { main: () => {
-            if (!NON_EU.has(st.country)) return verdict('good', `✓ ${esc(LANE[st.country].name)} is in the EU`, 'No import fees expected. Nothing to do.');
+            if (!NON_EU.has(st.country)) return verdict('good', `✓ ${esc(LANE[st.country].name)}: no fees expected`, 'Nothing to do.');
             const m = DUTY_MARKETS[st.country], v = DEFAULT_VALUE[st.country], c = landedCost(m, v);
-            return verdict('warn', `! The courier may ask for about ${m.cur}${Math.round(c.atDoor)} at the door`, `On a ${m.cur}${v} order, that’s ${c.surprise}% more than they paid. Illustrative rates. The hub sends a heads-up.`);
+            return verdict('warn', `! About ${m.cur}${Math.round(c.atDoor)} at the door`, `On a ${m.cur}${v} order (illustrative). The hub sends a heads-up.`);
           } } },
-        { at: 3, title: 'The customer hears it from you first',
-          text: 'A short, friendly email goes out before the parcel arrives, so the charge isn’t a surprise.',
+        { at: 4, title: 'The customer hears it from you first',
+          text: 'No surprise at the door, so no angry review.',
           body: () => { const c = NON_EU.has(st.country) ? st.country : 'US'; const m = DUTY_MARKETS[c]; const est = Math.round(landedCost(m, DEFAULT_VALUE[c]).atDoor);
-            return (NON_EU.has(st.country) ? '' : '<p class="cx-small">You picked an EU country, so no email is needed. Here’s the US version.</p>') +
-              card('The Cellexia team', `to the customer · ${esc(LANE[c].name)}`, `Your order is on its way! One thing to know: for deliveries to ${esc(LANE[c].name)}, the courier may ask for local import fees of around ${m.cur}${est} before handing over your parcel. We wanted you to hear it from us first.`); } },
-        { at: 4, title: 'Why it matters',
-          text: 'Surprise fees are the number one complaint in public reviews. Telling people up front turns an angry 1-star review into a cost they expected.',
-          body: () => compare('The customer finds out at the door, then writes a review or a ticket.', 'A heads-up email the same day. Later, show fees at checkout or prepay them (see <a href="#duties">the duties section</a>).') },
+            return card('The Cellexia team', `to the customer · ${esc(LANE[c].name)}`, `Your order is on its way! For deliveries to ${esc(LANE[c].name)}, the courier may ask for import fees of around ${m.cur}${est}. We wanted you to hear it from us first.`) +
+              compare('The customer finds out at the door.', 'A heads-up email the same day.'); } },
       ],
     },
     {
       key: 'parcel', short: 'Late parcel', tab: 'delivery', tabName: 'Delivery',
-      nodes: [['truck', 'Carrier scan'], ['hub', 'Morning check'], ['clock', 'Promise check'], ['mail', 'Delay email'], ['person', 'Customer']],
-      how: { trigger: 'AfterShip tracking webhook, plus a scheduled morning check', system: 'Promise and stuck-scan rules per lane (lib/lanes.js)', api: 'AfterShip Tracking API: GET /trackings · webhook tracking_update', approve: 'Ops approves the delay email' },
+      nodes: [['truck', 'Carrier scan'], ['hub', 'Morning check'], ['clock', 'On time?'], ['mail', 'Delay email'], ['person', 'Customer']],
       steps: [
-        { at: 0, title: 'Every morning, the hub checks every parcel',
-          text: 'It reads the carrier’s tracking for every parcel still on its way. This one is going to Canada, where you promise 5–7 days (my reading of the shipping page).',
+        { at: 1, title: 'Every morning, every parcel is checked',
+          text: 'This one is going to Canada.',
           body: () => `<div data-out="line"></div>`, out: { line: () => timeline() } },
-        { at: 2, title: 'Is it late, or stuck?', try: true,
-          text: 'Two simple rules. Has it gone past the promised days? Has the carrier gone quiet for too long? Try both sliders.',
+        { at: 2, title: 'Late, or stuck?', try: true,
+          text: 'Move the sliders.',
           body: () => `<label class="cx-t-lab" for="cx-t-ship">Days since it shipped: <output id="cx-t-ship-o">${st.shipDays}</output></label>
             <input type="range" id="cx-t-ship" min="1" max="12" value="${st.shipDays}" data-k="shipDays">
-            <label class="cx-t-lab" for="cx-t-scan">Days since the carrier last scanned it: <output id="cx-t-scan-o">${st.scanDays}</output></label>
+            <label class="cx-t-lab" for="cx-t-scan">Days since the last carrier scan: <output id="cx-t-scan-o">${st.scanDays}</output></label>
             <input type="range" id="cx-t-scan" min="0" max="6" value="${st.scanDays}" data-k="scanDays">
             <div data-out="line"></div><div data-out="main" aria-live="polite"></div>`,
           out: { line: () => timeline(), main: () => { const p = parcelStatus(caParcel(), LANE.CA, now);
-            if (p.stuck) return verdict('bad', `✗ Stuck: no scan for ${p.sinceScan} days (limit ${p.limit})`, 'The hub drafts a delay email and suggests opening a carrier claim.');
-            if (p.pastPromise) return verdict('warn', `! Late: day ${p.sinceShip}, the promise was ${LANE.CA.min}–${LANE.CA.max} days`, 'The hub drafts a delay email before the customer writes in.');
-            return verdict('good', '✓ On track', 'Nothing to do. The hub checks again tomorrow.'); } } },
-        { at: 3, title: 'It writes before the customer does',
-          text: 'If either rule trips, the hub drafts an honest delay email for a person to approve.',
-          body: () => card('The Cellexia team', 'to the customer · Canada', 'Quick update on your order: it’s taking longer than the 5–7 days we aim for, and we’re sorry. We’ve asked the courier to check on it today. If it hasn’t moved in 2 working days, we’ll send a replacement at no cost.') },
-        { at: 4, title: 'Fewer “where is my order?” emails',
-          text: 'Customers who hear from you first rarely need to chase.',
-          body: () => compare('The customer emails “where is my order?”, an agent checks tracking and replies. Often a day later.', 'The apology arrives first. Agents only handle the parcels that need a decision.') },
+            if (p.stuck) return verdict('bad', `✗ Stuck: no scan for ${p.sinceScan} days`, 'Delay email drafted, carrier claim suggested.');
+            if (p.pastPromise) return verdict('warn', `! Late: day ${p.sinceShip} of ${LANE.CA.min}–${LANE.CA.max}`, 'Delay email drafted before they ask.');
+            return verdict('good', '✓ On track', 'Nothing to do.'); } } },
+        { at: 4, title: 'You write before they do',
+          text: 'Fewer “where is my order?” emails.',
+          body: () => card('The Cellexia team', 'to the customer · Canada', 'Quick update: your order is taking longer than we aim for, and we’re sorry. We’ve asked the courier to check today. If it hasn’t moved in 2 working days, we’ll send a replacement.') +
+            compare('The customer chases you.', 'The apology arrives first.') },
       ],
     },
     {
       key: 'ad', short: 'Ad overspend', tab: 'ads', tabName: 'Ads',
       nodes: [['chart', 'Ad spend'], ['hub', 'Morning check'], ['check', 'Spike rule'], ['store', 'Real sales'], ['bell', 'Slack alert']],
-      how: { trigger: 'Scheduler, every morning at 07:00 Dublin time', system: `Spike rule (≥${SPIKE_THRESHOLD}× the 7-day average) and ROAS on UTM-matched Shopify sales`, api: 'Meta Marketing API /insights · Google Ads API · Slack chat.postMessage', approve: 'The media buyer decides. Budgets are never changed automatically.' },
       steps: [
-        { at: 0, title: 'Every morning, the hub reads the ad spend',
-          text: `From Meta and YouTube, for every ad. Here’s one YouTube ad: its last 7 days, and today.`,
+        { at: 1, title: 'Every morning, ad spend is read',
+          text: 'Here is one ad: its last 7 days, and today.',
           body: () => `<div data-out="bars"></div>`, out: { bars: () => bars() } },
-        { at: 2, title: 'Is this ad suddenly spending too much?', try: true,
-          text: `The rule: flag any ad spending ${SPIKE_THRESHOLD}× (or more) its usual day. Drag today’s spend.`,
+        { at: 2, title: 'Is it suddenly overspending?', try: true,
+          text: 'Drag today’s spend.',
           body: () => `<label class="cx-t-lab" for="cx-t-spend">Spend today: €<output id="cx-t-spend-o">${st.spend}</output></label>
             <input type="range" id="cx-t-spend" min="60" max="500" value="${st.spend}" data-k="spend">
             <div data-out="bars"></div><div data-out="main" aria-live="polite"></div>`,
           out: { bars: () => bars(), main: () => { const a = { ...spikeAd, today: st.spend }; const r = spikeRatio(a).toFixed(1);
-            return isSpike(a) ? verdict('warn', `! ${r}× the usual day: alert the media buyer`, `Suggested cap: €${suggestedCap(a)} a day.`) : verdict('good', `✓ ${r}× the usual day: normal`, 'No alert. Nobody is disturbed.'); } } },
-        { at: 3, title: 'Then it checks real sales',
-          text: 'Ad platforms estimate their own results. The hub counts actual Shopify orders that came from the ad, so the numbers match the money in the bank.',
-          body: () => `<div class="cx-t-eq"><div><span>Spend, 7 days</span><b>€${spikeAd.spend.toLocaleString('en-GB')}</b></div><i aria-hidden="true">→</i><div><span>Shopify sales from it</span><b>€${spikeAd.rev.toLocaleString('en-GB')}</b></div><i aria-hidden="true">=</i><div class="cx-t-eq-r"><span>Return per €1</span><b>€${roas(spikeAd).toFixed(2)}</b></div></div>
-            <p class="cx-small">Below an illustrative €2.50 target, so the alert says so.</p>` },
-        { at: 4, title: 'The media buyer gets a short message',
-          text: 'One Slack note with the facts and a suggestion. The hub never changes budgets by itself.',
+            return isSpike(a) ? verdict('warn', `! ${r}× a normal day`, `Alert the media buyer. Suggested cap €${suggestedCap(a)}/day.`) : verdict('good', `✓ ${r}× a normal day`, 'No alert.'); } } },
+        { at: 4, title: 'The media buyer gets one message',
+          text: 'The hub suggests. A person decides.',
           body: () => { const a = { ...spikeAd, today: Math.max(st.spend, Math.ceil(spikeAd.avg7 * SPIKE_THRESHOLD)) };
-            return `<div class="cx-slack" role="img" aria-label="Example Slack message"><span class="cx-slack-a" aria-hidden="true">OB</span><div><b>Ops bot</b> <span class="cx-small">#ads · 07:02</span><p>⚠️ <span class="cx-mono">${esc(spikeAd.n)}</span> spent <b>€${a.today}</b> today, ${spikeRatio(a).toFixed(1)}× its usual day. Return on Shopify sales is <b>€${roas(spikeAd).toFixed(1)} per €1</b>. Suggested cap: <b>€${suggestedCap(a)}/day</b>. Nothing has been changed.</p></div></div>
-            ${compare('A VA builds the ads report in a spreadsheet each week, so a spike can run for days before anyone sees it.', 'An alert the same morning, and the weekly report in one click (see the Ads tab).')}`; } },
+            return `<div class="cx-slack" role="img" aria-label="Example Slack message"><span class="cx-slack-a" aria-hidden="true">OB</span><div><b>Ops bot</b> <span class="cx-small">#ads · 07:02</span><p>⚠️ <span class="cx-mono">${esc(spikeAd.n)}</span> spent <b>€${a.today}</b> today, ${spikeRatio(a).toFixed(1)}× normal. Real sales return <b>€${roas(spikeAd).toFixed(1)} per €1</b>. Suggested cap: <b>€${suggestedCap(a)}/day</b>.</p></div></div>
+            ${compare('A weekly spreadsheet spots it days later.', 'An alert the same morning.')}`; } },
       ],
     },
     {
       key: 'review', short: '1-star review', tab: 'voice', tabName: 'Customer voice',
-      nodes: [['star', 'New review'], ['hub', 'Hub reads it'], ['check', 'Tags the theme'], ['pen', 'Drafts reply'], ['person', 'You approve']],
-      how: { trigger: 'Trustpilot poll every 15 minutes (or webhook, depending on plan)', system: 'An LLM picks one theme from a fixed list (keywords in this demo); weekly counts stored', api: 'Trustpilot Business API: reply to a service review (API module, to confirm)', approve: 'The support lead approves each public reply' },
+      nodes: [['star', 'New review'], ['hub', 'Hub reads it'], ['check', 'Finds the theme'], ['pen', 'Drafts reply'], ['person', 'You approve']],
       steps: [
-        { at: 0, title: 'A 1-star review appears',
-          text: 'Reviews come in all day. Right now, the negative ones go unanswered.',
-          body: () => card('D. Demo · US · ★☆☆☆☆', 'Invented review for this demo', 'Burned around my eyes, I had to stop using it.') },
+        { at: 1, title: 'A 1-star review appears',
+          text: 'Today, negative reviews go unanswered.',
+          body: () => card('D. Demo · US · ★☆☆☆☆', 'invented review', 'Burned around my eyes, I had to stop using it.') },
         { at: 2, title: 'What is it really about?', try: true,
-          text: 'The hub sorts every review into one of a few themes. Pick a review, or type your own and watch it get tagged.',
+          text: 'Pick one, or type your own.',
           body: () => `<div class="cx-t-pills" role="group" aria-label="Sample reviews">${['Burned around my eyes, I had to stop using it.', 'FedEx made me pay $40 extra at the door!', 'Such a tiny tube for the price.', 'Six weeks in and still no difference.'].map(r => `<button type="button" class="cx-t-pill" data-review="${esc(r)}" aria-pressed="${st.review === r}">“${esc(r)}”</button>`).join('')}</div>
-            <label class="cx-t-lab" for="cx-t-rev">Or type a review</label><input type="text" id="cx-t-rev" class="cx-t-input" value="${esc(st.review)}" maxlength="200" autocomplete="off">
+            <label class="cx-vh" for="cx-t-rev">Type a review</label><input type="text" id="cx-t-rev" class="cx-t-input" value="${esc(st.review)}" maxlength="200" autocomplete="off" placeholder="Type a review…">
             <div data-out="main" aria-live="polite"></div>`,
           out: { main: () => { const t = tagTheme(st.review), th = themeOf(t.key);
-            return th ? verdict(th.kind === 'bad' ? 'bad' : 'warn', `Theme: ${esc(th.t)}`, `This week’s count goes ${weekCount(th)} → ${weekCount(th) + 1}.`) : verdict('info', 'No theme matched', 'It goes to a person to file by hand. No guessing.'); } } },
-        { at: 3, title: 'A reply, ready to approve',
-          text: 'Each theme has an approved reply that a person can edit before it’s posted.',
+            return th ? verdict(th.kind === 'bad' ? 'bad' : 'warn', `Theme: ${esc(th.t)}`, `This week: ${weekCount(th)} → ${weekCount(th) + 1}`) : verdict('info', 'No theme matched', 'A person files it.'); } } },
+        { at: 4, title: 'A reply, ready to approve',
+          text: 'And the product team sees the pattern.',
           body: () => { const th = themeOf(tagTheme(st.review).key);
-            return th ? `<label class="cx-vh" for="cx-t-reply">Drafted public reply</label><textarea id="cx-t-reply" rows="5">${esc(th.reply)}</textarea><div class="cx-acts"><button type="button" class="cx-btn" data-demo="Approved. In real life this posts to Trustpilot.">Approve reply</button><span class="cx-small">Demo button. Nothing is posted.</span></div>`
-              : '<p>No theme matched this review, so no reply is drafted. A person writes this one.</p>'; } },
-        { at: 4, title: 'Patterns reach the product team',
-          text: 'Counting themes each week shows what to fix, not just what to reply to.',
-          body: () => { const key = tagTheme(st.review).key, mx = Math.max(...S.themes.map(t => weekCount(t) + 1));
-            return `<ul class="cx-t-hbars">${S.themes.map(t => { const n = weekCount(t) + (t.key === key ? 1 : 0); return `<li class="${t.key === key ? 'is-hit' : ''}"><span>${esc(t.t)}</span><i style="width:${n / mx * 100}%"></i><b>${n}</b></li>`; }).join('')}</ul>
-              <p class="cx-small">Mentions this week (invented).${themeOf(key) ? ` Note for product: ${esc(themeOf(key).product)}` : ''}</p>
-              ${compare('No replies to negative reviews, and no one counting why.', 'Every review answered within a day, and a weekly theme note for the product team.')}`; } },
+            return (th ? `<label class="cx-vh" for="cx-t-reply">Drafted public reply</label><textarea id="cx-t-reply" rows="4">${esc(th.reply)}</textarea><div class="cx-acts"><button type="button" class="cx-btn" data-demo="Approved (demo, nothing posted).">Approve reply</button></div>`
+              : '<p>No theme matched, so a person writes this one.</p>') + compare('No replies to bad reviews.', 'Every review answered within a day.'); } },
       ],
     },
   ];
@@ -221,7 +199,7 @@ export function mountTour(el, { S, now, ctx, onResult, track = () => {}, toast =
     const pct = finale ? 100 : Math.round(tour.position / tour.total * 100);
     el.innerHTML = `
       <div class="cx-t-head">
-        <div><p class="cx-eyebrow">Guided tour · one morning at Cellexia</p><h3 class="cx-t-h">Five jobs the hub takes off your team’s plate</h3></div>
+        <div><p class="cx-eyebrow">Guided tour</p><h3 class="cx-t-h">Five jobs, taken off your team’s plate</h3></div>
         <div class="cx-t-prog" role="progressbar" aria-label="Tour progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}"><i style="width:${pct}%"></i></div>
       </div>
       <ol class="cx-t-rail" aria-label="Chapters">${CHAPTERS.map((c, i) => `<li><button type="button" data-ch="${i}" aria-current="${!finale && i === tour.chapter ? 'step' : 'false'}" class="${tour.isFinished(c.key) ? 'is-done' : ''}"><span class="cx-t-rail-n" aria-hidden="true">${tour.isFinished(c.key) ? '✓' : i + 1}</span>${esc(c.short)}${tour.isFinished(c.key) ? '<span class="cx-vh"> (seen)</span>' : ''}</button></li>`).join('')}</ol>
@@ -229,13 +207,11 @@ export function mountTour(el, { S, now, ctx, onResult, track = () => {}, toast =
       <div class="cx-t-stage">
         <ol class="cx-flow" aria-label="How it flows">${ch.nodes.map(([ic, label], i) => `<li class="${i < step.at ? 'is-done' : i === step.at ? 'is-now' : ''}"${i === step.at ? ' aria-current="step"' : ''}><span class="cx-flow-ic">${icon(ic)}</span><span class="cx-flow-l">${esc(label)}</span>${i ? '<span class="cx-flow-dot" aria-hidden="true"></span>' : ''}</li>`).join('')}</ol>
         <div class="cx-t-body">
-          <p class="cx-t-count">Chapter ${tour.chapter + 1} of ${CHAPTERS.length} · step ${tour.step + 1} of ${ch.steps.length}${step.try ? ' · <span class="cx-chip cx-info">Try it</span>' : ''}</p>
+          <p class="cx-t-count">${tour.chapter + 1}.${tour.step + 1}${step.try ? ' <span class="cx-chip cx-info">Try it</span>' : ''}</p>
           <h4 class="cx-t-title" id="cx-t-title" tabindex="-1">${esc(step.title)}</h4>
           <p class="cx-t-text">${esc(step.text)}</p>
           <div class="cx-t-try ${step.try ? 'is-try' : ''}">${step.body()}</div>
-          <details class="cx-how"><summary>For the technical team</summary><ol class="cx-how-flow">
-            <li><b>Trigger</b><span>${esc(ch.how.trigger)}</span></li><li><b>System</b><span>${esc(ch.how.system)}</span></li>
-            <li><b>API</b><code>${esc(ch.how.api)}</code></li><li><b>A person approves</b><span>${esc(ch.how.approve)}</span></li></ol></details>
+
         </div>
       </div>
       <div class="cx-t-nav">
@@ -252,9 +228,9 @@ export function mountTour(el, { S, now, ctx, onResult, track = () => {}, toast =
   function renderFinale() {
     return `<div class="cx-t-fin">
       <h4 id="cx-t-fin" tabindex="-1">That was one morning.</h4>
-      <p>A refund, a heads-up about import fees, a late parcel, an overspending ad and a 1-star review. Five jobs that today mean opening five tools and doing it by hand. With the hub, each one becomes a short read and one click from a person.</p>
+      <p>Five jobs that today mean five tools and a lot of copy-paste. Connected, each one is a short read and one click from the right person.</p>
       <ul class="cx-t-fin-list">${CHAPTERS.map(c => `<li><span aria-hidden="true">✓</span>${esc(c.short)} <button type="button" class="cx-link" data-result="${c.key}">see it in ${esc(c.tabName)}</button></li>`).join('')}</ul>
-      <div class="cx-acts"><a class="cx-btn cx-pri" href="#plan">Read the 30-day plan</a><button type="button" class="cx-btn" data-nav="restart">Take the tour again</button></div>
+      <div class="cx-acts"><a class="cx-btn cx-pri" href="#plan">How I’d work with you</a><button type="button" class="cx-btn" data-nav="restart">Take the tour again</button></div>
     </div>`;
   }
 
