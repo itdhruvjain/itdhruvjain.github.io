@@ -3,157 +3,167 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cellexia Ops Hub — a case study by Dhruv Jain</title>
-<meta name="description" content="An unofficial concept by Dhruv Jain, a job candidate: the role that connects Cellexia's team, and a hands-on tour of the tools I'd build in my first 30 days. Sample data only.">
 <meta name="robots" content="noindex, nofollow">
+<title>Dhruv Jain · Case study for Cellexia</title>
+<meta name="description" content="Unofficial concept by Dhruv Jain, a job candidate: the role that connects Cellexia's team, and a working demo of the tools I'd build in my first 30 days. Sample data only.">
 <meta name="author" content="Dhruv Jain">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#f5f2ec" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#131316" media="(prefers-color-scheme: dark)">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%2327306B%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2245%22%20font-family%3D%22Helvetica%2CArial%2Csans-serif%22%20font-size%3D%2236%22%20font-weight%3D%22bold%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%3ED%3C%2Ftext%3E%3C%2Fsvg%3E">
-<script>try{var t=localStorage.getItem('dj-theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23262E6B%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2245%22%20font-family%3D%22Helvetica%2CArial%2Csans-serif%22%20font-size%3D%2236%22%20font-weight%3D%22bold%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%3ED%3C%2Ftext%3E%3C%2Fsvg%3E">
+<script>try{var t=localStorage.getItem('dj-theme');document.documentElement.dataset.theme=(t==='dark'||t==='light')?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500;600&display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
 <link rel="stylesheet" href="styles/cx.css">
-<link rel="modulepreload" href="ui/page.js">
+<link rel="modulepreload" href="ui/app.js">
 </head>
-<body class="cx">
-<a class="cx-skip" href="#main">Skip to content</a>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<aside class="notice" aria-label="Disclaimer"><p>Unofficial concept by Dhruv Jain, a job candidate. Not affiliated with or endorsed by Cellexia Labs. Orders, customers, emails and ad figures are invented sample data.</p></aside>
 
-<aside class="cx-banner" aria-label="Disclaimer">
-  <p><b>Unofficial concept by Dhruv Jain, a job candidate.</b> Not affiliated with or endorsed by Cellexia Labs. Orders, customers, emails and ad figures are invented sample data.</p>
-</aside>
-
-<header class="cx-top">
-  <div class="cx-wrap cx-top-in">
-    <a class="cx-me" href="/">Dhruv Jain</a>
-    <span class="cx-top-tag">Case study · Cellexia</span>
-    <button class="cx-themebtn" id="cx-theme" type="button" aria-pressed="false" aria-label="Dark theme"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg><span>Dark</span></button>
+<header>
+  <div class="wrap">
+    <div class="bar">
+      <div class="brand"><a href="/" style="text-decoration:none"><b>Dhruv Jain</b></a><span>Case study · Cellexia</span></div>
+      <button class="theme" id="theme" type="button" aria-pressed="false" aria-label="Dark mode"><span id="themeIco" aria-hidden="true">☾</span><span id="themeTxt">Dark</span></button>
+    </div>
+    <nav class="tabs" aria-label="Sections">
+      <a href="#why" class="on">Why this role</a>
+      <a href="#proof">The proof</a>
+      <a href="#work">How I'd work with you</a>
+      <a href="#contact">Contact</a>
+      <span class="ink" id="ink"></span>
+    </nav>
   </div>
-  <nav class="cx-secnav" aria-label="Sections">
-    <div class="cx-wrap"><ul>
-      <li><a href="#why">Why this role</a></li>
-      <li><a href="#hub">The proof</a></li>
-      <li><a href="#plan">How I’d work with you</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul></div>
-  </nav>
+  <span class="progress" id="progress"></span>
 </header>
 
 <main id="main">
-
-<!-- 1. THE WATER QUESTION -->
-<section class="cx-why" id="why" aria-labelledby="cx-why-h">
-  <div class="cx-wrap cx-why-in">
-    <div class="cx-why-text">
-      <h1 id="cx-why-h" class="cx-why-q">Hydrogen + oxygen.<br>Do you get water?</h1>
-      <ol class="cx-why-beats">
-        <li data-beat="1"><b>Not on their own.</b> Something has to bond them.</li>
-        <li data-beat="2"><b>A team is the same.</b> Good people, each in their own tool.</li>
-        <li data-beat="3"><b>This role is the bond.</b> It works with everyone, understands their work and builds what joins it up.</li>
-        <li data-beat="4"><b>So choose wisely.</b> I believe I’m the best fit. Here’s the proof.</li>
-      </ol>
-      <div class="cx-acts">
-        <button type="button" class="cx-btn cx-pri cx-lg" id="cx-play">See the proof ↓</button>
-        <button type="button" class="cx-btn" id="cx-w-replay">↻ Replay</button>
+<!-- ================= HERO ================= -->
+<section id="why" class="heroScroll">
+ <div class="heroSticky">
+  <div class="wrap hero">
+    <div class="hint" id="hint"><span>Scroll to find out</span><i></i></div>
+    <div class="copy">
+      <h1 id="h1" aria-label="Hydrogen + oxygen. Do you get water?"><span class="w" aria-hidden="true">Hydrogen</span> <span class="w" aria-hidden="true">+</span> <br><span class="w" aria-hidden="true">oxygen.</span> <br><span class="w" aria-hidden="true">Do</span> <span class="w" aria-hidden="true">you</span> <span class="w" aria-hidden="true">get</span> <span class="w q" aria-hidden="true">water?</span> </h1>
+      <div class="lines">
+        <div class="line"><b>Not on their own.</b> Something has to bond them.</div>
+        <div class="line"><b>A team is the same.</b> Good people, each in their own tool.</div>
+        <div class="line"><b>This role is the bond.</b> It works with everyone, understands their work and builds what joins it up.</div>
+        <div class="line"><b>So choose wisely.</b> I believe I'm the best fit. Here's the proof.</div>
+      </div>
+      <div class="ctas">
+        <a class="btn primary" href="#proof">See the proof ↓</a>
+        <button class="btn ghost" id="replay" type="button">↻ Replay</button>
       </div>
     </div>
-    <div class="cx-why-stage" id="cx-water">
-      <svg class="cx-w-svg" viewBox="0 0 420 380" role="img" aria-labelledby="cx-w-t">
-        <title id="cx-w-t">Two hydrogen atoms and an oxygen atom bond into water. Then seven parts of the team (founder, operations, ads and media, SEO, IT, support and VAs) are joined by one connecting person in the middle.</title>
-        <g class="cx-w-lines">
-          <line x1="210" y1="190" x2="210" y2="62" style="--d:0ms"/><line x1="210" y1="190" x2="323" y2="110" style="--d:90ms"/><line x1="210" y1="190" x2="351" y2="218" style="--d:180ms"/><line x1="210" y1="190" x2="273" y2="305" style="--d:270ms"/><line x1="210" y1="190" x2="147" y2="305" style="--d:360ms"/><line x1="210" y1="190" x2="69" y2="218" style="--d:450ms"/><line x1="210" y1="190" x2="97" y2="110" style="--d:540ms"/>
-        </g>
-        <g class="cx-w-team">
-          <g class="cx-w-node" style="--i:0" transform="translate(210 62)"><rect x="-43" y="-17" width="86" height="34" rx="17"/><text text-anchor="middle" y="5">Founder</text></g>
-          <g class="cx-w-node" style="--i:1" transform="translate(323 110)"><rect x="-56" y="-17" width="112" height="34" rx="17"/><text text-anchor="middle" y="5">Operations</text></g>
-          <g class="cx-w-node" style="--i:2" transform="translate(351 218)"><rect x="-60" y="-17" width="121" height="34" rx="17"/><text text-anchor="middle" y="5">Ads &amp; media</text></g>
-          <g class="cx-w-node" style="--i:3" transform="translate(273 305)"><rect x="-32" y="-17" width="64" height="34" rx="17"/><text text-anchor="middle" y="5">SEO</text></g>
-          <g class="cx-w-node" style="--i:4" transform="translate(147 305)"><rect x="-32" y="-17" width="64" height="34" rx="17"/><text text-anchor="middle" y="5">IT</text></g>
-          <g class="cx-w-node" style="--i:5" transform="translate(69 218)"><rect x="-43" y="-17" width="86" height="34" rx="17"/><text text-anchor="middle" y="5">Support</text></g>
-          <g class="cx-w-node" style="--i:6" transform="translate(97 110)"><rect x="-32" y="-17" width="64" height="34" rx="17"/><text text-anchor="middle" y="5">VAs</text></g>
-        </g>
-        <g class="cx-w-core"><circle cx="210" cy="190" r="54"/><text x="210" y="186" text-anchor="middle">The person</text><text x="210" y="204" text-anchor="middle">who connects</text></g>
-        <g class="cx-w-mol">
-          <line class="cx-w-bond" x1="210" y1="176" x2="166" y2="214"/><line class="cx-w-bond" x1="210" y1="176" x2="254" y2="214"/>
-          <g class="cx-w-h cx-w-h1"><circle cx="166" cy="214" r="22"/><text x="166" y="221" text-anchor="middle">H</text></g>
-          <g class="cx-w-o"><circle cx="210" cy="176" r="30"/><text x="210" y="184" text-anchor="middle">O</text></g>
-          <g class="cx-w-h cx-w-h2"><circle cx="254" cy="214" r="22"/><text x="254" y="221" text-anchor="middle">H</text></g>
-          <text class="cx-w-q" x="210" y="292" text-anchor="middle">?</text>
-          <text class="cx-w-label" x="210" y="292" text-anchor="middle">H₂O · water</text>
-        </g>
+    <div class="stage" id="stage">
+      <svg id="mol" viewBox="0 0 500 460" role="img" aria-label="Animation: hydrogen and oxygen bond into water, then a team of roles connects through one person"></svg>
+      <div class="stage-cap">
+        <span id="cap">Two gases. Each fine on its own.</span>
+        <span class="live" aria-hidden="true"><span class="dot"></span><span id="flowCount">0</span>&nbsp;handoffs</span>
+      </div>
+    </div>
+  </div>
+ </div>
+</section>
+
+<!-- ================= PROOF ================= -->
+<section id="proof">
+  <div class="wrap">
+    <div class="eyebrow rv">01 · The proof</div>
+    <h2 class="rv">I studied how Cellexia works.<br>Then I built a morning of it.</h2>
+    <p class="lede rv">Public sources first: your reviews, your job posts, your sales channels. Then a working demo of what I'd automate, with a person approving anything a customer sees.</p>
+
+    <div class="finds">
+      <div class="card find rv"><div class="big" data-count="4.8" data-dec="1">0</div><p>Trustpilot score from about 4,500 reviews. Customers love the product, so trust is the asset to protect.</p><small>Source: Trustpilot, Nov 2026</small></div>
+      <div class="card find rv"><div class="big">#1</div><p>Repeated complaint: surprise import fees charged by the courier at the door in the US and UK, after paying in full at checkout.</p><small>Source: Trustpilot reviews, 2026</small></div>
+      <div class="card find rv"><div class="big" data-count="0">0</div><p>Replies to negative reviews on the profile. An easy, very visible win, and the reviews tell product what to fix.</p><small>Source: Trustpilot profile</small></div>
+    </div>
+
+    <div class="hub">
+      <div class="card steps rv">
+        <h3>A morning at Cellexia</h3>
+        <button class="step" type="button" data-i="0"><time>07:02</time><span>Refund request triaged</span><i class="st"></i></button>
+        <button class="step" type="button" data-i="1"><time>07:15</time><span>US order: import fee warning</span><i class="st"></i></button>
+        <button class="step" type="button" data-i="2"><time>08:40</time><span>Stuck parcel caught early</span><i class="st"></i></button>
+        <button class="step" type="button" data-i="3"><time>09:10</time><span>Ad overspend flagged</span><i class="st"></i></button>
+        <button class="step" type="button" data-i="4"><time>09:30</time><span>Low review answered</span><i class="st"></i></button>
+        <button class="btn primary play" id="play" type="button">▶ Play the whole morning</button>
+        <p class="note" style="margin:8px 6px 0">Click any step to replay it.</p>
+      </div>
+
+      <div class="card window rv">
+        <div class="chrome"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><span>ops-hub · today</span></div>
+        <div class="kpis">
+          <div class="kpi" id="k0"><b>0</b><span>handled automatically</span></div>
+          <div class="kpi" id="k1"><b>0</b><span>caught before the customer wrote</span></div>
+          <div class="kpi" id="k2"><b>0 min</b><span>team time saved</span></div>
+          <div class="kpi" id="k3"><b>€0</b><span>ad spend protected</span></div>
+        </div>
+        <div class="view" id="view" aria-live="polite">
+          <div class="empty"><div><div class="big">☕</div>It's 07:00. The team is just logging on.<br>Press <b>Play the whole morning</b> to see what runs before they finish their coffee.</div></div>
+        </div>
+        <div class="log" id="log" role="log" aria-label="Automation log"><div>ops-hub ready · waiting for events</div></div>
+      </div>
+    </div>
+    <p class="note rv">Policy windows (60-day guarantee, 48-hour damage reports, delivery promises) are taken from public pages and would be confirmed with the team before going live.</p>
+
+    <div class="card arch rv">
+      <div class="eyebrow" style="margin-bottom:6px">How it connects</div>
+      <svg viewBox="0 0 1000 300" aria-label="Architecture: tools feed a small ops service, AI drafts, a person approves, actions go out">
+        <g id="archFlows"></g>
+        <g id="archBoxes"></g>
       </svg>
+      <div class="arch-legend"><span>Uses each tool's official API</span><span>·</span><span>Nothing reaches a customer without approval</span><span>·</span><span>EU-hosted, GDPR-minded</span></div>
     </div>
   </div>
 </section>
 
-<!-- 2. THE PROOF -->
-<section class="cx-sec cx-wrap" id="hub" aria-labelledby="cx-hub-h">
-  <p class="cx-eyebrow">The proof</p>
-  <h2 id="cx-hub-h">One morning at Cellexia, connected</h2>
-  <p class="cx-intro">Five everyday jobs, one click at a time. Try the controls. Everything here is sample data.</p>
-  <div class="cx-hub" id="cx-hub">
-    <p class="cx-empty">Loading the demo…</p>
-    <noscript><p class="cx-empty">The demo needs JavaScript.</p></noscript>
+<!-- ================= WORK ================= -->
+<section id="work">
+  <div class="wrap">
+    <div class="eyebrow rv">02 · How I'd work with you</div>
+    <h2 class="rv">My first 30 days.</h2>
+    <p class="lede rv">One shipped outcome every week, each with a number we can check. Small releases, documented and easy to reverse.</p>
+    <div class="plan" id="plan">
+      <div class="track"><i id="trackFill"></i></div>
+      <div class="card wk rv"><div class="n">WEEK 1</div><h3>Ads reporting on autopilot</h3><p>Meta, YouTube and Shopify data in one daily view of return on spend per market, with alerts for spikes and disapproved ads.</p><div class="m"><span>Measure:</span> hours of manual reporting saved</div></div>
+      <div class="card wk rv"><div class="n">WEEK 2</div><h3>No more surprise fees</h3><p>Clear import fee notices on product and cart pages, a post-purchase email per market, and a costed plan for duties-paid shipping.</p><div class="m"><span>Measure:</span> duty-related tickets and reviews</div></div>
+      <div class="card wk rv"><div class="n">WEEK 3</div><h3>Support drafts itself</h3><p>Every email gets its order looked up, checked against your policies and a reply drafted. A person approves it with one click.</p><div class="m"><span>Measure:</span> first-response time</div></div>
+      <div class="card wk rv"><div class="n">WEEK 4</div><h3>Reviews and deliveries</h3><p>Replies drafted for low reviews, weekly themes sent to product, and stuck parcels flagged before customers ask.</p><div class="m"><span>Measure:</span> reviews answered, "where's my order" tickets</div></div>
+    </div>
+    <div class="two">
+      <div class="card rv"><h3>How I work</h3><div class="princ"><span>Simple over clever</span><span>People approve what customers see</span><span>Talk to the user first</span><span>Ship small, ship often</span><span>Write it down</span><span>AI output gets checked</span><span>Customer data handled carefully</span></div></div>
+      <div class="card rv"><h3>What I'd ask on day one</h3><ol class="qs"><li>Which helpdesk, warehouse and email tools do you use?</li><li>Where do tickets pile up most?</li><li>Do any markets ship with duties paid today?</li><li>How long does ad reporting take each week?</li><li>What does a great first month look like to you?</li></ol></div>
+    </div>
   </div>
 </section>
 
-<!-- 3. HOW I'D WORK WITH YOU -->
-<section class="cx-sec cx-wrap" id="plan" aria-labelledby="cx-plan-h">
-  <p class="cx-eyebrow">Working together</p>
-  <h2 id="cx-plan-h">How I’d work with each of you</h2>
-  <ul class="cx-people">
-    <li><b>Founder</b><span>A short weekly note: what shipped, what it saved, what’s next.</span></li>
-    <li><b>Operations</b><span>Delivery and stock alerts each morning. You decide; I build.</span></li>
-    <li><b>Media buyer</b><span>Spend alerts in Slack. Budgets never change without you.</span></li>
-    <li><b>VAs</b><span>Reports that build themselves, so your time goes on judgement.</span></li>
-    <li><b>Support</b><span>Replies drafted with the order and policy checked. You approve.</span></li>
-    <li><b>New hires</b><span>Every tool documented, so you’re useful in week one.</span></li>
-  </ul>
-  <h3 class="cx-h3">First 30 days</h3>
-  <ol class="cx-weeks">
-    <li><span class="cx-wk">Week 1</span><b>Ads report builds itself</b><p class="cx-metric">VA hours saved</p></li>
-    <li><span class="cx-wk">Week 2</span><b>Import-fee heads-up emails</b><p class="cx-metric">Fewer fee complaints</p></li>
-    <li><span class="cx-wk">Week 3</span><b>Support replies drafted</b><p class="cx-metric">Faster first reply</p></li>
-    <li><span class="cx-wk">Week 4</span><b>Review replies and parcel alerts</b><p class="cx-metric">Every bad review answered</p></li>
-  </ol>
-</section>
-
-<!-- 4. CONTACT -->
-<section class="cx-sec cx-wrap cx-cta" id="contact" aria-labelledby="cx-cta-h">
-  <h2 id="cx-cta-h">I’d love 20 minutes to walk your team through this.</h2>
-  <ul class="cx-contact">
-    <li><span>Email</span><a href="mailto:hello.dhruvjain@gmail.com?subject=Cellexia%20case%20study">hello.dhruvjain@gmail.com</a></li>
-    <li><span>Phone</span><a href="tel:+917016581281">+91 70165 81281</a></li>
-    <li><span>Portfolio</span><a href="https://itdhruvjain.github.io/">itdhruvjain.github.io</a></li>
-  </ul>
-  <div class="cx-acts">
-    <a class="cx-btn cx-pri cx-lg" href="mailto:hello.dhruvjain@gmail.com?subject=Cellexia%20case%20study">Email me</a>
-    <button type="button" class="cx-btn cx-lg" id="cx-print">Save the plan as PDF</button>
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap">
+    <div class="cta rv">
+      <canvas id="sparks" aria-hidden="true"></canvas>
+      <div class="eyebrow" style="color:inherit;opacity:.75">03 · Contact</div>
+      <h2>Give me 20 minutes.</h2>
+      <p>I'll walk your team through this demo and listen to which problem costs you the most. That's the one I'd build first.</p>
+      <div class="row">
+        <a class="btn" href="mailto:hello.dhruvjain@gmail.com?subject=Cellexia%20case%20study">✉ Email me</a>
+        <button class="btn" id="copyMail" type="button">Copy my email</button>
+        <a class="btn" href="https://itdhruvjain.github.io/?ref=cellexia-demo">Portfolio ↗</a>
+      </div>
+      <div class="contact"><a href="mailto:hello.dhruvjain@gmail.com">hello.dhruvjain@gmail.com</a><a href="tel:+917016581281">+91 70165 81281</a><a href="https://itdhruvjain.github.io/">itdhruvjain.github.io</a></div>
+    </div>
   </div>
 </section>
-
 </main>
 
-<footer class="cx-foot">
-  <div class="cx-wrap">
-    <p><b>Unofficial concept by Dhruv Jain, a job candidate.</b> Not affiliated with or endorsed by Cellexia Labs. Orders, customers, emails and ad figures are invented sample data.</p>
-    <p><a href="/">← Back to my portfolio</a></p>
-  </div>
-</footer>
+<footer><div class="wrap">Built by Dhruv Jain as part of an application for the Software Developer role at Cellexia Labs.<br>Unofficial concept, not affiliated with or endorsed by Cellexia Labs. All orders, customers, emails and ad figures are invented. Public facts come from Trustpilot and Cellexia's job posts, checked November 2026.<br><a href="/">← Back to my portfolio</a></div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<div class="cx-print-head" aria-hidden="true">
-  <b>Dhruv Jain — how I’d work with the Cellexia team</b>
-  <span>hello.dhruvjain@gmail.com · +91 70165 81281 · itdhruvjain.github.io/cellexia/</span>
-  <span>Unofficial concept by a job candidate. Not affiliated with or endorsed by Cellexia Labs.</span>
-</div>
-
-<div class="cx-toast" id="cx-toast" role="status" aria-live="polite"></div>
-
-<script type="module" src="ui/page.js"></script>
+<script type="module" src="ui/app.js"></script>
 <script data-goatcounter="https://dhruvjain.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
