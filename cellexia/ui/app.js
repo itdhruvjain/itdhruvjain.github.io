@@ -18,8 +18,19 @@ const SENT = new Set();
 function track(name, once = true) {
   const key = 'cellexia-' + name + (REF ? '--' + REF : '');
   if (once && SENT.has(key)) return; SENT.add(key);
-  const go = () => { try { window.goatcounter.count({ path: key, title: name + (REF ? ' (' + REF + ')' : ''), event: true }); } catch (e) {} };
-  if (window.goatcounter && window.goatcounter.count) go(); else addEventListener('load', () => setTimeout(go, 400), { once: true });
+  QUEUE.push({ path: key, title: name + (REF ? ' (' + REF + ')' : ''), event: true });
+  flush();
+}
+// Events wait here until GoatCounter's script is ready (it loads async and may be slow or blocked).
+const QUEUE = [];
+let flushTimer = null, flushTries = 0;
+function flush() {
+  if (window.goatcounter && typeof window.goatcounter.count === 'function') {
+    while (QUEUE.length) { const e = QUEUE.shift(); try { window.goatcounter.count(e); } catch (err) {} }
+    return;
+  }
+  if (flushTimer || flushTries > 60) return;           // give up after ~30s (e.g. blocked by an ad blocker)
+  flushTimer = setTimeout(() => { flushTimer = null; flushTries++; flush(); }, 500);
 }
 if (REF) track('visit');
 
@@ -37,7 +48,7 @@ const lerp=(a,b,t)=>a+(b-a)*t;
 const setTheme=(t,save)=>{document.documentElement.dataset.theme=t;$('#themeTxt').textContent=t==='dark'?'Light':'Dark';$('#themeIco').textContent=t==='dark'?'☀':'☾';$('#theme').setAttribute('aria-pressed',t==='dark');if(save){try{localStorage.setItem('dj-theme',t)}catch(e){}}};
 let saved=null;try{saved=localStorage.getItem('dj-theme')}catch(e){}
 setTheme(saved||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
-$('#theme').onclick=()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark',true);
+$('#theme').onclick=()=>{const n=document.documentElement.dataset.theme==='dark'?'light':'dark';setTheme(n,true);track('theme_'+n,false)};
 
 /* ---------- toast ---------- */
 let tt;const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2200)};
@@ -81,14 +92,14 @@ addEventListener('resize',()=>{setMode()});
 const svg=$('#mol'), C={x:250,y:230};
 const ROLES=[['Founder',250,72],['Operations',388,128],['Ads & media',400,268],['SEO',322,372],['IT',178,372],['Support',100,268],['VAs',118,128]];
 const MSGS=[
-  [5,1,'Support → Operations · refund checked against the 60-day guarantee'],
-  [2,0,'Ads → Founder · daily return on spend per market, no spreadsheet'],
-  [1,5,'Operations → Support · stuck parcel flagged before the customer writes'],
-  [6,2,'VAs → Ads · competitor ads collected and tagged automatically'],
-  [4,1,'IT → Operations · new order webhook connected'],
-  [3,0,'SEO → Founder · top landing pages and what changed'],
-  [5,0,'Support → Founder · this week\'s review themes'],
-  [2,1,'Ads → Operations · spend spike, cap suggested'],
+  [5,1,'Support → Operations: a refund checked against the 60-day guarantee'],
+  [2,0,'Ads → Founder: today’s ad results, no spreadsheet needed'],
+  [1,5,'Operations → Support: a late parcel spotted before the customer asks'],
+  [6,2,'VAs → Ads: competitor ads collected and sorted for you'],
+  [4,1,'IT → Operations: new orders now arrive on their own'],
+  [3,0,'SEO → Founder: which pages bring visitors, and what changed'],
+  [5,0,'Support → Founder: what customers talked about this week'],
+  [2,1,'Ads → Operations: one ad spent too much, a limit suggested'],
 ];
 let atoms,bonds,mol,core,pills=[],spokes=[],pulses=[],t0,raf,lastSpawn=0,flows=0,capStage=-1,msgIdx=0;
 function build(){
@@ -112,11 +123,12 @@ function build(){
   ROLES.forEach(([n])=>{const p=mk('g',{class:'pill',opacity:0},pg);const w=n.length*8.6+34;mk('rect',{x:-w/2,y:-19,width:w,height:38,rx:19},p);const t=mk('text',{'text-anchor':'middle','dominant-baseline':'central'},p);t.textContent=n;pills.push(p)});
   svg.__pulseLayer=mk('g',{},svg);
 }
-const CAPS=['Two gases. Each fine on its own.','Add a bond, and you get something new: water.','A team works the same way.','Every role connected through one person who builds the links.'];
+const CAPS=['Two gases. Fine on their own, but no water.','Join them, and you get something new: water.','Your team works the same way.','One person in the middle, so work flows between everyone.'];
 function cap(i){if(i===capStage)return;capStage=i;const c=$('#cap');c.style.opacity=0;setTimeout(()=>{c.textContent=CAPS[i];c.style.opacity=1},RM?0:250)}
 const start=[[330,170],[150,310],[380,335]], water=[[250,205],[187,258],[313,258]];
 function frame(now){
   const t=RM?20:SCRUB?clamp((HP-.16)/.64)*7.4:(now-t0)/1000;const tf=now/1000;const live=SCRUB?HP>.82:t>7;
+  if(live)track('why_done');
   // phase A: atoms appear and float
   atoms.forEach((a,i)=>{
     const appear=clamp((t-.2-i*.2)/.6);
@@ -210,45 +222,50 @@ const p3=parcelStatus({o:'CX-DEMO-10455',m:'CA',shippedAt:new Date(NOW-9*DAY-HR)
 const ad4={n:'ELS_US_Video_60Day_V4',spend:1520,rev:3040,today:1520,avg7:724};
 const th5=tagTheme('The cream feels lovely, but the cooling feeling makes my eyes water.');
 const R={
-  refund:[g1.ok?'ok':'bad',`Delivered ${g1.day} days ago, ${g1.ok?'within':'outside'} the ${POLICY.guaranteeDays}-day guarantee`],
-  fee:[NON_EU.has('US')?'warn':'ok',NON_EU.has('US')?'Import charges may be collected by the courier (illustrative rule)':'Inside the EU: no import charges'],
-  late:[p3.pastPromise?'bad':'ok',`Day ${p3.sinceShip} since dispatch: ${p3.sinceShip-LANE.CA.max} days past the ${LANE.CA.min}–${LANE.CA.max} day window`],
-  stuck:[p3.stuck?'warn':'ok',`No carrier scan for ${p3.sinceScan} days (limit ${p3.limit})`],
-  spike:[isSpike(ad4)?'bad':'ok',`Spend ${spikeRatio(ad4).toFixed(1)}× its 7-day average`],
+  refund:[g1.ok?'ok':'bad',g1.ok?`Delivered ${g1.day} days ago: still inside the ${POLICY.guaranteeDays}-day money-back guarantee`:`Delivered ${g1.day} days ago: past the ${POLICY.guaranteeDays}-day money-back guarantee`],
+  fee:[NON_EU.has('US')?'warn':'ok',NON_EU.has('US')?'The courier may ask for import fees at the door (example rule)':'Inside the EU, so no import fees'],
+  late:[p3.pastPromise?'bad':'ok',`It’s day ${p3.sinceShip}. We promised ${LANE.CA.min}–${LANE.CA.max} days, so it’s ${p3.sinceShip-LANE.CA.max} days late`],
+  stuck:[p3.stuck?'warn':'ok',`The courier hasn’t scanned it for ${p3.sinceScan} days (we flag it after ${p3.limit})`],
+  spike:[isSpike(ad4)?'bad':'ok',`Spent ${spikeRatio(ad4).toFixed(1)} times its normal day`],
   cap:suggestedCap(ad4),
-  theme:th5.key==='menthol'?'menthol sensitivity':th5.key,
+  theme:th5.key==='menthol'?'eyes stinging from the cooling ingredient':th5.key,
 };
 const STEPS=[
- {src:['✉','Support inbox','Marta G. · Spain · 07:02'],subj:'Refund please',
+ {plain:'Marta wants her money back. The dashboard finds her order, sees she’s still inside the 60-day guarantee, and writes a kind reply. Support just clicks Approve.',
+  src:['✉','Support inbox','Marta G. · Spain · 07:02'],subj:'Refund please',
   body:'Hola, I used the eye serum for three weeks. It stings my eyes and I don\'t see a difference. I\'d like my money back as your guarantee says.',
-  intent:'Refund under guarantee',conf:94,
-  checks:[['ok','Order CX-DEMO-10391 found in Shopify'],R.refund,['warn','Mentions stinging: logged as an irritation theme'],['ok','Return RMA-2291 created, refund ready on approval']],
+  intent:'Refund request',conf:94,
+  checks:[['ok','Found her order (CX-DEMO-10391)'],R.refund,['warn','She mentions stinging, so it’s noted for the product team'],['ok','Return number RMA-2291 ready; the refund goes out once approved']],
   draft:'Hi Marta, I\'m sorry the serum didn\'t suit you, and thank you for telling us about the stinging. You\'re on day 21 of our 60-day guarantee, so you\'re fully covered. Your return number is RMA-2291, and your refund goes out as soon as we receive it.',
-  approver:'Support · one click',log:'refund triaged · policy ok · RMA-2291 created',k:[1,0,6,0]},
- {src:['⚡','Shopify webhook','orders/create · 07:15'],subj:'New order · United States · $151.30',
-  body:'Deep Wrinkle Filler Gel ×2, shipping from the EU warehouse to Ohio, US.',
-  intent:'Cross-border order',conf:99,
-  checks:[['ok','Ships from the EU to a non-EU country'],R.fee,['ok','Customer not yet told about possible fees'],['ok','"What to expect at delivery" email queued']],
+  approver:'Support approves with one click',log:'refund checked, reply ready',k:[1,0,6,0]},
+ {plain:'A new order is going to the US, where the courier may charge import fees. The customer gets a friendly heads-up before the parcel arrives, so there are no nasty surprises.',
+  src:['⚡','Your store (Shopify)','new order · 07:15'],subj:'New order to the United States · $151.30',
+  body:'Deep Wrinkle Filler Gel ×2, going from the European warehouse to Ohio, USA.',
+  intent:'Order going abroad',conf:99,
+  checks:[['ok','Shipping from Europe to outside the EU'],R.fee,['ok','She hasn’t been told about this yet'],['ok','A “what to expect at delivery” email is ready']],
   draft:'Hi Jane, thank you for your order! It ships from our European warehouse. Depending on US rules at the time, the courier may collect import charges on delivery. Here\'s what to expect and who to contact if you have questions.',
-  approver:'Template approved once',log:'US order · fee notice queued before dispatch',k:[1,1,4,0]},
- {src:['📦','Carrier tracking','FedEx · Canada · 08:40'],subj:'Parcel CX-DEMO-10455 has stopped moving',
-  body:'Last scan "Clearance delay" 4 days ago. Day 9 since dispatch against a promised window of 5–7 days.',
-  intent:'Late delivery',conf:97,
-  checks:[R.late,R.stuck,['ok','No ticket from the customer yet'],['ok','Apology email drafted, carrier claim prepared']],
+  approver:'Written once, then sent with every order',log:'fee heads-up ready before the parcel ships',k:[1,1,4,0]},
+ {plain:'A parcel to Canada has stopped moving. The dashboard notices first and drafts an apology, so the customer hears from you before they have to ask.',
+  src:['📦','Courier tracking','FedEx · Canada · 08:40'],subj:'A parcel to Canada has stopped moving',
+  body:'Last update from FedEx: “Clearance delay”, 4 days ago. It left 9 days ago, and we promise 5–7 days.',
+  intent:'Late parcel',conf:97,
+  checks:[R.late,R.stuck,['ok','The customer hasn’t complained yet'],['ok','Apology email and courier claim are ready']],
   draft:'Hi Ruth, a quick heads-up before you have to ask: your parcel is held at customs clearance, so it\'s running a little late. We\'re on it with FedEx and expect it within 3 working days. Thank you for your patience.',
-  approver:'Support · one click',log:'late parcel caught · customer told first',k:[1,1,5,0]},
- {src:['◎','Meta Ads','daily check · 09:10'],subj:'ELS_US_Video_60Day_V4 spent 2.1× its usual',
-  body:'Yesterday €1,520 spend for €3,040 revenue: a return of 2.0, against 3.3 for the US account average.',
-  intent:'Spend anomaly',conf:92,
-  checks:[R.spike,['warn',`Return ${roas(ad4).toFixed(1)} against an account average of 3.3`],['ok','Creative frequency checked: 4.1, likely fatigue'],['ok',`Suggested daily cap €${R.cap} sent to the media buyer`]],
-  draft:`#ads-alerts · ELS_US_Video_60Day_V4 overspent overnight (${spikeRatio(ad4).toFixed(1)}× usual, return ${roas(ad4).toFixed(1)}). Suggest capping at €${R.cap}/day and testing a fresh hook. Approve the cap?`,
-  approver:'Media buyer decides',log:'spend spike flagged · cap suggested',k:[1,0,3,820]},
- {src:['★','Trustpilot','new review · 09:30'],subj:'2★ "Too strong for my eyes"',
+  approver:'Support approves with one click',log:'late parcel spotted, customer told first',k:[1,1,5,0]},
+ {plain:'One ad suddenly spent twice its usual amount without selling more. The person who runs ads gets a short message with a suggested daily limit. Nothing changes until they decide.',
+  src:['◎','Meta ads','morning check · 09:10'],subj:'One ad spent 2.1× its usual amount',
+  body:'Ad “ELS_US_Video_60Day_V4”: yesterday it spent €1,520 and brought in €3,040 in sales. Usually each €1 brings back €3.30.',
+  intent:'Ad overspending',conf:92,
+  checks:[R.spike,['warn',`Each €1 brought back €${roas(ad4).toFixed(2)} in sales, below the usual €3.30`],['ok','The same video was shown too often, so people may be tired of it'],['ok',`Suggested limit: €${R.cap} a day, sent to the person who runs ads`]],
+  draft:`Hi! One of the US ads (ELS_US_Video_60Day_V4) spent ${spikeRatio(ad4).toFixed(1)}× its normal amount overnight, and sales didn’t keep up. I’d suggest a daily limit of €${R.cap} and trying a fresh video. Want me to set the limit?`,
+  approver:'The ads person decides',log:'overspending ad flagged, limit suggested',k:[1,0,3,820]},
+ {plain:'A 2-star review says the cream made someone’s eyes water. A caring public reply is drafted, and the product team learns this keeps coming up.',
+  src:['★','Trustpilot','new review · 09:30'],subj:'2★ “Too strong for my eyes”',
   body:'The cream feels lovely, but the cooling feeling makes my eyes water. Wish this was mentioned on the page.',
-  intent:'Product irritation',conf:90,
-  checks:[['ok',`Theme matched: ${R.theme} (7 this month)`],['ok','Public reply drafted in brand voice'],['ok','Support team asked to contact the customer privately'],['ok','Weekly theme report updated for product']],
+  intent:'Unhappy with the product',conf:90,
+  checks:[['ok',`This is about ${R.theme} (7 times this month)`],['ok','A public reply is written in Cellexia’s friendly tone'],['ok','Support will also email her privately'],['ok','Added to the weekly “what customers say” note']],
   draft:'Thank you for being honest with us. Some of our formulas include a cooling ingredient that sensitive eyes can react to. We\'ll make that clearer on the page. Our team is emailing you now to arrange a refund under our 60-day guarantee.',
-  approver:'Support · one click',log:'review answered · theme +1 → product',k:[1,0,5,0]},
+  approver:'Support approves with one click',log:'review answered, product team told',k:[1,0,5,0]},
 ];
 const tot=[0,0,0,0];let running=false,runId=0;
 const view=$('#view'),log=$('#log');
@@ -263,46 +280,47 @@ async function type(el,text,id,speed=12){el.classList.add('caret');el.textConten
 async function runStep(i,id){
   const s=STEPS[i];$$('.step').forEach((b,j)=>{b.classList.toggle('run',j===i)});
   view.innerHTML=`
-   <div class="panel"><h4><span>Incoming</span><span>${s.src[2].split('·').pop().trim()}</span></h4>
+   <div class="plain"><b>In short:</b> ${s.plain}</div>
+   <div class="panel"><h4><span>What came in</span><span>${s.src[2].split('·').pop().trim()}</span></h4>
      <div class="src"><div class="ico">${s.src[0]}</div><div><b>${s.subj}</b><span>${s.src[1]} · ${s.src[2]}</span></div></div>
      <div class="msg" id="msg"></div></div>
-   <div class="panel"><h4><span>Checks</span><span id="intent"></span></h4><ul class="checks" id="checks">${s.checks.map(([k,t])=>`<li><span class="k ${k}">${k==='ok'?'✓':k==='warn'?'!':'✕'}</span><span>${t}</span></li>`).join('')}</ul></div>
-   <div class="panel draft"><h4><span>Drafted ${i===3?'alert':'reply'}</span><span>AI draft · needs approval</span></h4>
+   <div class="panel"><h4><span>What it checked</span><span id="intent"></span></h4><ul class="checks" id="checks">${s.checks.map(([k,t])=>`<li><span class="k ${k}">${k==='ok'?'✓':k==='warn'?'!':'✕'}</span><span>${t}</span></li>`).join('')}</ul></div>
+   <div class="panel draft"><h4><span>${i===3?'Message':'Reply'} ready for you</span><span>Drafted for you · a person approves</span></h4>
      <div class="msg" id="draft"></div>
-     <div class="actions"><button class="mini go" id="approve" disabled>Approve & send</button><button class="mini">Edit</button><button class="mini">Escalate</button><span class="who">${s.approver}</span></div></div>`;
+     <div class="actions"><button class="mini go" id="approve" disabled>Approve & send</button><button class="mini">Edit</button><button class="mini">Ask a lead</button><span class="who">${s.approver}</span></div></div>`;
   await type($('#msg'),s.body,id,16);if(id!==runId)return;
-  await sleep(250);$('#intent').innerHTML=`${s.intent}<span class="tag">${s.conf}%</span>`;
+  await sleep(250);$('#intent').innerHTML=`${s.intent}<span class="tag">${s.conf}% sure</span>`;
   for(const li of $$('#checks li')){if(id!==runId)return;await sleep(520);li.classList.add('in')}
   await sleep(400);await type($('#draft'),s.draft,id,14);if(id!==runId)return;
   const ap=$('#approve');ap.disabled=false;await sleep(700);if(id!==runId)return;
-  ap.classList.add('pressing');ap.textContent='Sent ✓';toast(i===3?'Alert sent to the media buyer':'Approved · sent to customer');
+  ap.classList.add('pressing');ap.textContent='Sent ✓';toast(i===3?'Message sent to the ads person (demo)':'Approved. Reply sent to the customer (demo)');
   addLog(`[${['07:02','07:15','08:40','09:10','09:30'][i]}] <b>✓</b> ${s.log}`);
   s.k.forEach((v,j)=>v&&bump(j,v));
   $$('.step')[i].classList.remove('run');$$('.step')[i].classList.add('done');
   await sleep(2200);
 }
-async function playAll(){track('demo_play',false);const id=++runId;tot.fill(0);['0','0','0 min','€0'].forEach((v,i)=>$('#k'+i+' b').textContent=v);
-  $$('.step').forEach(b=>b.classList.remove('done','run'));log.innerHTML='<div>ops-hub ready · 5 events queued</div>';
-  $('#play').textContent='⏸ Running…';
+async function playAll(auto){auto=auto===true;track(auto?'demo_autoplay':'demo_play',!auto?false:true);const id=++runId;tot.fill(0);['0','0','0 min','€0'].forEach((v,i)=>$('#k'+i+' b').textContent=v);
+  $$('.step').forEach(b=>b.classList.remove('done','run'));log.innerHTML='<div>Good morning. 5 things to handle today.</div>';
+  $('#play').textContent='⏸ Playing…';
   for(let i=0;i<STEPS.length;i++){if(id!==runId)return;await runStep(i,id)}
-  if(id!==runId)return;$('#play').textContent='↻ Play again';
-  view.innerHTML=`<div class="empty"><div><div class="big">09:31</div>Five issues handled before the team's first meeting.<br><b>${tot[2]} minutes</b> of manual work saved, and every customer message was approved by a person.</div></div>`;
+  if(id!==runId)return;$('#play').textContent='↻ Watch again';track('demo_done');
+  view.innerHTML=`<div class="empty"><div><div class="big">9:31 am</div>Five things handled before the team’s first meeting.<br>About <b>${tot[2]} minutes</b> of copy-and-paste saved, and a person said yes to every customer message.</div></div>`;
 }
-$('#play').onclick=playAll;
-$$('.step').forEach(b=>b.onclick=async()=>{track('step_'+b.dataset.i,false);const id=++runId;$$('.step').forEach(x=>x.classList.remove('run'));$('#play').textContent='▶ Play the whole morning';await runStep(+b.dataset.i,id)});
+$('#play').onclick=()=>playAll(false);
+$$('.step').forEach(b=>b.onclick=async()=>{track('step_'+b.dataset.i,false);const id=++runId;$$('.step').forEach(x=>x.classList.remove('run'));$('#play').textContent='▶ Watch the whole morning';await runStep(+b.dataset.i,id)});
 // auto-play when the hub first scrolls into view
-const hio=new IntersectionObserver(es=>{if(es[0].isIntersecting){hio.disconnect();setTimeout(playAll,500)}},{threshold:.45});hio.observe($('.window'));
+const hio=new IntersectionObserver(es=>{if(es[0].isIntersecting){hio.disconnect();setTimeout(()=>playAll(true),500)}},{threshold:.45});hio.observe($('.window'));
 
 /* ---------- architecture ---------- */
 const AB=$('#archBoxes'),AF=$('#archFlows');
-const srcs=['Shopify','Helpdesk','Carriers','Meta · YouTube','Trustpilot'];
+const srcs=['Your store','Support inbox','Couriers','Meta · YouTube','Trustpilot'];
 const box=(x,y,w,h,t,cls='')=>{const g=mk('g',{class:'box '+cls},AB);mk('rect',{x:x-w/2,y:y-h/2,width:w,height:h,rx:12},g);const lines=t.split('\n');lines.forEach((l,i)=>mk('text',{x,y:y+5+(i-(lines.length-1)/2)*17},g).textContent=l);return g};
 srcs.forEach((s,i)=>{const y=34+i*58;box(90,y,150,40,s);mk('path',{class:'flow',d:`M165 ${y} C 250 ${y}, 260 150, 340 150`},AF)});
-box(420,150,160,70,'Ops service\nchecks · rules','main');
+box(420,150,160,70,'The helper\nchecks the rules','main');
 mk('path',{class:'flow',d:'M500 150 L 570 150'},AF);
-box(640,150,130,54,'AI drafts\nreply / alert');
+box(640,150,130,54,'AI writes\na first draft');
 mk('path',{class:'flow',d:'M705 150 L 765 150'},AF);
-box(835,150,130,54,'Person\napproves','human');
+box(835,150,130,54,'A person\nsays yes','human');
 [70,150,230].forEach(y=>mk('path',{class:'flow',d:`M900 150 C 925 150, 920 ${y}, 945 ${y}`},AF));
 // labels for outputs
 [['Email',70],['Slack',150],['Shopify',230]].forEach(([t,y])=>{const g=mk('g',{class:'box'},AB);mk('rect',{x:945,y:y-16,width:52,height:32,rx:9},g);mk('text',{x:971,y:y+5,'font-size':11},g).textContent=t});
@@ -318,4 +336,23 @@ sizeCv();addEventListener('resize',sizeCv);
   const D=120*devicePixelRatio;for(let i=0;i<P.length;i++)for(let j=i+1;j<P.length;j++){const d=Math.hypot(P[i].x-P[j].x,P[i].y-P[j].y);if(d<D){cx.strokeStyle=`rgba(${col},${.5*(1-d/D)})`;cx.lineWidth=devicePixelRatio;cx.beginPath();cx.moveTo(P[i].x,P[i].y);cx.lineTo(P[j].x,P[j].y);cx.stroke()}}
   if(!RM)requestAnimationFrame(sp)})();
 
-document.addEventListener('click',e=>{if(e.target.closest('a[href^="mailto:"]'))track('cta_email',false)});
+/* ---------- tracing: what they clicked, how far they read, how long they stayed ---------- */
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a');if(!a)return;
+  const h=a.getAttribute('href')||'';
+  if(h.startsWith('mailto:'))track('cta_email',false);
+  else if(h.startsWith('tel:'))track('cta_phone',false);
+  else if(h.includes('itdhruvjain.github.io')||h==='/')track('cta_portfolio',false);
+  else if(a.closest('nav.tabs'))track('nav_'+h.slice(1),false);
+  else if(h==='#proof')track('cta_see_proof',false);
+});
+// sections reached (once each)
+const seenIO=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){track('seen_'+en.target.id);seenIO.unobserve(en.target)}}),{rootMargin:'-35% 0px -35% 0px'});
+['proof','work','contact'].forEach(id=>{const el=document.getElementById(id);if(el)seenIO.observe(el)});
+// scroll depth 25/50/75/100
+addEventListener('scroll',()=>{const max=document.documentElement.scrollHeight-innerHeight;if(max<=0)return;const d=scrollY/max;
+  [25,50,75,100].forEach(p=>{if(d>=p/100-.02)track('depth_'+p)})},{passive:true});
+// engaged time, counted only while the tab is visible
+{let vis=0,last=document.visibilityState==='visible'?Date.now():0;const marks=[30,60,120,300];
+ document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')last=Date.now();else if(last){vis+=Date.now()-last;last=0}});
+ setInterval(()=>{const s=(vis+(last?Date.now()-last:0))/1000;marks.forEach(m=>{if(s>=m)track('time_'+m+'s')})},5000);}

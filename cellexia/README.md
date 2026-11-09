@@ -59,7 +59,22 @@ tests/*.test.js     node:test unit tests
 
 ## Analytics
 
-GoatCounter (cookie-free) counts the page view. Events are sent as `cellexia-<name>`, with `--<ref>` added when the link had `?ref=`, which is kept for the visit in sessionStorage. The events are `demo_play`, `step_<0-4>`, `why_replay`, `cta_email`, `cta_copy_email` and `visit` (sent only when a ref is present). No personal data is sent.
+GoatCounter (cookie-free) counts the page view. Events are sent as `cellexia-<name>`, with `--<ref>` added when the link had `?ref=`, which is kept for the visit in sessionStorage. Events wait in a small queue until GoatCounter's script is ready, so nothing is lost if it loads late. No personal data is sent.
+
+| Event | Means |
+|---|---|
+| `visit` | opened with a `?ref=` link |
+| `why_done`, `why_replay` | watched the water opener to the end; replayed it |
+| `seen_proof`, `seen_work`, `seen_contact` | reached that section |
+| `depth_25` … `depth_100` | scrolled that far down the page |
+| `time_30s`, `time_60s`, `time_120s`, `time_300s` | time on the page while the tab was visible |
+| `demo_autoplay`, `demo_play`, `demo_done` | the morning demo started by itself; they pressed Watch; it finished |
+| `step_0` … `step_4` | clicked a single moment in the demo |
+| `nav_<section>`, `cta_see_proof` | used the top menu; pressed "See the proof" |
+| `cta_email`, `cta_copy_email`, `cta_phone`, `cta_portfolio` | contact clicks |
+| `theme_dark`, `theme_light` | switched theme |
+
+In the GoatCounter dashboard, type `cellexia` in the filter to see only this page. Add the ref (for example `--cellexia`) to see one company's visits.
 
 ## Nav link
 
