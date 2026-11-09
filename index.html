@@ -1101,6 +1101,19 @@ html.smooth{scroll-behavior:auto}
 })();
 </script>
 
+<!-- Optional "Case study" nav link to /cellexia/. Off by default: set SHOW_CASE_STUDY = true to show it. -->
+<script>
+(() => {
+  const SHOW_CASE_STUDY = false;
+  if (!SHOW_CASE_STUDY) return;
+  const nav = document.querySelector('.nav-links');
+  if (!nav) return;
+  const a = document.createElement('a');
+  a.href = '/cellexia/'; a.textContent = 'Case study';
+  nav.appendChild(a);
+})();
+</script>
+
 <!-- ============ Analytics (GoatCounter, cookie-free) ============ -->
 <script>
 /* Share per-company links like  https://itdhruvjain.github.io/?ref=cellexia

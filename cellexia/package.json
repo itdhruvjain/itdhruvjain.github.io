@@ -1,0 +1,9 @@
+{
+  "name": "cellexia-case-study",
+  "private": true,
+  "description": "Static case-study route for itdhruvjain.github.io/cellexia/. No build step; this file only scopes ES modules and the test script.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/"
+  }
+}

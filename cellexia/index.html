@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cellexia Ops Hub — a case study by Dhruv Jain</title>
+<meta name="description" content="An unofficial concept by Dhruv Jain, a job candidate: how I would automate support, delivery, ads reporting and review replies for Cellexia in my first 30 days. Sample data only.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="author" content="Dhruv Jain">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f5f2ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131316" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%2327306B%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2245%22%20font-family%3D%22Helvetica%2CArial%2Csans-serif%22%20font-size%3D%2236%22%20font-weight%3D%22bold%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%3ED%3C%2Ftext%3E%3C%2Fsvg%3E">
+<script>try{var t=localStorage.getItem('dj-theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles/cx.css">
+<link rel="modulepreload" href="ui/page.js">
+</head>
+<body class="cx">
+<a class="cx-skip" href="#main">Skip to content</a>
+
+<aside class="cx-banner" aria-label="Disclaimer">
+  <p><b>Unofficial concept by Dhruv Jain, a job candidate.</b> Not affiliated with or endorsed by Cellexia Labs. Orders, customers, emails and ad figures are invented sample data.</p>
+</aside>
+
+<header class="cx-top">
+  <div class="cx-wrap cx-top-in">
+    <a class="cx-me" href="/">Dhruv Jain</a>
+    <span class="cx-top-tag">Case study · Cellexia</span>
+    <button class="cx-theme" id="cx-theme" type="button" aria-pressed="false" aria-label="Dark theme"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg><span>Dark</span></button>
+  </div>
+  <nav class="cx-secnav" aria-label="Sections">
+    <div class="cx-wrap"><ul>
+      <li><a href="#learned">What I learned</a></li>
+      <li><a href="#hub">Ops Hub demo</a></li>
+      <li><a href="#duties">The duties problem</a></li>
+      <li><a href="#connects">How it connects</a></li>
+      <li><a href="#plan">First 30 days</a></li>
+      <li><a href="#principles">Principles</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul></div>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- 1. HERO -->
+<section class="cx-hero cx-wrap" aria-labelledby="cx-h1">
+  <p class="cx-eyebrow">For the Cellexia team · founder, operations, hiring</p>
+  <h1 id="cx-h1">A morning at Cellexia, with the busywork automated.</h1>
+  <p class="cx-lede">I studied how Cellexia sells and what customers complain about, then built the tools I’d ship in my first 30 days.</p>
+  <div class="cx-hero-acts">
+    <button type="button" class="cx-btn cx-pri cx-lg" id="cx-play">▶ Play the 2-minute demo</button>
+    <a class="cx-btn cx-lg" href="#plan">Read the plan</a>
+  </div>
+  <ul class="cx-stats" aria-label="Public facts about Cellexia">
+    <li><b>4.8★ from ~4,500 reviews</b><span>Source: Trustpilot public profile, at time of research</span></li>
+    <li><b>5 markets</b><span>Europe, UK, US, Canada, Australia. Source: public shipping information</span></li>
+    <li><b>#1 complaint: surprise import fees</b><span>Source: my reading of public reviews</span></li>
+  </ul>
+</section>
+
+<!-- 2. WHAT I LEARNED -->
+<section class="cx-sec cx-wrap" id="learned" aria-labelledby="cx-learned-h">
+  <p class="cx-eyebrow">01 · Research</p>
+  <h2 id="cx-learned-h">What I learned about your business</h2>
+  <p class="cx-intro">Everything here comes from public sources. Where I’m guessing, I say so.</p>
+  <div class="cx-cards">
+    <article class="cx-card cx-learn">
+      <h3>How you sell</h3>
+      <p>A Shopify store (with Shogun pages and Fast Bundle offers), Meta and YouTube ads, sponsored articles on lifestyle sites such as Esquire AU and HollywoodLife, and listings on German online pharmacies (medpex, DocMorris) with PZN codes. Products are about €54–69, led by the 10 ml Deep Wrinkle Filler Gel.</p>
+      <p class="cx-sowhat"><b>So what for engineering:</b> one product list that maps each SKU to its PZN, and UTM tags on every link, so every channel’s sales are counted the same way.</p>
+    </article>
+    <article class="cx-card cx-learn">
+      <h3>Who buys</h3>
+      <p>People with mature skin across Europe, the UK, the US, Canada and Australia, buying a premium product backed by a 60-day money-back guarantee. Most probably shop on their phones <em class="cx-assume">(assumption)</em>.</p>
+      <p class="cx-sowhat"><b>So what for engineering:</b> notices and emails written plainly and designed for mobile first, and measured with the Clarity and heatmap tools already on the site.</p>
+    </article>
+    <article class="cx-card cx-learn">
+      <h3>How the team works</h3>
+      <p>Small and fully remote, largely in the Philippines. You’re hiring for ops, ads, SEO, IT and VA roles at the same time, and a VA builds the Ads Manager reports by hand in spreadsheets.</p>
+      <p class="cx-sowhat"><b>So what for engineering:</b> tools that are simple, documented and work across time zones, starting with whatever removes manual spreadsheet work.</p>
+    </article>
+    <article class="cx-card cx-learn">
+      <h3>What customers complain about</h3>
+      <p>Mainly <b>surprise import duties</b> collected by FedEx at the door (for example US $55 on an $89 order, and UK £51 and £68). Also menthol irritation, a small tube for the price, results that take weeks, and limited local availability. The rating is 4.8, but negative reviews get no replies.</p>
+      <p class="cx-sowhat"><b>So what for engineering:</b> most of these can be fixed by showing the right information at the right moment, before the customer has to ask.</p>
+    </article>
+  </div>
+</section>
+
+<!-- 3. OPS HUB -->
+<section class="cx-sec cx-wrap" id="hub" aria-labelledby="cx-hub-h">
+  <p class="cx-eyebrow">02 · Working demo</p>
+  <h2 id="cx-hub-h">The Ops Hub</h2>
+  <p class="cx-intro">One place for support, delivery, ads and reviews. Press play to watch five automations from a typical morning, then click through the tabs to see where each result lands. Every customer-facing step waits for a person to approve it.</p>
+  <div class="cx-hub" id="cx-hub" aria-live="off">
+    <p class="cx-empty">Loading the demo…</p>
+    <noscript><p class="cx-empty">The demo needs JavaScript. The rest of the page works without it.</p></noscript>
+  </div>
+</section>
+
+<!-- 4. DUTIES -->
+<section class="cx-sec cx-wrap" id="duties" aria-labelledby="cx-duties-h">
+  <p class="cx-eyebrow">03 · The biggest fix</p>
+  <h2 id="cx-duties-h">The duties problem</h2>
+  <div class="cx-story">
+    <ol class="cx-steps3">
+      <li><b>The customer pays €67 at checkout.</b> The price looks fair, and the guarantee makes it feel safe.</li>
+      <li><b>The courier asks for more at the door.</b> Duty, tax and a handling fee, which can come to more than half the order.</li>
+      <li><b>They leave a 1-star review.</b> The product may be fine, but the surprise is what they remember.</li>
+    </ol>
+    <p class="cx-assume-p"><span class="cx-chip cx-warn">Assumption</span> If you ship duties-unpaid from the EU to the UK, US, Canada and Australia (which the reviews suggest), the courier collects these fees on delivery. The explainer below uses <b>illustrative</b> numbers.</p>
+  </div>
+
+  <div class="cx-card cx-duty" role="group" aria-labelledby="cx-d-h">
+    <h3 id="cx-d-h">Landed-cost explainer <span class="cx-chip cx-mute">Illustrative rates</span></h3>
+    <div class="cx-d-form">
+      <label for="cx-d-market">Market</label>
+      <select id="cx-d-market"></select>
+      <label for="cx-d-value">Order value (<span id="cx-d-cur">USD</span>)</label>
+      <div class="cx-d-range"><input type="range" id="cx-d-value" min="20" max="300" step="1" value="89"><output id="cx-d-value-out" for="cx-d-value">$89.00</output></div>
+    </div>
+    <div class="cx-d-cols">
+      <div class="cx-d-col cx-d-bad"><h4>What the customer pays today</h4><div id="cx-d-today" aria-live="polite"></div></div>
+      <div class="cx-d-col cx-d-good"><h4>With duties shown or prepaid</h4><div id="cx-d-pre" aria-live="polite"></div></div>
+    </div>
+    <p class="cx-small">Rates, thresholds and fees are round numbers from <code>data/duties.js</code>, chosen to show the shape of the problem. They are not current rules. Check the real thresholds for each market before using anything like this with customers.</p>
+  </div>
+
+  <h3 class="cx-h3">Three options, from cheapest to best</h3>
+  <ol class="cx-options">
+    <li><span class="cx-opt-n">a</span><div><b>Clear notices on the product, cart and post-purchase pages</b><p>Ships in days and costs almost nothing. It takes away the surprise, but not the charge.</p></div></li>
+    <li><span class="cx-opt-n">b</span><div><b>Show estimated duties at checkout</b><p>The customer sees an honest total up front, but estimates can be off and they still pay the courier at the door.</p></div></li>
+    <li><span class="cx-opt-n">c</span><div><b>Duties-paid shipping (DDP) through Shopify Markets / Managed Markets, Zonos or Global-e</b><p>Nothing to pay at the door, which is the best experience. It costs a fee or some margin, and needs HS codes and carrier support.</p></div></li>
+  </ol>
+</section>
+
+<!-- 5. ARCHITECTURE -->
+<section class="cx-sec cx-wrap" id="connects" aria-labelledby="cx-arch-h">
+  <p class="cx-eyebrow">04 · Architecture</p>
+  <h2 id="cx-arch-h">How it connects</h2>
+  <p class="cx-intro">A small service sits between the tools you already use. It reads, checks and drafts. People approve, and only then does anything go out.</p>
+
+  <figure class="cx-arch">
+    <svg class="cx-arch-wide" viewBox="0 0 1000 440" role="img" aria-labelledby="cx-arch-t cx-arch-d">
+      <title id="cx-arch-t">System diagram</title>
+      <desc id="cx-arch-d">Shopify, the helpdesk, 3PLs and carriers through AfterShip, Meta and YouTube ads, Trustpilot, the email tool and Slack all connect to a small ops service made of serverless functions, a scheduler and a database. The service sends drafts to an LLM, every customer-facing draft goes to a person for approval, and approved actions go back out as emails, review replies, Slack alerts and returns.</desc>
+      <defs><marker id="cx-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" class="cx-sv-head"/></marker></defs>
+      <g class="cx-sv-edges">
+        <path d="M214 33 C 280 33, 280 220, 340 220"/><path d="M214 93 C 280 93, 280 220, 340 220"/><path d="M214 153 C 280 153, 280 220, 340 220"/>
+        <path d="M214 213 C 280 213, 280 220, 340 220"/><path d="M214 273 C 280 273, 280 220, 340 220"/><path d="M214 333 C 280 333, 280 220, 340 220"/><path d="M214 393 C 280 393, 280 220, 340 220"/>
+        <path d="M580 180 C 610 180, 610 95, 650 95" marker-end="url(#cx-ah)"/>
+        <path d="M780 130 L 780 178" marker-end="url(#cx-ah)"/>
+        <path d="M580 250 L 648 230" marker-end="url(#cx-ah)"/>
+        <path d="M780 270 L 780 318" marker-end="url(#cx-ah)"/>
+      </g>
+      <g class="cx-sv-in">
+        <rect x="14" y="10" width="200" height="46" rx="8"/><text x="30" y="31">Shopify</text><text class="cx-sv-sub" x="30" y="47">orders, customers</text>
+        <rect x="14" y="70" width="200" height="46" rx="8" class="cx-sv-tbc"/><text x="30" y="91">Helpdesk</text><text class="cx-sv-sub" x="30" y="107">support email · to confirm</text>
+        <rect x="14" y="130" width="200" height="46" rx="8" class="cx-sv-tbc"/><text x="30" y="151">3PL / carriers</text><text class="cx-sv-sub" x="30" y="167">via AfterShip · to confirm</text>
+        <rect x="14" y="190" width="200" height="46" rx="8"/><text x="30" y="211">Meta &amp; YouTube Ads</text><text class="cx-sv-sub" x="30" y="227">spend, status</text>
+        <rect x="14" y="250" width="200" height="46" rx="8"/><text x="30" y="271">Trustpilot</text><text class="cx-sv-sub" x="30" y="287">reviews, replies</text>
+        <rect x="14" y="310" width="200" height="46" rx="8" class="cx-sv-tbc"/><text x="30" y="331">Email tool</text><text class="cx-sv-sub" x="30" y="347">customer emails · to confirm</text>
+        <rect x="14" y="370" width="200" height="46" rx="8"/><text x="30" y="391">Slack</text><text class="cx-sv-sub" x="30" y="407">team alerts</text>
+      </g>
+      <g class="cx-sv-core">
+        <rect x="340" y="120" width="240" height="200" rx="14"/>
+        <text x="460" y="160" text-anchor="middle" class="cx-sv-big">Ops service</text>
+        <text x="460" y="194" text-anchor="middle">Serverless functions</text>
+        <text x="460" y="222" text-anchor="middle">Scheduler (every morning)</text>
+        <text x="460" y="250" text-anchor="middle">Postgres / SQLite store</text>
+        <text x="460" y="278" text-anchor="middle">Rules in config, EU region</text>
+      </g>
+      <g class="cx-sv-out">
+        <rect x="650" y="62" width="260" height="66" rx="10"/><text x="670" y="90">LLM for drafts</text><text class="cx-sv-sub" x="670" y="110">replies, theme tags; facts only</text>
+        <rect x="650" y="182" width="260" height="86" rx="10" class="cx-sv-human"/><text x="670" y="212">Human approval</text><text class="cx-sv-sub" x="670" y="232">approve, edit or escalate</text><text class="cx-sv-sub" x="670" y="252">anything customer-facing</text>
+        <rect x="650" y="322" width="260" height="96" rx="10"/><text x="670" y="350">Actions</text><text class="cx-sv-sub" x="670" y="370">send email · post review reply</text><text class="cx-sv-sub" x="670" y="390">Slack alert · return number</text><text class="cx-sv-sub" x="670" y="408">weekly report</text>
+      </g>
+    </svg>
+
+    <svg class="cx-arch-tall" viewBox="0 0 360 700" role="img" aria-labelledby="cx-arch-t2">
+      <title id="cx-arch-t2">System diagram: seven tools feed the ops service, which drafts with an LLM; a person approves before actions go out.</title>
+      <defs><marker id="cx-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" class="cx-sv-head"/></marker></defs>
+      <g class="cx-sv-in">
+        <rect x="8" y="8" width="168" height="44" rx="8"/><text x="20" y="28">Shopify</text><text class="cx-sv-sub" x="20" y="44">orders</text>
+        <rect x="184" y="8" width="168" height="44" rx="8" class="cx-sv-tbc"/><text x="196" y="28">Helpdesk</text><text class="cx-sv-sub" x="196" y="44">to confirm</text>
+        <rect x="8" y="60" width="168" height="44" rx="8" class="cx-sv-tbc"/><text x="20" y="80">3PL / AfterShip</text><text class="cx-sv-sub" x="20" y="96">3PL to confirm</text>
+        <rect x="184" y="60" width="168" height="44" rx="8"/><text x="196" y="80">Meta &amp; YouTube</text><text class="cx-sv-sub" x="196" y="96">ad spend</text>
+        <rect x="8" y="112" width="168" height="44" rx="8"/><text x="20" y="132">Trustpilot</text><text class="cx-sv-sub" x="20" y="148">reviews</text>
+        <rect x="184" y="112" width="168" height="44" rx="8" class="cx-sv-tbc"/><text x="196" y="132">Email tool</text><text class="cx-sv-sub" x="196" y="148">to confirm</text>
+        <rect x="96" y="164" width="168" height="44" rx="8"/><text x="108" y="184">Slack</text><text class="cx-sv-sub" x="108" y="200">alerts</text>
+      </g>
+      <g class="cx-sv-edges"><path d="M180 212 L 180 246" marker-end="url(#cx-ah2)"/><path d="M180 396 L 180 426" marker-end="url(#cx-ah2)"/><path d="M180 494 L 180 522" marker-end="url(#cx-ah2)"/><path d="M180 590 L 180 618" marker-end="url(#cx-ah2)"/></g>
+      <g class="cx-sv-core"><rect x="20" y="250" width="320" height="146" rx="14"/>
+        <text x="180" y="282" text-anchor="middle" class="cx-sv-big">Ops service</text>
+        <text x="180" y="310" text-anchor="middle">Serverless functions</text><text x="180" y="334" text-anchor="middle">Scheduler · Postgres / SQLite</text><text x="180" y="358" text-anchor="middle">Rules in config, EU region</text></g>
+      <g class="cx-sv-out">
+        <rect x="20" y="430" width="320" height="64" rx="10"/><text x="36" y="456">LLM for drafts</text><text class="cx-sv-sub" x="36" y="478">replies, theme tags; facts only</text>
+        <rect x="20" y="526" width="320" height="64" rx="10" class="cx-sv-human"/><text x="36" y="552">Human approval</text><text class="cx-sv-sub" x="36" y="574">anything customer-facing</text>
+        <rect x="20" y="622" width="320" height="70" rx="10"/><text x="36" y="648">Actions</text><text class="cx-sv-sub" x="36" y="670">email · review reply · Slack · returns</text>
+      </g>
+    </svg>
+    <figcaption class="cx-small">Dashed boxes are tools I haven’t been able to confirm from public information.</figcaption>
+  </figure>
+
+  <div class="cx-tablewrap" tabindex="0" role="region" aria-labelledby="cx-int-cap">
+  <table class="cx-table cx-int">
+    <caption id="cx-int-cap">Integrations, what each needs, and the limits</caption>
+    <thead><tr><th scope="col">Integration</th><th scope="col">Official API</th><th scope="col">Access Cellexia would grant</th><th scope="col">Data used</th><th scope="col">Risk / limit</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Shopify</th><td>Admin GraphQL API + webhooks (orders/create, fulfillments/update)</td><td>A custom app in your admin with read_orders, read_customers, read_fulfillments</td><td>Order number, country, items, dates, email</td><td>Customer data is “protected”; by default only the last 60 days of orders</td></tr>
+      <tr><th scope="row">Helpdesk <span class="cx-chip cx-warn">to confirm</span></th><td>The helpdesk’s ticket API, or the Gmail API / Microsoft Graph</td><td>An API key or OAuth for the support inbox</td><td>Email text, sender</td><td>Depends on the tool; Gmail push watches need renewing every 7 days</td></tr>
+      <tr><th scope="row">3PL / carriers <span class="cx-chip cx-warn">3PL to confirm</span></th><td>AfterShip Tracking API + webhooks; the 3PL’s own API for pick errors</td><td>An AfterShip account; tracking numbers already come from Shopify</td><td>Scan events and dates</td><td>Paid plan; the quality of pick-error data depends on the 3PL</td></tr>
+      <tr><th scope="row">Meta Ads</th><td>Marketing API (Insights)</td><td>A system-user token with ads_read in your Business Manager</td><td>Spend, status, ad names</td><td>Rate limits; read-only by design</td></tr>
+      <tr><th scope="row">YouTube Ads</th><td>Google Ads API</td><td>A developer token and read access to the Ads account</td><td>Spend, campaign names</td><td>Developer-token approval can take days</td></tr>
+      <tr><th scope="row">Trustpilot</th><td>Business API (reviews, replies)</td><td>The API module on your plan</td><td>Review text, stars, reply</td><td>A paid add-on; without it, use export plus manual replies</td></tr>
+      <tr><th scope="row">Email tool <span class="cx-chip cx-warn">to confirm</span></th><td>e.g. the Klaviyo Events API, or Shopify Flow</td><td>A private API key for one event type</td><td>Order number, country, first name</td><td>Marketing-consent rules; templates approved once</td></tr>
+      <tr><th scope="row">Slack</th><td>Incoming webhook or chat.postMessage</td><td>One bot in one channel</td><td>Alert text only, no customer details</td><td>Low</td></tr>
+      <tr><th scope="row">LLM</th><td>A hosted model API (e.g. Claude)</td><td>A key held only by the service</td><td>Email text and order facts; never payment data</td><td>Drafts can be wrong, so a person approves every one</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- 6. PLAN -->
+<section class="cx-sec cx-wrap" id="plan" aria-labelledby="cx-plan-h">
+  <p class="cx-eyebrow">05 · Plan</p>
+  <h2 id="cx-plan-h">First 30 days</h2>
+  <p class="cx-intro">One shipped outcome a week, each with a number we can watch.</p>
+  <ol class="cx-weeks">
+    <li><span class="cx-wk">Week 1</span><b>Ads reporting automation</b><p>The weekly ads report builds itself from Meta, YouTube and Shopify, and spend spikes alert the media buyer in Slack.</p><p class="cx-metric">Metric: VA hours saved per week</p></li>
+    <li><span class="cx-wk">Week 2</span><b>Duties notices and post-purchase email</b><p>Clear import-fee notices on the product, cart and confirmation pages, plus a pre-delivery email for non-EU orders.</p><p class="cx-metric">Metric: duty-related tickets and reviews</p></li>
+    <li><span class="cx-wk">Week 3</span><b>Support triage with drafted replies</b><p>Every email is tagged, matched to its order and checked against policy. A person approves each draft, and anything unclear goes straight to a person.</p><p class="cx-metric">Metric: first-response time</p></li>
+    <li><span class="cx-wk">Week 4</span><b>Review replies, theme reports, stuck-parcel alerts</b><p>Drafted replies to negative reviews, a weekly themes note for the product team, and alerts before customers ask where their parcel is.</p><p class="cx-metric">Metric: share of negative reviews answered; WISMO tickets</p></li>
+  </ol>
+  <div class="cx-card cx-asks">
+    <h3>What I’d ask on day 1</h3>
+    <ol>
+      <li>Which helpdesk or inbox does support use today?</li>
+      <li>Which 3PLs and carriers ship each market, and do non-EU parcels go duties-unpaid?</li>
+      <li>Which Shopify plan are you on, and are Shopify Markets or Managed Markets an option?</li>
+      <li>Does your Trustpilot plan include the API module?</li>
+      <li>Do all Meta and YouTube ads carry UTM tags, and where does the VA’s report live today?</li>
+    </ol>
+  </div>
+</section>
+
+<!-- 7. PRINCIPLES -->
+<section class="cx-sec cx-wrap" id="principles" aria-labelledby="cx-pr-h">
+  <p class="cx-eyebrow">06 · How I build</p>
+  <h2 id="cx-pr-h">Engineering principles</h2>
+  <ul class="cx-principles">
+    <li><b>Simple over clever.</b> Small services and plain rules that the next person can read.</li>
+    <li><b>People approve anything customer-facing.</b> Automations draft and suggest. They don’t send on their own.</li>
+    <li><b>GDPR-aware.</b> No customer data in logs, hosted in an EU region, and only the data each task needs.</li>
+    <li><b>Documented.</b> Every automation has a one-page “what, why and how to switch it off”.</li>
+    <li><b>Small, reversible releases.</b> Behind a switch, rolled out one market at a time.</li>
+    <li><b>AI drafts are checked.</b> Replies start from approved templates and real order facts, and a person reviews them before they go out.</li>
+  </ul>
+</section>
+
+<!-- 8. CTA -->
+<section class="cx-sec cx-wrap cx-cta" id="contact" aria-labelledby="cx-cta-h">
+  <h2 id="cx-cta-h">I’d love 20 minutes to walk your team through this.</h2>
+  <ul class="cx-contact">
+    <li><span>Email</span><a href="mailto:hello.dhruvjain@gmail.com?subject=Cellexia%20case%20study">hello.dhruvjain@gmail.com</a></li>
+    <li><span>Phone</span><a href="tel:+917016581281">+91 70165 81281</a></li>
+    <li><span>Portfolio</span><a href="https://itdhruvjain.github.io/">itdhruvjain.github.io</a></li>
+  </ul>
+  <div class="cx-hero-acts">
+    <a class="cx-btn cx-pri cx-lg" href="mailto:hello.dhruvjain@gmail.com?subject=Cellexia%20case%20study">Email me</a>
+    <button type="button" class="cx-btn cx-lg" id="cx-print">Download the one-page plan (PDF)</button>
+  </div>
+  <p class="cx-small">The PDF button opens your browser’s print dialog. Choose “Save as PDF”.</p>
+</section>
+
+</main>
+
+<footer class="cx-foot">
+  <div class="cx-wrap">
+    <p><b>Unofficial concept by Dhruv Jain, a job candidate.</b> Not affiliated with or endorsed by Cellexia Labs. Orders, customers, emails and ad figures are invented sample data. Cellexia’s name is used only to describe the company this concept is for.</p>
+    <p><a href="/">← Back to my portfolio</a></p>
+  </div>
+</footer>
+
+<div class="cx-print-head" aria-hidden="true">
+  <b>Dhruv Jain — First 30 days at Cellexia (one-page plan)</b>
+  <span>hello.dhruvjain@gmail.com · +91 70165 81281 · itdhruvjain.github.io/cellexia/</span>
+  <span>Unofficial concept by a job candidate. Not affiliated with or endorsed by Cellexia Labs. Figures are illustrative.</span>
+</div>
+
+<div class="cx-toast" id="cx-toast" role="status" aria-live="polite"></div>
+
+<script type="module" src="ui/page.js"></script>
+<script data-goatcounter="https://dhruvjain.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
