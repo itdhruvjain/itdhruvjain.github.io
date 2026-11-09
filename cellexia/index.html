@@ -14,7 +14,9 @@
 <script>try{var t=localStorage.getItem('dj-theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500;600&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500;600&display=swap"></noscript>
 <link rel="stylesheet" href="styles/cx.css">
 <link rel="modulepreload" href="ui/page.js">
 </head>
@@ -29,10 +31,11 @@
   <div class="cx-wrap cx-top-in">
     <a class="cx-me" href="/">Dhruv Jain</a>
     <span class="cx-top-tag">Case study · Cellexia</span>
-    <button class="cx-theme" id="cx-theme" type="button" aria-pressed="false" aria-label="Dark theme"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg><span>Dark</span></button>
+    <button class="cx-themebtn" id="cx-theme" type="button" aria-pressed="false" aria-label="Dark theme"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg><span>Dark</span></button>
   </div>
   <nav class="cx-secnav" aria-label="Sections">
     <div class="cx-wrap"><ul>
+      <li><a href="#why">Why this role</a></li>
       <li><a href="#learned">What I learned</a></li>
       <li><a href="#hub">Ops Hub demo</a></li>
       <li><a href="#duties">The duties problem</a></li>
@@ -46,13 +49,34 @@
 
 <main id="main">
 
+<!-- 0. WHY THIS ROLE -->
+<section class="cx-why cx-wrap" id="why" aria-labelledby="cx-why-h">
+  <div class="cx-why-text">
+    <p class="cx-eyebrow">Before the demo · why this role matters</p>
+    <h1 id="cx-why-h">Hydrogen and oxygen don’t make water on their own.</h1>
+    <p class="cx-why-lede">You can have both and still have no water. Something has to bring them together. A team works the same way: your founder, operations, ads, SEO, IT, support and VAs each do good work, but the value comes from how it connects.</p>
+    <p>This role sits in the middle. The person in it has to work with almost everyone, understand them and their work, and build the tools that join it all up. So choose them carefully. <b>I believe I’m the best fit for it, and the rest of this page is my case.</b></p>
+  </div>
+  <div class="cx-why-demo" id="cx-water">
+    <p class="cx-w-eq" aria-live="polite"><span class="cx-w-a">H</span><span class="cx-w-op">+</span><span class="cx-w-a">H</span><span class="cx-w-op">+</span><span class="cx-w-a cx-w-o">O</span><span class="cx-w-op">→</span><span class="cx-w-res" id="cx-w-res">no water yet</span></p>
+    <svg class="cx-w-svg" viewBox="0 0 420 380" role="img" aria-labelledby="cx-w-svg-t">
+      <title id="cx-w-svg-t">Seven parts of the team: founder, operations, ads and media, SEO, IT, support and VAs. When the connecting role is added, a line joins each of them to it.</title>
+      <g class="cx-w-lines"><line x1="210" y1="190" x2="210" y2="62" style="--d:0ms"/><line x1="210" y1="190" x2="323" y2="110" style="--d:70ms"/><line x1="210" y1="190" x2="351" y2="218" style="--d:140ms"/><line x1="210" y1="190" x2="273" y2="305" style="--d:210ms"/><line x1="210" y1="190" x2="147" y2="305" style="--d:280ms"/><line x1="210" y1="190" x2="69" y2="218" style="--d:350ms"/><line x1="210" y1="190" x2="97" y2="110" style="--d:420ms"/></g>
+      <g class="cx-w-core"><circle cx="210" cy="190" r="52"/><text x="210" y="186" text-anchor="middle">The person</text><text x="210" y="204" text-anchor="middle">who connects</text></g>
+      <g class="cx-w-node" transform="translate(210 62)"><rect x="-43" y="-17" width="86" height="34" rx="17"/><text text-anchor="middle" y="5">Founder</text></g><g class="cx-w-node" transform="translate(323 110)"><rect x="-56" y="-17" width="112" height="34" rx="17"/><text text-anchor="middle" y="5">Operations</text></g><g class="cx-w-node" transform="translate(351 218)"><rect x="-60" y="-17" width="121" height="34" rx="17"/><text text-anchor="middle" y="5">Ads &amp; media</text></g><g class="cx-w-node" transform="translate(273 305)"><rect x="-32" y="-17" width="64" height="34" rx="17"/><text text-anchor="middle" y="5">SEO</text></g><g class="cx-w-node" transform="translate(147 305)"><rect x="-32" y="-17" width="64" height="34" rx="17"/><text text-anchor="middle" y="5">IT</text></g><g class="cx-w-node" transform="translate(69 218)"><rect x="-43" y="-17" width="86" height="34" rx="17"/><text text-anchor="middle" y="5">Support</text></g><g class="cx-w-node" transform="translate(97 110)"><rect x="-32" y="-17" width="64" height="34" rx="17"/><text text-anchor="middle" y="5">VAs</text></g>
+    </svg>
+    <p class="cx-w-cap" id="cx-w-cap" aria-live="polite">Good people, separate tools: every hand-off between them is done by hand.</p>
+    <div class="cx-acts"><button type="button" class="cx-btn cx-pri" id="cx-w-btn" aria-pressed="false">Add the missing link</button><a class="cx-btn" href="#top-hero">See what I’d build ↓</a></div>
+  </div>
+</section>
+
 <!-- 1. HERO -->
-<section class="cx-hero cx-wrap" aria-labelledby="cx-h1">
+<section class="cx-hero cx-wrap" id="top-hero" aria-labelledby="cx-h1">
   <p class="cx-eyebrow">For the Cellexia team · founder, operations, hiring</p>
-  <h1 id="cx-h1">A morning at Cellexia, with the busywork automated.</h1>
+  <h2 id="cx-h1" class="cx-hero-h">A morning at Cellexia, with the busywork automated.</h2>
   <p class="cx-lede">I studied how Cellexia sells and what customers complain about, then built the tools I’d ship in my first 30 days.</p>
   <div class="cx-hero-acts">
-    <button type="button" class="cx-btn cx-pri cx-lg" id="cx-play">▶ Play the 2-minute demo</button>
+    <button type="button" class="cx-btn cx-pri cx-lg" id="cx-play">▶ Take the 2-minute tour</button>
     <a class="cx-btn cx-lg" href="#plan">Read the plan</a>
   </div>
   <ul class="cx-stats" aria-label="Public facts about Cellexia">
@@ -95,7 +119,7 @@
 <section class="cx-sec cx-wrap" id="hub" aria-labelledby="cx-hub-h">
   <p class="cx-eyebrow">02 · Working demo</p>
   <h2 id="cx-hub-h">The Ops Hub</h2>
-  <p class="cx-intro">One place for support, delivery, ads and reviews. Press play to watch five automations from a typical morning, then click through the tabs to see where each result lands. Every customer-facing step waits for a person to approve it.</p>
+  <p class="cx-intro">One place for support, delivery, ads and reviews. The guided tour walks through five jobs from a typical morning, one step at a time and at your own pace. Each chapter has something to try, and ends with a link to where the result lands in the hub. Every customer-facing step waits for a person to approve it.</p>
   <div class="cx-hub" id="cx-hub" aria-live="off">
     <p class="cx-empty">Loading the demo…</p>
     <noscript><p class="cx-empty">The demo needs JavaScript. The rest of the page works without it.</p></noscript>

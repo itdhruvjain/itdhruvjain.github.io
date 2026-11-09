@@ -1,17 +1,16 @@
-// Interactive Ops Hub: tabs, panels and the scenario player.
+// Interactive Ops Hub: tabs, panels and the guided tour.
 // Loaded lazily by page.js when the hub scrolls near the viewport.
 import { POLICY, LANE, LANES, NON_EU } from '../data/policy.js';
 import { buildSample } from '../data/sample.js';
 import { triage } from '../lib/triage.js';
-import { laneSummary, overallOnTime, findStuck, parcelStatus } from '../lib/lanes.js';
+import { laneSummary, overallOnTime, findStuck } from '../lib/lanes.js';
 import { adFlags, roas, totals, merByMarket, weeklySummary, suggestedCap, spikeRatio } from '../lib/ads.js';
-import { createPlayer } from '../lib/scenario.js';
+import { mountTour } from './tour.js';
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const eur = n => '€' + Math.round(n).toLocaleString('en-GB');
 const pct = n => Math.round(n * 100) + '%';
 const D = 864e5, H = 36e5;
-const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const time = d => d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
 const when = (d, now) => (now - d < 18 * H ? time(d) : 'Yesterday');
 
@@ -19,7 +18,7 @@ export function initHub(root, { track = () => {}, toast = () => {} } = {}) {
   const S = buildSample(new Date());
   const now = S.now;
   const ctx = { orders: S.orders, policy: POLICY, lanes: LANE, nonEu: NON_EU };
-  const st = { sel: 1, sent: new Set(), escalated: new Set(), edits: {}, notices: [], alerts: [], runs: [], report: '', tab: 'today' };
+  const st = { sel: 1, sent: new Set(), escalated: new Set(), edits: {}, notices: [], alerts: [], report: '', tab: 'today' };
   const $ = sel => root.querySelector(sel);
 
   /* ------------------------------------------------------------ shell + ARIA tabs */
@@ -92,43 +91,14 @@ export function initHub(root, { track = () => {}, toast = () => {} } = {}) {
   }
   function renderToday() {
     $('#cx-panel-today').innerHTML = `
+      <section class="cx-card cx-tour" id="cx-tour" aria-label="Guided tour"></section>
+      <h3 class="cx-glance-h">Today at a glance</h3>
       <ul class="cx-kpis" id="cx-kpis" aria-label="Key numbers"></ul>
-      <div class="cx-today">
-        <section class="cx-card cx-player" aria-labelledby="cx-player-h">
-          <h3 id="cx-player-h">Scenario player</h3>
-          <p class="cx-small">Five automations from a typical morning, one at a time. Watch each step land in the log.</p>
-          <ol class="cx-scn">${SCENARIOS.map((s, i) => `<li data-scn="${i}"><span class="cx-scn-n" aria-hidden="true">${i + 1}</span><span><b>${esc(s.name)}</b><span class="cx-small">${esc(s.sub)}</span></span><span class="cx-vh" data-scn-state></span></li>`).join('')}</ol>
-          <div class="cx-ctrls">
-            <button type="button" class="cx-btn cx-pri" data-ctl="play"></button>
-            <button type="button" class="cx-btn" data-ctl="pause">Pause</button>
-            <button type="button" class="cx-btn" data-ctl="skip">Skip</button>
-            <button type="button" class="cx-btn" data-ctl="replay">Replay</button>
-          </div>
-          <p class="cx-small cx-status" aria-live="polite" id="cx-pstatus"></p>
-        </section>
-        <section class="cx-card cx-logbox" aria-labelledby="cx-log-h">
-          <h3 id="cx-log-h">Automation log</h3>
-          <div id="cx-log"></div>
-        </section>
-      </div>
       <section class="cx-card" aria-labelledby="cx-att-h">
         <h3 id="cx-att-h">Needs attention</h3>
         <ul class="cx-alerts" id="cx-att"></ul>
       </section>`;
     todayData();
-  }
-  const scnClass = i => (player.index > i || player.state === 'ended') ? 'is-done' : (player.index === i && player.state !== 'idle') ? 'is-run' : '';
-  const scnLabel = i => scnClass(i) === 'is-done' ? '(done)' : scnClass(i) === 'is-run' ? '(running)' : '(waiting)';
-  const playLabel = () => player.state === 'paused' ? '▶ Resume' : player.state === 'ended' ? '▶ Play again' : '▶ Play the whole morning';
-  const statusText = () => ({ idle: 'Ready.', playing: `Running ${Math.min(player.index + 1, SCENARIOS.length)} of ${SCENARIOS.length}…`, paused: 'Paused.', ended: 'Morning done. Open the other tabs to see where each result landed.' }[player.state]);
-
-  function renderLog() {
-    if (!st.runs.length) return '<p class="cx-empty">Nothing has run yet. Press “Play the whole morning”.</p>';
-    return `<ol class="cx-runs">${st.runs.map(r => `<li class="cx-run">
-      <div class="cx-run-h">${chip('info', r.s.src)}<b>${esc(r.s.title)}</b><span class="cx-small">${r.time}</span></div>
-      <ol class="cx-steps">${r.s.steps.map((x, i) => `<li class="${i <= r.step ? (r.s.wait && i === r.s.steps.length - 1 ? 'is-wait' : 'is-on') : ''}">${esc(x)}</li>`).join('')}</ol>
-      ${r.s.slack && r.step >= r.s.steps.length - 1 ? r.s.slack() : ''}
-      ${how('', r.s.how)}</li>`).join('')}</ol>`;
   }
 
   /* ------------------------------------------------------------ SUPPORT */
@@ -289,93 +259,39 @@ export function initHub(root, { track = () => {}, toast = () => {} } = {}) {
   }
   function renderAll() { renderToday(); renderSupport(); renderDelivery(); renderAds(); renderVoice(); refreshCounts(); }
 
-  /* ------------------------------------------------------------ SCENARIOS */
-  // Scenario data is built through the same libs the tabs use, so the log and the tabs always agree.
+  /* ------------------------------------------------------------ tour results */
+  // When the reader finishes a tour chapter, its result is added to the hub so they can find it in the tabs.
   const helenOrder = { id: 'CX-DEMO-10612', email: 'helen.w@example.com', country: 'UK', items: 'Neck Tightening Cream ×1', total: '£58.00', shippedAt: new Date(now - 15 * D), deliveredAt: new Date(now - 12 * D), carrier: 'DPD', site: '3PL-EU-1' };
   const helenMail = { id: 9, from: 'Helen W.', email: 'helen.w@example.com', receivedAt: now, isNew: true, subj: 'Return the neck cream?', body: 'Hi, the neck cream isn’t for me. Can I send it back for a refund? Order CX-DEMO-10612.' };
-  const helenT = triage(helenMail, { ...ctx, orders: [helenOrder] });
-  const helenRan = helenT.actions[0].label.replace('Issue ', '');
   const caParcel = { o: 'CX-DEMO-10399', m: 'CA', carrier: 'FedEx', last: 'Arrived at sort facility', shippedAt: new Date(now - 8 * D - 2 * H), lastScanAt: new Date(now - 2 * D - 4 * H), isNew: true };
-  const caS = parcelStatus(caParcel, LANE.CA, now);
   const spikeAd = S.ads.find(a => a.n === 'ELS_US_Video_60Day_V4');
   const menthol = S.themes.find(t => t.key === 'menthol');
-
-  const SCENARIOS = [
-    { key: 'refund', name: 'A refund request', sub: 'Email → order → 60-day check → return number → draft', src: 'Helpdesk', wait: true,
-      title: `Refund request from ${helenMail.from} (UK)`,
-      steps: ['Email received', `Order ${helenOrder.id} found`, helenT.checks.find(c => /guarantee/.test(c.label)).label, `Return number ${helenRan} created`, 'Reply drafted', 'Waiting for a person to approve'],
-      how: { trigger: 'New email or helpdesk ticket (helpdesk webhook; tool to confirm)', system: 'Ops service triage rules: intent, order lookup, 60-day guarantee from delivery', api: 'Shopify Admin GraphQL: orders(query: "name:CX-DEMO-10612") · helpdesk API: draft reply', approve: 'A support agent approves or edits the reply in Support' },
-      apply() { if (!S.orders.includes(helenOrder)) { S.orders.push(helenOrder); S.emails.unshift(helenMail); st.sel = helenMail.id; st.alerts.unshift(['info', 'New refund request triaged', `${helenMail.from}: within the guarantee, return number and reply ready.`, 'support', true]); } } },
-    { key: 'order', name: 'A US order arrives', sub: 'Shopify webhook → import-fee flag → pre-delivery email', src: 'Shopify',
-      title: 'Shopify order CX-DEMO-10650 ($138, United States)',
-      steps: ['orders/create webhook received', 'Signature (HMAC) verified', 'Saved once; duplicate deliveries ignored', 'US is outside the EU: flagged for import fees', 'Pre-delivery email drafted: “your courier may ask for import fees”'],
-      how: { trigger: 'Shopify orders/create webhook', system: 'Ops service checks the shipping country against the duty table (data/duties.js)', api: 'Email tool event, e.g. Klaviyo POST /api/events "Duties notice" (tool to confirm)', approve: 'Ops approves the template once; after that it sends per order' },
-      apply() { if (!st.notices.includes('CX-DEMO-10650')) { st.notices.push('CX-DEMO-10650'); S.ordersYesterday++; st.alerts.unshift(['info', 'Import-fee notice queued for CX-DEMO-10650', 'US order: customer told before delivery that the courier may ask for fees.', 'delivery', true]); } } },
-    { key: 'parcel', name: 'A Canada parcel runs late', sub: 'Tracking check → promise missed → delay email', src: 'AfterShip', wait: true,
-      title: `${caParcel.o} to Canada misses its window`,
-      steps: ['Morning tracking check', `${caParcel.o} matched to its Shopify order`, `Day ${caS.sinceShip} against a ${LANE.CA.min}–${LANE.CA.max} day promise: missed`, 'Delay email drafted before the customer writes in', 'Waiting for a person to approve'],
-      how: { trigger: 'AfterShip tracking webhook, plus a scheduled morning check', system: 'Promise and stuck-scan rules per lane (lib/lanes.js)', api: 'AfterShip Tracking API: GET /trackings · webhook tracking_update', approve: 'Ops approves the delay email' },
-      apply() { if (!S.parcels.includes(caParcel)) { S.parcels.unshift(caParcel); st.alerts.unshift(['warn', `${caParcel.o} to Canada is past its promise`, 'Delay email drafted for approval.', 'delivery', true]); } } },
-    { key: 'ad', name: 'An ad overspends', sub: 'Morning pull → 2.1× spike → Slack alert with a cap', src: 'Ads',
-      title: `Spend spike on ${spikeAd.n}`,
-      steps: ['Meta and YouTube spend pulled', `€${spikeAd.today} today vs €${spikeAd.avg7} average: ${spikeRatio(spikeAd).toFixed(1)}×`, `Joined with Shopify sales: ROAS ${roas(spikeAd).toFixed(1)}`, `Suggested cap: €${suggestedCap(spikeAd)} a day`, 'Media buyer alerted in Slack'],
-      slack: () => `<div class="cx-slack" role="img" aria-label="Example Slack message to the media buyer"><span class="cx-slack-a" aria-hidden="true">OB</span><div><b>Ops bot</b> <span class="cx-small">#ads · ${time(new Date())}</span><p>⚠️ <span class="cx-mono">${esc(spikeAd.n)}</span> has spent <b>€${spikeAd.today}</b> today, ${spikeRatio(spikeAd).toFixed(1)}× its 7-day average. ROAS on Shopify sales is <b>${roas(spikeAd).toFixed(1)}</b>. Suggested daily cap: <b>€${suggestedCap(spikeAd)}</b>. Nothing has been changed.</p></div></div>`,
-      how: { trigger: 'Scheduler, every morning at 07:00 Dublin time', system: 'Spike rule (≥1.8× the 7-day average) and ROAS on UTM-matched Shopify sales (lib/ads.js)', api: 'Meta Marketing API /insights · Google Ads API · Slack chat.postMessage', approve: 'The media buyer decides whether to cap. Budgets are never changed automatically.' },
-      apply() { if (!spikeAd.isNew) { spikeAd.isNew = true; st.alerts.unshift(['warn', `${spikeAd.n}: spend ${spikeRatio(spikeAd).toFixed(1)}× average`, `Slack alert sent to the media buyer with a €${suggestedCap(spikeAd)} cap suggestion.`, 'ads', true]); } } },
-    { key: 'review', name: 'A 1★ review lands', sub: 'Trustpilot → theme tag → drafted public reply', src: 'Trustpilot', wait: true,
-      title: '1★ review from D. Demo (US)',
-      steps: ['New review pulled', 'Tagged: menthol irritation', `Theme count ${themeCount(menthol)} → ${themeCount(menthol) + 1}`, 'Public reply drafted', 'Waiting for a person to approve'],
-      how: { trigger: 'Trustpilot poll every 15 minutes (or webhook, depending on plan)', system: 'An LLM picks a theme from a fixed list; weekly counts stored', api: 'Trustpilot Business API: reply to service review (API module, to confirm)', approve: 'The support lead approves each public reply' },
-      apply() { if (!S.reviews.some(r => r.who.startsWith('D. Demo'))) { S.reviews.unshift({ who: 'D. Demo · US · 1★', theme: 'menthol', text: 'Burned around my eyes, I had to stop using it.', isNew: true }); menthol.trend[menthol.trend.length - 1]++; menthol.isNew = true; st.alerts.unshift(['warn', 'New 1★ review: menthol irritation', `Reply drafted. Theme now at ${themeCount(menthol)} mentions.`, 'voice', true]); } } },
-  ];
-
-  /* ------------------------------------------------------------ player wiring */
-  let activeRun = null;
-  const player = createPlayer(SCENARIOS, {
-    stepMs: 700, gapMs: 1100,
-    schedule: (fn, ms) => setTimeout(fn, reduced() ? Math.min(ms, 120) : ms),
-    onEvent(e) {
-      if (e.type === 'reset') { st.runs = []; activeRun = null; }
-      if (e.type === 'start') { activeRun = { s: e.scenario, step: -1, time: time(new Date()) }; st.runs.unshift(activeRun); }
-      if (e.type === 'step' && activeRun) { activeRun.step = e.step; const log = $('#cx-log'); if (log) log.innerHTML = renderLog(); }
-      if (e.type === 'done') { e.scenario.apply(); toast(`Step ${e.index + 1} of ${SCENARIOS.length} done: ${e.scenario.name.toLowerCase()}`); renderSupport(); renderDelivery(); renderAds(); renderVoice(); refreshCounts(); }
-      if (e.type === 'state' || e.type === 'done' || e.type === 'start') updatePlayerUi();
-    },
-  });
-  function updatePlayerUi() {
-    const p = $('#cx-panel-today'); if (!p || !p.querySelector('.cx-player')) return;
-    p.querySelectorAll('[data-scn]').forEach(li => { const i = +li.dataset.scn; li.className = scnClass(i); li.querySelector('[data-scn-state]').textContent = scnLabel(i); });
-    p.querySelector('[data-ctl=play]').textContent = playLabel();
-    p.querySelector('[data-ctl=play]').disabled = player.state === 'playing';
-    p.querySelector('[data-ctl=pause]').disabled = player.state !== 'playing';
-    p.querySelector('[data-ctl=skip]').disabled = !(player.state === 'playing' || player.state === 'paused');
-    p.querySelector('[data-ctl=replay]').disabled = !st.runs.length;
-    $('#cx-pstatus').textContent = statusText();
-    const log = $('#cx-log'); if (log) log.innerHTML = renderLog();
-  }
+  const RESULTS = {
+    refund: ['support', () => { S.orders.push(helenOrder); S.emails.unshift(helenMail); st.sel = helenMail.id; st.alerts.unshift(['info', 'New refund request triaged', 'Helen W.: within the guarantee, return number and reply ready.', 'support', true]); }],
+    order: ['delivery', () => { st.notices.push('CX-DEMO-10650'); S.ordersYesterday++; st.alerts.unshift(['info', 'Import-fee heads-up queued for CX-DEMO-10650', 'US order: the customer hears about fees before the courier asks.', 'delivery', true]); }],
+    parcel: ['delivery', () => { S.parcels.unshift(caParcel); st.alerts.unshift(['warn', 'CX-DEMO-10399 to Canada is past its promise', 'Delay email drafted for approval.', 'delivery', true]); }],
+    ad: ['ads', () => { spikeAd.isNew = true; st.alerts.unshift(['warn', `${spikeAd.n}: spend ${spikeRatio(spikeAd).toFixed(1)}× its usual day`, `Slack alert sent with a €${suggestedCap(spikeAd)} cap suggestion.`, 'ads', true]); }],
+    review: ['voice', () => { S.reviews.unshift({ who: 'D. Demo · US · 1★', theme: 'menthol', text: 'Burned around my eyes, I had to stop using it.', isNew: true }); menthol.trend[menthol.trend.length - 1]++; menthol.isNew = true; st.alerts.unshift(['warn', 'New 1★ review: menthol irritation', `Reply drafted. Theme now at ${themeCount(menthol)} mentions.`, 'voice', true]); }],
+  };
 
   root.addEventListener('click', e => {
     const g = e.target.closest('[data-go]');
-    if (g) { selectTab(g.dataset.go, { focus: true }); return; }
-    const c = e.target.closest('[data-ctl]');
-    if (!c) return;
-    const k = c.dataset.ctl;
-    if (k === 'play') { if (player.state !== 'paused') track('demo_play'); player.play(); }
-    if (k === 'pause') { player.pause(); root.querySelector('[data-ctl=play]').focus(); }
-    if (k === 'skip') player.skip();
-    if (k === 'replay') { track('demo_play'); player.replay(); }
-    if (k === 'play' || k === 'replay') root.querySelector('[data-ctl=pause]')?.focus();
+    if (g) selectTab(g.dataset.go, { focus: true });
   });
 
   renderAll();
-  updatePlayerUi();
+  const tour = mountTour($('#cx-tour'), {
+    S, now, ctx, track, toast,
+    onResult(key, first) {
+      const [tab, apply] = RESULTS[key];
+      if (first) { apply(); renderSupport(); renderDelivery(); renderAds(); renderVoice(); refreshCounts(); }
+      selectTab(tab, { focus: true });
+      root.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      toast(first ? 'Added to the hub. Look for the highlighted item.' : 'Here it is in the hub.');
+    },
+  });
 
   return {
-    playMorning() {
-      selectTab('today', { silent: true });
-      if (player.state === 'playing') return;
-      track('demo_play');
-      player.state === 'ended' ? player.replay() : player.play();
-    },
+    startTour() { selectTab('today', { silent: true }); tour.start(); },
   };
 }

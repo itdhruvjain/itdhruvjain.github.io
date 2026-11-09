@@ -78,7 +78,21 @@ if ('IntersectionObserver' in window) {
 $('#cx-play').addEventListener('click', async () => {
   const hub = await loadHub();
   document.getElementById('hub').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-  if (hub) { hub.playMorning(); document.querySelector('#cx-hub [data-ctl=pause]')?.focus({ preventScroll: true }); }
+  if (hub) hub.startTour();
+});
+
+/* ---------------- "water" layer: add the missing link ---------------- */
+const water = $('#cx-water'), wBtn = $('#cx-w-btn');
+wBtn.addEventListener('click', () => {
+  const on = !water.classList.contains('is-joined');
+  water.classList.toggle('is-joined', on);
+  wBtn.setAttribute('aria-pressed', on);
+  wBtn.textContent = on ? 'Take the link away' : 'Add the missing link';
+  $('#cx-w-res').innerHTML = on ? 'H<sub>2</sub>O 💧' : 'no water yet';
+  $('#cx-w-cap').textContent = on
+    ? 'Same people, now connected: work flows between them, and one person understands all of it.'
+    : 'Good people, separate tools: every hand-off between them is done by hand.';
+  if (on) track('why_connect', true);
 });
 
 /* ---------------- duties explainer ---------------- */
